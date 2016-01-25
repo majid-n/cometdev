@@ -813,7 +813,7 @@
         margin-left: 0 !important;
         float: left;
         left: 15px;
-        cursor: default;
+        cursor: pointer !important;
     }
     #portfolio .portfolio-item .portfolio-caption .enable:hover,
     #portfolio .portfolio-item .portfolio-caption .enable:focus {
@@ -961,7 +961,7 @@
     }
     #cometModal .modal-footer div span.glyphicon-heart.disable {
         color: #fec503;
-        cursor: default !important;
+        cursor: pointer !important;
     }
     #cometModal .modal-footer div span.glyphicon-heart.enable:hover,
     #cometModal .modal-footer div span.glyphicon-heart.enable:focus {

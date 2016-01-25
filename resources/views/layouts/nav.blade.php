@@ -14,10 +14,10 @@
                 <li><a class="scroll" href="#team">تیم طراحی</a></li>
                 <li>
                     <a class="scroll" href="#portfolio">پروژه ها</a>
-                    <?php //if( is_numeric($TotalNewPosts) && $TotalNewPosts > 0 ): ?>
-                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های ماه جاری" data-number="10"></span>
-                    <span class="badge backYellow shadow visible-xs" data-number="10"></span>
-                    <?php //endif; ?>
+                    @if( $TotalNewPosts > 0 )
+                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های ماه جاری" data-number="{{ $TotalNewPosts }}"></span>
+                    <span class="badge backYellow shadow visible-xs" data-number="{{ $TotalNewPosts }}"></span>
+                    @endif
                 </li>
                 <li><a class="scroll" href="#services">سرویس ها</a></li>
                 <li><a class="scroll" href="#about">درباره ما</a></li>

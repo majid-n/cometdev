@@ -12,9 +12,7 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-
     'POSTS_LIMIT' => 6,
-
     'env' => env('APP_ENV', 'production'),
 
     /*

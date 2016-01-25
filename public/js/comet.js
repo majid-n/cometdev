@@ -5,8 +5,6 @@ var ModalParent,
     page         = 1,
     SkillsLoaded = false;
 
-
-
 $(document).ready(function() {
 
     //Fix header Padding on All devices
@@ -25,12 +23,12 @@ $(document).ready(function() {
     LoadSkills();
 
     // Ajax Setup
-    // $.ajaxSetup({
-    //     type     : 'POST',
-    //     dataType : 'JSON',
-    //     // cache    : false,
-    //     headers  : { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-    // });
+    $.ajaxSetup({
+        type     : 'POST',
+        dataType : 'JSON',
+        cache    : false,
+        headers  : { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    });
 
     // Highlight the top nav as scrolling occurs
     $('body').scrollspy({
@@ -91,7 +89,7 @@ $(document).ready(function() {
     });
 
     // Like Portfolio
-    $('body').on('click', '.enable', function(event) {
+    $('body').on('click', '.portfolio-like span', function(event) {
         event.preventDefault();
         var target    = $(event.target),
             PID       = target.attr('id'),
@@ -100,7 +98,7 @@ $(document).ready(function() {
 
         if( ModalOpen ) {
 
-            var LikeSpan            = ModalParent.parents('.portfolio-item').find('.portfolio-like span.enable'),
+            var LikeSpan            = ModalParent.parents('.portfolio-item').find('.portfolio-like span'),
                 LikeParagraph       = ModalParent.parents('.portfolio-item').find('.portfolio-like .likecount'),
                 Loader              = target.parent().find('img'),
                 ModalLikeParagraph  = target.parent().find('p'),
@@ -109,7 +107,7 @@ $(document).ready(function() {
 
         }else{
 
-            var LikeSpan      = target.parent('.portfolio-like').find('span.enable'),
+            var LikeSpan      = target.parent('.portfolio-like').find('span'),
                 LikeParagraph = target.parent('.portfolio-like').find('.likecount'),
                 Loader        = target.parents('.portfolio-caption').find('.portfolio-ajaxloader'),
                 FadeElement   = target.parent('.portfolio-like');
@@ -117,7 +115,7 @@ $(document).ready(function() {
         }
 
         FadeElement.fadeTo(400,0,function(){
-            Loader.show(400);     
+            Loader.fadeTo(400,1);     
         });
        
 
@@ -126,17 +124,35 @@ $(document).ready(function() {
             data: {pid: PID}
         })
         .done(function(data) {
-            console.log(data);
+            console.log(data.responseText);
             if(data.result === true ){
 
-                if( ModalOpen ) {
-                    ModalLikeSpan.removeAttr('id').removeClass('enable').addClass('disable animated infinite pulse');
-                    ModalLikeParagraph.html(data.totalPostLikes);
+                if( data.status === 'like' ) {
+
+                    if( ModalOpen ) {
+                        ModalLikeSpan.removeClass('enable').addClass('disable animated infinite pulse');
+                        ModalLikeParagraph.html(data.totalPostLikes);
+                    }
+
+                    LikeSpan.removeClass('enable').addClass('disable animated infinite pulse');
+                    LikeParagraph.html(data.totalPostLikes);
+                    TotalNav.html(data.totalLikes);
+
                 }
 
-                LikeSpan.removeAttr('id').removeClass('enable').addClass('disable animated infinite pulse');
-                LikeParagraph.html(data.totalPostLikes);
-                TotalNav.html(data.totalLikes);
+                if( data.status === 'unlike' ) {
+
+                    if( ModalOpen ) {
+                        ModalLikeSpan.removeClass('disable animated infinite pulse').addClass('enable');
+                        ModalLikeParagraph.html(data.totalPostLikes);
+                    }
+
+                    LikeSpan.removeClass('disable animated infinite pulse').addClass('enable');
+                    LikeParagraph.html(data.totalPostLikes);
+                    TotalNav.html(data.totalLikes);
+                    
+                }
+                
                 
 
             }else{
@@ -149,7 +165,7 @@ $(document).ready(function() {
             }
         })
         .fail(function(data) {
-            console.log(data);
+            console.log(data.responseText);
             if( ModalOpen ) {
                 $('.modal').modal('hide');
             }

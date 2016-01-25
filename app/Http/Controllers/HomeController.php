@@ -2,65 +2,86 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Helper\Time;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Like;
 use App\Post;
-
 
 class HomeController extends Controller
 {
     public function index() {
 
-        $Page          = 1;
+        $title         = 'گروه طراحی و توسعه کامت';
     	$TotalLikes    = Like::all()->count();
     	$TotalPosts    = Post::all()->count();
-    	$TotalNewPosts = Post::where('CURRENT_TIMESTAMP() <= TIMESTAMP(time + INTERVAL 1 MONTH)');
+    	$TotalNewPosts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
     	$Posts         = Post::paginate(config('app.POSTS_LIMIT'));
+        $Page          = $Posts->currentPage();
     	$TotalPage     = ceil( $TotalPosts/config('app.POSTS_LIMIT') );
 
-    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','TotalPage','Page'));
+    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','TotalPage','Page','title'));
     }
 
-    public function likePost() {
+    public function likePost(Request $request) {
 
-        // if( Request::ajax() && Request::isMethod('post') ) {
-            // if( $request->has('pid') ) {
+        if ( $request->ajax() && $request->isMethod('post')) {
 
-                // $Post     = new Post();
-                // $Post->id = intval( $_POST['pid'] );
+            if( $request->has('pid') ) {
 
-                // if( is_numeric($Post->id) && $Post->id !== 0 ) {
+                $Post       = new Post;
+                $Post->id   = intval( $request->input('pid') );
 
-                //     $Like = new Like();
-                //     $Like->post_id  = $Post->id;
-                //     $like->ip       = request()->ip();
-                //     $Like->likedat  = '2015-10-05 22:00:00';
+                if( $Post->isLiked() > 0 ) {
 
-                //     if($Like->save()) {
+                    $isDeleted = Like::where([
+                                    ['post_id','=',$Post->id],
+                                    ['ip','=',$request->ip()]
+                                ])->delete();
 
-                //         $totalPostLikes = $Post->TotalLikes();
-                //         $totalLikes     = Like::all()->count();
+                    if( $isDeleted ) {
 
-                //         return response()->json([
-                //                     'result' => true,
-                //                     'totalPostLikes' => $totalPostLikes,
-                //                     'totalLikes' => $totalLikes
-                //                 ]);
-                //     }
-                    // if( $Post->Like() ) {
+                        $totalPostLikes = Like::where('post_id', '=', $Post->id)->count();
+                        $totalLikes     = Like::all()->count();
+                        if( $totalPostLikes === 0 ) $totalPostLikes = ''; 
 
-                        
-                    // }
-                // }
-            // }
-        // }
-        if (Request::ajax()) {
-           return Response::json([ 'result' =>  7]);
+                        return  response()->json(
+                                    [
+                                        'result' => true,
+                                        'status' => 'unlike',
+                                        'totalPostLikes' => $totalPostLikes,
+                                        'totalLikes' => $totalLikes
+                                    ]
+                                );
+                    }
+
+                    
+                }else{
+
+
+                    $Like           = new Like;
+                    $Like->ip       = $request->ip();
+                    $Like->post_id  = $Post->id;
+
+                    if( $Like->save() ) {
+
+                        $totalPostLikes = Like::where('post_id', '=', $Like->post_id)->count();
+                        $totalLikes     = Like::all()->count();
+
+                        return  response()->json(
+                                    [
+                                        'result' => true,
+                                        'status' => 'like',
+                                        'totalPostLikes' => $totalPostLikes,
+                                        'totalLikes' => $totalLikes
+                                    ]
+                                );
+                    }
+                }
+            }  
         }
-
-            // $request->input('pid')
+            
+        return response()->json([ 'result' =>  false ]);
     }
 }
 

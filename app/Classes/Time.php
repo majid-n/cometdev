@@ -1,4 +1,8 @@
 <?php  
+namespace App\Classes;
+
+use Datetime;
+
 class Time extends DateTime{
 	
 	public static function Make($year , $month , $day){

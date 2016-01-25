@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -10,10 +9,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', 'HomeController@index')->middleware(['web']);
-Route::post('likepost', 'HomeController@likePost')->middleware(['web']);
-
 
 
 /*
@@ -28,5 +23,6 @@ Route::post('likepost', 'HomeController@likePost')->middleware(['web']);
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+	Route::get('/', 'HomeController@index');
+	Route::post('likepost', 'HomeController@likePost');
 });
