@@ -120,11 +120,10 @@ $(document).ready(function() {
        
 
         $.ajax({
-            url: 'likepost',
+            url: 'LikePost',
             data: {pid: PID}
         })
         .done(function(data) {
-            console.log(data.responseText);
             if(data.result === true ){
 
                 if( data.status === 'like' ) {
@@ -152,8 +151,6 @@ $(document).ready(function() {
                     TotalNav.html(data.totalLikes);
                     
                 }
-                
-                
 
             }else{
 
@@ -164,8 +161,7 @@ $(document).ready(function() {
                 ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
             }
         })
-        .fail(function(data) {
-            console.log(data.responseText);
+        .fail(function() {
             if( ModalOpen ) {
                 $('.modal').modal('hide');
             }
