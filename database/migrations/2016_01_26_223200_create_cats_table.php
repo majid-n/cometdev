@@ -10,7 +10,7 @@ class CreateCatsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
         Schema::create('cats', function (Blueprint $table) {
             $table->increments('id');

@@ -31,5 +31,5 @@ class Post extends Model
         return DB::table('cats')
                     ->where('id', $this->parent)
                     ->value('title');
-    }
+    } 
 }
