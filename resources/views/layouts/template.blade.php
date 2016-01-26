@@ -10,6 +10,9 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <!-- Seo Information -->
+        @yield('seo')
+
         <title>{{ $title }}</title>
 
         <link rel="shortcut icon" href="{{ asset('img/logo/comet.ico') }}" type="image/x-icon">
@@ -17,17 +20,13 @@
 
         <link href='{{ asset('css/bootstrap.min.css') }}' rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
-
-        <!-- Additional CSS -->
-        @yield('css');
-
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <!-- Seo Information -->
-        @yield('seo')
+        <![endif]--> 
+        
+        <!-- Additional CSS -->
+        @yield('css')
 
     </head>
 

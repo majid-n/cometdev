@@ -882,8 +882,12 @@
         z-index: 1;
         border:none;
     }
+    #cometModal .modal-content{
+        min-height: 150px;
+    }
     #cometModal .modal-header button{
         padding: 10px 15px 25px 15px;
+        opacity: .5;
     }
     #cometModal .modal-body{
         padding: 0;

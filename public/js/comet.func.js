@@ -80,9 +80,21 @@ function Tooltip(){
 }
 // Error Function
 function ShowErr(errtxt,glyph){
-    $('#ErrModal').find('.modal-body').html("<p class=\"errtxt\"><span class=\"glyphicon glyphicon-"+glyph+"\"></span>"+errtxt+"</p>");
-    PlaySound();
-    $('#ErrModal').modal('show');
+
+    var content = "<p class=\"errtxt\"><span class=\"glyphicon glyphicon-"+glyph+"\"></span>"+errtxt+"</p>";
+
+    if( $('body').hasClass('modal-open') && $('.modal-backdrop').length > 0 ){
+        $('.modal').modal('hide');
+        $('.modal').one('hidden.bs.modal', function(event) {
+            $('#ErrModal').find('.modal-body').html(content);
+            PlaySound();
+            $('#ErrModal').modal('show');
+        });
+    }else{
+        $('#ErrModal').find('.modal-body').html(content);
+        PlaySound();
+        $('#ErrModal').modal('show');
+    }
 }
 // Animation Numbers
 function Counter(element){
@@ -131,15 +143,9 @@ function Scroll(offset){
         }, 2000, "easeInOutQuart");
     });
 }
-// Modal Loading
-function AjaxLoaderModal(){
-    var img = "<div class=\"cometModalLoader\"><img src=\"img/svg/3dots.svg\" width=\"64\"></div>";
-    $('#cometModal .modal-body').html(img);
-    $('#cometModal').modal('show');
-}
 // is Comet Modal Open or not?
 function isCometModalOpen(){
-     return typeof ModalParent === 'object' && ModalParent !== undefined && ModalParent !== null && $('body').hasClass('modal-open') && $('#cometModal').hasClass('in');
+     return typeof ModalParent === 'object' && ModalParent !== undefined && ModalParent !== null && $('body').hasClass('modal-open') && $('#cometModal').hasClass('in') && $('.modal-backdrop').length > 0;
 }
 // Init Masonry
 function Masonry(element,columnW,item){

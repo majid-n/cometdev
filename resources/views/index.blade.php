@@ -1,9 +1,5 @@
 @extends('layouts.template')
 
-@section('css')
-    <link href='{{ asset('css/comet.css') }}' rel="stylesheet">
-@endsection
-
 @section('seo')
     <!-- Add Schema -->
     <script type="application/ld+json">
@@ -64,6 +60,10 @@
     <meta property="og:image" content="large picture for other social network share" />
     <meta property="og:description" content="طراحی ، توسعه و مدیریت وب سایت تخصص ماست و تلاش ما در راستای انجام پروژه در بهترین حالت ممکن می باشد بنابراین کامت با خلق محصولات دیجیتال، طراحی وب سایت های پویا و پروژه های چند منظوره به شرکت ها و برندها کمک می کند تا پیشرفت چشمگیری در دنیای ارتباطات داشته باشند. کامت نسبت به مشتریان خود در طول انجام پروژه و پس از اتمام آن، با توجه به اهداف پروژه، متعهد است و همچنین خدمت به مشتریان از اهداف اصلی این گروه می باشد." />
     <meta property="og:site_name" content="the name of the site" />
+@endsection
+
+@section('css')
+    <link href="{{ asset('css/comet.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -222,9 +222,9 @@
                             <div class="portfolio-like">
                                 <h4>{{ $Post->title }}</h4>
                                     @if( $Post->isLiked() === 0 )
-                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart enable transitionfast"></span>
+                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart enable transitionfast likePost"></span>
                                     @else
-                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart disable transitionfast"></span>
+                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart disable transitionfast likePost"></span>
                                     @endif
                                 @if( $Post->totalLikes() > 0 )
                                     <p class="likecount">{{ $Post->totalLikes() }}</p>

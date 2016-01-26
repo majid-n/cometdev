@@ -6,10 +6,7 @@
             <div class="modal-header">
                 <button type="button" class="close pointer" data-dismiss="modal" aria-label="Close"><span class="pointer text-shadow" aria-hidden="true">&times;</span></button>
             </div>
-
-            <div class="modal-body">
-                <!-- content -->
-            </div>
+            
         </div>
     </div>
 </div>

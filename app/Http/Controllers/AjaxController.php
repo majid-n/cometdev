@@ -32,7 +32,6 @@ class AjaxController extends Controller
 
                         $totalPostLikes = Like::where('post_id', '=', $Post->id)->count();
                         $totalLikes     = Like::all()->count();
-                        if( $totalPostLikes === 0 ) $totalPostLikes = ''; 
 
                         return  response()->json(
                                     [
@@ -70,7 +69,7 @@ class AjaxController extends Controller
         return response()->json([ 'result' =>  false ]);
     }
 
-    # Portfolio Pagination
+    # Portfolio Pagination on Post Items
     public function PaginatePost(Request $request) {
         
         if ( $request->ajax() && $request->isMethod('get')) {
@@ -84,7 +83,7 @@ class AjaxController extends Controller
                                     'result'    => true,
                                     'page'      => $Posts->currentPage(),
                                     'lastpage'  => $Posts->lastPage(),
-                                    'html'      => view('layouts.pagination', array('Posts' => $Posts))->render()
+                                    'html'      => view('ajaxlayouts.pagination', array('Posts' => $Posts))->render()
                                 ]
                             );
                 }
@@ -92,4 +91,27 @@ class AjaxController extends Controller
 
         return  response()->json([ 'result' => false ]);
     }
+
+    # Load Post data on Modal
+    public function ModalPost(Request $request) {
+        
+        if ( $request->ajax() && $request->isMethod('post')) {
+
+                if( $request->has('pid') ) {
+
+                    $Post = Post::find( intval($request->input('pid')) );
+                    if( $Post ) Post::where('id', '=', $Post->id)->increment('views');
+                    
+                    return  response()->json(
+                                [
+                                    'result'      => true,
+                                    'modaldata'   => view('ajaxlayouts.postmodaldata',  array('Post' => $Post))->render()
+                                ]
+                            );
+                }
+        }
+
+        return  response()->json([ 'result' => false ]);
+    }
+
 }

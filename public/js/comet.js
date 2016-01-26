@@ -41,8 +41,9 @@ $(document).ready(function() {
     });
 
     $('body').on('hide.bs.modal','#cometModal', function() {
-        $(this).find('.modal-body').html('');
+        $(this).find('.modal-body').remove();
         $(this).find('.modal-footer').remove();
+        $(this).find('.cometModalLoader').remove();
         ModalParent = undefined;
     });
 
@@ -50,27 +51,29 @@ $(document).ready(function() {
     $('body').on('click', '.portfolio-link', function(event) {
 
         event.preventDefault();
-        AjaxLoaderModal();
+
+        var Loader = "<div class=\"cometModalLoader\"><img src=\"img/svg/3dots.svg\" width=\"64\"></div>";
+        $('#cometModal').find('.modal-content').append(Loader);
+        $('#cometModal').modal('show');
 
         var el          = $(this),
             PID         = el.attr('id'),
             Modal       = $('#cometModal'),
-            ModalBody   = Modal.find('.modal-body'),
-            ModalLoader = ModalBody.find('.cometModalLoader');
+            ModalHeader = Modal.find('.modal-header'),
+            ModalLoader = Modal.find('.modal-content .cometModalLoader');
 
         $.ajax({
-            url: 'ajax/modaldata.php',
-            data: {data: PID}
+            url  : 'ModalPost',
+            type : 'POST',
+            data : {pid: PID}
         })
         .done(function(data) {
 
             if( data.result === true ) {
 
                 ModalLoader.fadeTo(500,0,function(){
-
-                    ModalBody.html(data.modalBody);
-                    ModalBody.after(data.modalFooter);
-                    ModalBody.find('.modalEl').fadeIn(500);
+                    ModalHeader.after(data.modaldata);
+                    Modal.find('.modal-body .modalEl').fadeIn(500);
                     Modal.find('.modal-footer').fadeIn(500);
                     ModalParent = el;
                 });
@@ -81,14 +84,18 @@ $(document).ready(function() {
                 ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
             }
         })
-        .fail(function() {
+        .fail(function(data) {
             Modal.modal('hide');
             ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
+        })
+        .always(function(){
+            ModalLoader.remove();
         });
     });
 
     // Like Portfolio
-    $('body').on('click', '.portfolio-like span', function(event) {
+    $('body').on('click', '.likePost', function(event) {
+
         event.preventDefault();
         var target    = $(event.target),
             PID       = target.attr('id'),
@@ -127,45 +134,32 @@ $(document).ready(function() {
             if(data.result === true ){
 
                 if( data.status === 'like' ) {
-
-                    if( ModalOpen ) {
-                        ModalLikeSpan.removeClass('enable').addClass('disable animated infinite pulse');
-                        ModalLikeParagraph.html(data.totalPostLikes);
-                    }
-
-                    LikeSpan.removeClass('enable').addClass('disable animated infinite pulse');
-                    LikeParagraph.html(data.totalPostLikes);
-                    TotalNav.html(data.totalLikes);
-
+                    if( ModalOpen ) ModalLikeSpan.removeClass('enable').addClass('disable');
+                    LikeSpan.removeClass('enable').addClass('disable');
                 }
 
                 if( data.status === 'unlike' ) {
-
-                    if( ModalOpen ) {
-                        ModalLikeSpan.removeClass('disable animated infinite pulse').addClass('enable');
-                        ModalLikeParagraph.html(data.totalPostLikes);
-                    }
-
-                    LikeSpan.removeClass('disable animated infinite pulse').addClass('enable');
-                    LikeParagraph.html(data.totalPostLikes);
-                    TotalNav.html(data.totalLikes);
-                    
+                    if( ModalOpen ) ModalLikeSpan.removeClass('disable').addClass('enable');
+                    LikeSpan.removeClass('disable').addClass('enable');
                 }
+
+                if( ModalOpen ) {
+                    if( parseInt(data.totalPostLikes) === 0 ) ModalLikeParagraph.html("لایک کنید!");
+                    else ModalLikeParagraph.html(data.totalPostLikes);
+                }
+
+                if( parseInt(data.totalPostLikes) === 0 ) LikeParagraph.html('');
+                else LikeParagraph.html(data.totalPostLikes);
+                TotalNav.html(data.totalLikes);
 
             }else{
 
-                if( ModalOpen ) {
-                    $('.modal').modal('hide');
-                }
-
+                if( ModalOpen ) $('.modal').modal('hide');
                 ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
             }
         })
         .fail(function() {
-            if( ModalOpen ) {
-                $('.modal').modal('hide');
-            }
-            
+            if( ModalOpen ) $('.modal').modal('hide');
             ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
         })
         .always(function() {
@@ -338,5 +332,6 @@ $(document).ready(function() {
             });
        });
     });
+
 });
 
