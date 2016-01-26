@@ -26,4 +26,10 @@ class Post extends Model
                     ])
     				->count();
     }
+
+    public function catName(){
+        return DB::table('cats')
+                    ->where('id', $this->parent)
+                    ->value('title');
+    }
 }
