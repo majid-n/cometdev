@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Validator;
 use App\Like;
 use App\Post;
+use App\Support;
 
 class AjaxController extends Controller
 {
@@ -113,5 +115,70 @@ class AjaxController extends Controller
 
         return  response()->json([ 'result' => false ]);
     }
+
+    public function contactForm(Request $request) {
+
+        if ( $request->ajax() && $request->isMethod('post')) {
+            
+            parse_str( $request->input('data') , $data );
+
+            $rules = [
+                'name' => 'required|farsi|min:3',
+                'mail' => 'required|email',
+                'tel'  => 'required|digits_between:8,15',
+                'des'  => 'required|min:10|max:500'
+            ];
+
+            $messsages = [
+                'mail.required'         =>'لطفا ایمیل خود را وارد کنید.',
+                'mail.email'            =>'لطفا ایمیل خود را به درستی وارد کنید.',
+                'name.required'         =>'لطفا نام خود را وارد کنید.',
+                'name.farsi'            =>'لطفا در نام خود فقط از حروف فارسی استفاده کنید.',
+                'name.min'              =>'نام شما باید حداقل دارای :min حرف باشد.',
+                'tel.required'          =>'لطفا تلفن خود را وارد کنید.',
+                'tel.digits_between'    =>'شماره تلفن شما باید حداقل :min و حداکثر :max عدد باشد.',
+                'des.required'          =>'لطفا متن توضیحات خود را وارد کنید.',
+                'des.min'               =>'متن توضیحات شما باید حداقل دارای :min عدد باشد.',
+                'des.max'               =>'متن توضیحات شما باید حداکثر دارای :max عدد باشد.',
+            ];
+
+            $validator = Validator::make($data, $rules, $messsages);
+
+            if ( $validator->fails() ) {
+
+                return response()->json([
+
+                        'result'    => 'error',
+                        'errors'    => $validator->errors()
+
+                     ]);
+
+            } else {
+
+                $SupportTicket = Support::where('ip' , '=' , $request->ip())
+                                  ->whereRaw('CURRENT_TIMESTAMP() >= TIMESTAMP(created_at + INTERVAL 30 MINUTE)')
+                                  ->count();
+
+                if( $SupportTicket > 0 ) return response()->json([ 'result' => 'wait' ]);
+                else {
+
+                    $Support                = new Support;
+                    $Support->fullname      = $data['name'];
+                    $Support->email         = $data['mail'];
+                    $Support->tel           = $data['tel'];
+                    $Support->description   = $data['des'];
+                    $Support->ip            = $request->ip();
+
+                    if( $Support->save() ) {
+                        return response()->json([ 'result' => 'success' ]);
+                    }
+                }
+            }
+        }
+
+        return response()->json([ 'result' => 'fail' ]);
+    }
+
+   
 
 }

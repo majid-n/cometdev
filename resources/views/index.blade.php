@@ -289,11 +289,12 @@
 
                 <!-- form -->
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <form class="ContactForm" method="POST">
+
+                    {!! Form::open(array('method' => 'post', 'class' => 'ContactForm')) !!}
                         <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                <input name="name" type="text" class="form-control transitionslow" placeholder="نام و نام خانوادگی" required>
+                                {{ Form::text('name',null, array('class' => 'form-control transitionslow', 'placeholder' => 'نام و نام خانوادگی')) }}
                             </div>
                         </div>
 
@@ -301,7 +302,7 @@
                         <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                                <input name="mail" type="email" class="form-control transitionslow" placeholder="پست الکترونیک" required>
+                                {{ Form::text('mail',null, array('class' => 'form-control transitionslow', 'placeholder' => 'پست الکترونیک')) }}
                                 
                             </div>
 
@@ -309,21 +310,21 @@
                         <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                                <input name="tel" type="tel" class="form-control transitionslow" placeholder="شماره تماس" required>
+                                {{ Form::text('tel',null, array('class' => 'form-control transitionslow', 'placeholder' => 'شماره تماس')) }}
                             </div>
                         </div>
                     
-                        <div class="form-group">
+                        <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-align-left"></span></span>
-                                <textarea name="des" class="form-control shadow transitionslow" placeholder="توضیحات" required></textarea>
+                                {{ Form::textarea('des',null, array('class' => 'form-control transitionslow', 'placeholder' => 'توضیحات')) }}
                             </div>
                         </div>
                         <div class="btn-group btn-group-lg shadow" role="group" aria-label="...">
-                            <button type="reset" class="btn btn-default"><span class="glyphicon glyphicon-retweet"></span></button>
-                            <button id="submit" type="submit" class="btn btn-xl HoverAnimation">ارســــــــال<span class="Spin"></span><span class="comet-spaceman"></span></button>
+                            {!! Form::button('<span class="glyphicon glyphicon-retweet"></span>', array('class' => 'btn btn-default', 'type' => 'reset')) !!}
+                            {!! Form::button('ارســــــــال<span class="Spin"></span><span class="comet-spaceman"></span>', array('class' => 'btn btn-xl HoverAnimation', 'id' => 'submit', 'type' => 'submit')) !!}
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
 
                 <!-- Qr Section -->

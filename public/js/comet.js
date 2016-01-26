@@ -237,12 +237,15 @@ $(document).ready(function() {
 
         event.preventDefault();
 
-        var target      = $(this),
-            data        = target.serialize(),
-            submitBtn   = target.find('#submit'),
-            Loader      = target.find('#submit span.Spin'),
-            contactForm = $('.ContactForm'),
-            FadedSpan   = target.find('#submit span.comet-spaceman');
+        var target       = $(this),
+            data         = target.serialize(),
+            submitBtn    = target.find('#submit'),
+            Loader       = target.find('#submit span.Spin'),
+            contactForm  = $('.ContactForm'),
+            FadedSpan    = target.find('#submit span.comet-spaceman'),
+            hasErrorSpan = contactForm.find('.form-group span.glyphicon'),
+            FormInput    = contactForm.find('input'),
+            FormTextarea = contactForm.find('textarea');
 
         if( FadedSpan.hasClass('tada') ){
             FadedSpan.removeClass('animated inifite tada');
@@ -254,10 +257,15 @@ $(document).ready(function() {
             Loader.show(300);
         });
 
+        hasErrorSpan.removeClass('hasErr');
+        FormInput.css('background', '#FFF');
+        FormTextarea.css('background', '#FFF');
+
        //Ajax
        $.ajax({
-           url: 'ajax/support.php',
-           data: {data: data}
+            type: 'POST',
+            url: 'contactForm',
+            data: {data: data}
        })
        .done(function(data) {
 
@@ -273,30 +281,29 @@ $(document).ready(function() {
 
                 var span  = input.parent('div').find('.glyphicon');
 
-                if ( typeof errorArray[key] === 'boolean' && errorArray[key] !== false ) {
-
-                    span.addClass('hasErr');
-                    input.css('background', '#FFE281');
-
-                } else {
-
-                    if ( span.hasClass('hasErr') ) {
-                        span.removeClass('hasErr');
-                        input.css('background', '#FFF');
-                    }
-                }
+                span.addClass('hasErr');
+                input.css('background', '#FFE281');
             }
 
-            if( data.hasError === true ) {
+            if( data.result === 'success' ) {
+                contactForm.find('input').val('');
+                contactForm.find('textarea').val('');
+                ShowErr("پیام شما با موفقیت ارسال شد.","ok green");
+            }
 
-                var errorArrayDes = data.errorsDes,
-                    ErrorData = "";
+            if( data.result === 'wait' )    ShowErr("شما لحظاتی پیش یک پیام با موفقیت ارسال کرده اید، لطفا بعدا تلاش کنید.","ban-circle yellow");
+            if( data.result === 'fail' )    ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
 
-                for ( key in errorArrayDes ) {
+            if( data.result === 'error' ) {
 
-                    if ( typeof errorArrayDes[key] === 'string' && errorArrayDes[key] !== null ) {
-                        ErrorData += "<p class=\"errtxt\"><span class=\"glyphicon glyphicon-ban-circle yellow\"></span>"+errorArrayDes[key]+"</p>"
+                var  ErrorData = "";
+
+                for ( error in errorArray ) {
+
+                    for( item in errorArray[error] ) {
+                        ErrorData += "<p class=\"errtxt\"><span class=\"glyphicon glyphicon-ban-circle yellow\"></span>"+errorArray[error][item]+"</p>"
                     }
+                      
                 }
 
                 $('#ErrModal').find('.modal-body').html(ErrorData);
@@ -305,25 +312,11 @@ $(document).ready(function() {
                 
             }
 
-            if( data.result === true ) {
-                ShowErr("پیام شما با موفقیت ارسال شد.","ok green");
-            }
-
-            if( data.result === 'wait' ) {
-                ShowErr("شما لحظاتی پیش یک پیام با موفقیت ارسال کرده اید، لطفا بعدا تلاش کنید.","ban-circle yellow");
-            }
-
-            if( data.result === 'fail' ) {
-                ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
-            }
-
-            if( data.result !== false ) {
-                contactForm.find('input').val('');
-                contactForm.find('textarea').val('');
-            }
+            console.log(data);
        })
-       .fail(function() {
-            ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
+       .fail(function(data) {
+            console.log(data.responseText);
+            // ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
        })
        .always(function() {
             Loader.hide(300, function() {
@@ -332,6 +325,5 @@ $(document).ready(function() {
             });
        });
     });
-
 });
 
