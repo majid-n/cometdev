@@ -22,7 +22,7 @@ class Post extends Model
     	return DB::table('likes')
                     ->where([
                         ['post_id', '=', $this->id],
-                        ['ip' , '=', request()->ip()]
+                        ['ip' , '=', request()->ip()],
                     ])
     				->count();
     }

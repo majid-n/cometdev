@@ -11,6 +11,7 @@ use App\Post;
 
 class HomeController extends Controller
 {
+    # Create Index Page
     public function index() {
 
         $title         = 'گروه طراحی و توسعه کامت';
@@ -19,9 +20,9 @@ class HomeController extends Controller
     	$TotalNewPosts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
     	$Posts         = Post::paginate(config('app.POSTS_LIMIT'));
         $Page          = $Posts->currentPage();
-    	$TotalPage     = ceil( $TotalPosts/config('app.POSTS_LIMIT') );
+        $LastPage      = $Posts->lastPage();
 
-    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','TotalPage','Page','title'));
+    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','Page','LastPage','title'));
     }
 }
 

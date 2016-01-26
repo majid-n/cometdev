@@ -11,6 +11,7 @@ use App\Post;
 
 class AjaxController extends Controller
 {
+    # Like each Post from Portfiolio Section
     public function LikePost(Request $request) {
 
         if ( $request->ajax() && $request->isMethod('post')) {
@@ -21,10 +22,10 @@ class AjaxController extends Controller
                 $Post->id   = intval( $request->input('pid') );
 
                 if( $Post->isLiked() > 0 ) {
-
+                    # When User Liked this Post
                     $isDeleted = Like::where([
                                     ['post_id','=',$Post->id],
-                                    ['ip','=',$request->ip()]
+                                    ['ip','=',$request->ip()],
                                 ])->delete();
 
                     if( $isDeleted ) {
@@ -43,7 +44,7 @@ class AjaxController extends Controller
                                 );
                     }
                 }else{
-
+                    # When User didn't Like this Post before
                     $Like           = new Like;
                     $Like->ip       = $request->ip();
                     $Like->post_id  = $Post->id;
@@ -67,5 +68,28 @@ class AjaxController extends Controller
         }
             
         return response()->json([ 'result' =>  false ]);
+    }
+
+    # Portfolio Pagination
+    public function PaginatePost(Request $request) {
+        
+        if ( $request->ajax() && $request->isMethod('get')) {
+
+                $Posts = Post::paginate(config('app.POSTS_LIMIT'));
+
+                if( $Posts->currentPage() <= $Posts->lastPage() && $Posts->total() > config('app.POSTS_LIMIT') ) {
+
+                    return  response()->json(
+                                [
+                                    'result'    => true,
+                                    'page'      => $Posts->currentPage(),
+                                    'lastpage'  => $Posts->lastPage(),
+                                    'html'      => view('layouts.pagination', array('Posts' => $Posts))->render()
+                                ]
+                            );
+                }
+        }
+
+        return  response()->json([ 'result' => false ]);
     }
 }

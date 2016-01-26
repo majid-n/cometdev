@@ -224,7 +224,7 @@
                                     @if( $Post->isLiked() === 0 )
                                     <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart enable transitionfast"></span>
                                     @else
-                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart animated infinite pulse disable"></span>
+                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart disable transitionfast"></span>
                                     @endif
                                 @if( $Post->totalLikes() > 0 )
                                     <p class="likecount">{{ $Post->totalLikes() }}</p>
@@ -237,7 +237,7 @@
                 </div>
                 @endforeach
             </div>
-            @if( $TotalPosts > config('app.POSTS_LIMITS') && $TotalPage > 1 )
+            @if( $TotalPosts > config('app.POSTS_LIMITS') && $LastPage > 1 )
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <button class="btn btn-xl btn-primary transition loadmorePortfolio HoverAnimation">مشاهده پروژه های بیشتر<span class="Spin"></span><span class="comet-sattelite"></span></button>
@@ -249,19 +249,19 @@
             <div class="row text-center">
                 <div class="PortfolioNav-item text-center">
                     <span class="glyphicon glyphicon-heart" data-toggle="tooltipfa" data-placement="top" title="مجموع لایک ها"></span>
-                    <p class="yellow animated infinite pulse text-shadow">{{ $TotalLikes }}</p>
+                    <p class="yellow text-shadow">{{ $TotalLikes }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
                     <span data-toggle="tooltipfa" data-placement="top" title="مجموع پروژه ها" class="glyphicon glyphicon-briefcase"></span>
-                    <p class="green animated infinite pulse text-shadow">{{ $TotalPosts }}</p>
+                    <p class="green text-shadow">{{ $TotalPosts }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
                     <span data-toggle="tooltipfa" data-placement="top" title="مجموع صفحات" class="glyphicon glyphicon-inbox"></span>
-                    <p class="cyan animated infinite pulse text-shadow">{{ $TotalPage }}</p>
+                    <p class="cyan text-shadow LastPage">{{ $LastPage }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
                     <span data-toggle="tooltipfa" data-placement="top" title="صفحه در حال مشاهده" class="glyphicon glyphicon-eye-open"></span>
-                    <p class="pink animated infinite pulse text-shadow">{{ $Page }}</p>
+                    <p class="pink text-shadow">{{ $Page }}</p>
                 </div>
             </div>
         </div>

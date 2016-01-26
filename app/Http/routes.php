@@ -25,4 +25,5 @@
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'HomeController@index');
 	Route::post('LikePost', 'AjaxController@LikePost');
+	Route::get('PaginatePost', 'AjaxController@PaginatePost');
 });

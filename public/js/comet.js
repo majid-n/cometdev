@@ -1,9 +1,9 @@
 
 var ModalParent,
     $Masonry,
-    totalpage    = parseInt($('#configuration input[name="TotalPage"]').val()),
-    page         = 1,
-    SkillsLoaded = false;
+    SkillsLoaded = false,
+    Page         = 1,
+    LastPage     = parseInt($('.LastPage').html());
 
 $(document).ready(function() {
 
@@ -24,7 +24,6 @@ $(document).ready(function() {
 
     // Ajax Setup
     $.ajaxSetup({
-        type     : 'POST',
         dataType : 'JSON',
         cache    : false,
         headers  : { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -120,8 +119,9 @@ $(document).ready(function() {
        
 
         $.ajax({
-            url: 'LikePost',
-            data: {pid: PID}
+            url  : 'LikePost',
+            type : 'POST',
+            data : {pid: PID}
         })
         .done(function(data) {
             if(data.result === true ){
@@ -185,38 +185,44 @@ $(document).ready(function() {
             ButtonSpan   = $('.loadmorePortfolio span.comet-sattelite'),
             ButtonLoader = $('.loadmorePortfolio span.Spin'),
             PageViewed   = $('.PortfolioNav-item p.pink');
+            TotalPages   = $('.PortfolioNav-item p.cyan');
 
         target.prop('disabled',true);
 
-        if( page < totalpage && page > 0 && typeof page !== 'undefined' && typeof page === 'number' && page !== undefined && page !== null ) {
-            
-            page++;
+        if( ButtonSpan.hasClass('tada') ){
+            ButtonSpan.removeClass('animated infinite tada');
+        }
 
-            if( ButtonSpan.hasClass('tada') ){
-                ButtonSpan.removeClass('animated infinite tada');
-            }
+        ButtonSpan.fadeTo(500, 0, function() {
+            ButtonLoader.show(500);
+        });
 
-            ButtonSpan.fadeTo(500, 0, function() {
-                ButtonLoader.show(500);
-            });
+        if( Page < LastPage && Page > 0 && typeof Page !== 'undefined' && typeof Page === 'number' && Page !== undefined && Page !== null ) {
+
+            Page++;
 
             $.ajax({
-                url: 'ajax/paginationpost.php',
-                data: {page : page}
+                type : 'GET',
+                url  : 'PaginatePost?page='+Page
             })
             .done(function(data) {
 
                 if(data.result === true){
 
+                    Page     = data.page;
+                    LastPage = data.lastpage;
                     MasonryAddItem(data.html,'.masonry');
-                    PageViewed.html(page);
+                    PageViewed.html(Page);
+                    TotalPages.html(LastPage);
+                    if( Page >= LastPage ) target.parents('.row').remove();
 
                 }else{
+                    target.parents('.row').remove();
                     ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
                 }
             })
             .fail(function() {
-                ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
+                ShowErr("خطا در اتصال به پایگاه داده ، لطفا اتصال اینترت خود را چک کنید !","ban-circle yellow");
             })
             .always(function() {
 
@@ -224,14 +230,11 @@ $(document).ready(function() {
                     ButtonSpan.fadeTo(500,1);
                 });
 
-                if( page === totalpage ) {
-                    target.parents('.row').remove();
-                }else{
-                    target.prop('disabled',false);
-                }
+                target.prop('disabled',false);
             });
         }else{
-            ShowErr("صفحه مورد نظر موجود نمی باشد.","ban-circle yellow");   
+            target.parents('.row').remove();
+            ShowErr("صفحه مورد نظر موجود نمی باشد. لطفا دوباره امتحان کنید !","ban-circle yellow");
         }
     });
 
