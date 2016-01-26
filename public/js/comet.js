@@ -264,7 +264,7 @@ $(document).ready(function() {
        //Ajax
        $.ajax({
             type: 'POST',
-            url: 'contactForm',
+            url: 'ContactForm',
             data: {data: data}
        })
        .done(function(data) {
@@ -309,14 +309,10 @@ $(document).ready(function() {
                 $('#ErrModal').find('.modal-body').html(ErrorData);
                 PlaySound();
                 $('#ErrModal').modal('show');
-                
             }
-
-            console.log(data);
        })
        .fail(function(data) {
-            console.log(data.responseText);
-            // ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
+            ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
        })
        .always(function() {
             Loader.hide(300, function() {

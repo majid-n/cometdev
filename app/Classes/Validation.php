@@ -15,13 +15,6 @@ class Validation {
 		return preg_match_all($pattern , $variable);
 	}
 	
-	public static function PersianLettersSpace($string , $minChar , $maxChar ){
-		if( self::HasValue($string) && !self::HasEmoji($string) ) {     
-			return self::RegX($string , "/^[اآإأبپتثجچحخدذرزژسشصضظطعغفقکگلمنوؤهةۀیئيءـًٌٍَُِِّ\sA-Za-z]{".$minChar.",".$maxChar."}$/m");
-		}
-		return false;
-	}
-	
 	public static function HasEmoji($string){
 	    if( self::RegX($string , "/[\x{1F600}-\x{1F64F}]/u") ) {
 	    	return true;

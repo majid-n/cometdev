@@ -116,7 +116,8 @@ class AjaxController extends Controller
         return  response()->json([ 'result' => false ]);
     }
 
-    public function contactForm(Request $request) {
+    # Contact form Ajax
+    public function ContactForm(Request $request) {
 
         if ( $request->ajax() && $request->isMethod('post')) {
             
@@ -156,7 +157,7 @@ class AjaxController extends Controller
             } else {
 
                 $SupportTicket = Support::where('ip' , '=' , $request->ip())
-                                  ->whereRaw('CURRENT_TIMESTAMP() >= TIMESTAMP(created_at + INTERVAL 30 MINUTE)')
+                                  ->whereRaw('UTC_TIMESTAMP() <= TIMESTAMP(created_at + INTERVAL 30 MINUTE)')
                                   ->count();
 
                 if( $SupportTicket > 0 ) return response()->json([ 'result' => 'wait' ]);
@@ -178,7 +179,4 @@ class AjaxController extends Controller
 
         return response()->json([ 'result' => 'fail' ]);
     }
-
-   
-
 }

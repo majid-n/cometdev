@@ -27,5 +27,5 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('LikePost', 'AjaxController@LikePost');
 	Route::get('PaginatePost', 'AjaxController@PaginatePost');
 	Route::post('ModalPost', 'AjaxController@ModalPost');
-	Route::post('contactForm', 'AjaxController@contactForm');
+	Route::post('ContactForm', 'AjaxController@ContactForm');
 });
