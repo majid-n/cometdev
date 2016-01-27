@@ -15,7 +15,7 @@
                 <li>
                     <a class="scroll" href="#portfolio">پروژه ها</a>
                     @if( $TotalNewPosts > 0 )
-                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های ماه جاری" data-number="{{ $TotalNewPosts }}"></span>
+                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $TotalNewPosts }}"></span>
                     <span class="badge backYellow shadow visible-xs" data-number="{{ $TotalNewPosts }}"></span>
                     @endif
                 </li>

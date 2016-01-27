@@ -348,5 +348,22 @@
     <script src='{{ asset('js/masonry.min.js') }}'></script>
     <script src='{{ asset('js/chart.min.js') }}'></script>
     <script src='{{ asset('js/comet.func.js') }}'></script>
-    <script src='{{ asset('js/comet.js') }}'></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            AjaxSetup();
+            LayoutFixer();
+            MockUpAnimation();
+            NavigationSetup();
+            Scroll();
+            Counter('.navbar-nav .badge');
+            Tooltip();
+            Masonry('.masonry','.portfolio-item','.portfolio-item');
+            HoverAnimation();
+            // Skills();
+            PortfolioModalSetup();
+            PostsLikeSetup();
+            PortfolioPaginationSetup();
+            ContactFormSetup();
+        });
+    </script>
 @endsection
