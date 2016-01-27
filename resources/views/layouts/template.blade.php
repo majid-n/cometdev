@@ -30,7 +30,7 @@
 
     </head>
 
-    <body id="home">
+    <body>
 
         <!-- Navigation -->
         @include('layouts.nav')
