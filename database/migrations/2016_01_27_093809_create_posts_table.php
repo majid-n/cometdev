@@ -23,8 +23,8 @@ class CreatePostsTable extends Migration
             $table->string('image', 100);
             $table->integer('views')->default(0);
             $table->tinyInteger('active')->default(1);
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('cat_id')
                   ->references('id')->on('cats')
                   ->onDelete('cascade')
