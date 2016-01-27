@@ -10,7 +10,7 @@
                     <img src="{{ asset('img/portfolioThumb/'.$Post->thumb) }}" class="img-responsive transition" alt="{{ $Post->title }}">
                 </div>
             </a>
-            <div class="ribbon"><span>{{ $Post->type }}</span></div>
+            <div class="ribbon"><span>{{ $Post->cat->title }}</span></div>
             <div class="portfolio-caption">
                 <div class="portfolio-ajaxloader">
                     <img src="{{ asset('img/svg/3dots.svg') }}" width="45">

@@ -18,7 +18,7 @@ class HomeController extends Controller
     	$TotalLikes    = Like::all()->count();
     	$TotalPosts    = Post::all()->count();
     	$TotalNewPosts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
-    	$Posts         = Post::paginate(config('app.POSTS_LIMIT'));
+    	$Posts         = Post::with('cat')->paginate(config('app.POSTS_LIMIT'));
         $Page          = $Posts->currentPage();
         $LastPage      = $Posts->lastPage();
 

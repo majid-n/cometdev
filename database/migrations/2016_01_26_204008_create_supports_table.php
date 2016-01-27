@@ -23,9 +23,6 @@ class CreateSupportsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->tinyInteger('seen')->default(0);
-            $table->index('email');
-            $table->index('fullname');
-            $table->index('ip');
         });
     }
 

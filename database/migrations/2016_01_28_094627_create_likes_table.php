@@ -18,7 +18,6 @@ class CreateLikesTable extends Migration
             $table->integer('post_id')->unsigned();
             $table->timestamp('created_at');
             $table->index('post_id');
-            $table->index('ip');
             $table->foreign('post_id')
                   ->references('id')->on('posts')
                   ->onDelete('cascade')

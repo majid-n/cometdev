@@ -8,7 +8,7 @@ class Like extends Model
 {
 	public $timestamps = false;
 
-	// prevent using update_at field
+	# prevent using update_at field
 	public static function boot() {
         static::creating(function ($model) {
             $model->created_at = $model->freshTimestamp();

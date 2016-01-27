@@ -18,14 +18,17 @@ class CreatePostsTable extends Migration
             $table->text('description');
             $table->text('smalldescription');
             $table->string('link', 255)->nullable();
-            $table->integer('parent');
+            $table->integer('cat_id')->unsigned();
             $table->string('thumb', 100);
             $table->string('image', 100);
             $table->integer('views')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->softDeletes();
             $table->timestamps();
-            $table->index('title');
+            $table->foreign('cat_id')
+                  ->references('id')->on('cats')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 
