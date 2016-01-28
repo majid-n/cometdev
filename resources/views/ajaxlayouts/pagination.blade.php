@@ -1,6 +1,6 @@
 @foreach ($Posts as $Post)
     <?php 
-        $TotalLikes = $Post->totalLikes();      # Total this Post Likes
+        $TotalLikes = $Post->likes()->count();    # Total this Post Likes
         $isLiked    = $Post->isliked();         # Does this user Liked it before?
     ?>
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 portfolio-item">

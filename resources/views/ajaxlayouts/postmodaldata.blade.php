@@ -3,7 +3,7 @@
 	use App\Classes\Time;
 	use App\Classes\Validation;
 
-	$TotalLikes = $Post->totalLikes();		# Total this Post Likes
+	$TotalLikes = $Post->likes()->count();    # Total this Post Likes
 	$isLiked    = $Post->isliked();			# Does this user Liked it before?
 ?>
 

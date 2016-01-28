@@ -12,11 +12,7 @@ class Post extends Model
 
     protected $dates = ['deleted_at'];
     
-    public function totalLikes(){
-    	return Like::where('post_id' , $this->id)
-    				->count();
-    }
-
+    
     public function isLiked(){
     	return Like::where([
                         ['post_id', $this->id],
@@ -27,5 +23,9 @@ class Post extends Model
 
     public function cat() {
         return $this->belongsTo('App\Cat');
+    }
+
+    public function likes(){
+        return $this->hasMany('App\Like');
     }
 }

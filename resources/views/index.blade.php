@@ -226,8 +226,8 @@
                                     @else
                                     <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart disable transitionfast likePost"></span>
                                     @endif
-                                @if( $Post->totalLikes() > 0 )
-                                    <p class="likecount">{{ $Post->totalLikes() }}</p>
+                                @if( $Post->likes()->count() > 0 )
+                                    <p class="likecount">{{ $Post->likes()->count() }}</p>
                                 @else
                                     <p class="likecount"></p>
                                 @endif
