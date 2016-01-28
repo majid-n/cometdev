@@ -19,8 +19,8 @@ class Post extends Model
 
     public function isLiked(){
     	return Like::where([
-                        ['post_id', '=', $this->id],
-                        ['ip' , '=', request()->ip()],
+                        ['post_id', $this->id],
+                        ['ip' , request()->ip()],
                     ])
     				->count();
     }

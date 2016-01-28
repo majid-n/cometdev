@@ -33,7 +33,7 @@ class AjaxController extends Controller
                     if( $isDeleted ) {
 
                         $totalPostLikes = Like::where('post_id', '=', $Post->id)->count();
-                        $totalLikes     = Like::all()->count();
+                        $totalLikes     = Like::count();
 
                         return  response()->json(
                                     [
@@ -53,7 +53,7 @@ class AjaxController extends Controller
                     if( $Like->save() ) {
 
                         $totalPostLikes = Like::where('post_id', '=', $Like->post_id)->count();
-                        $totalLikes     = Like::all()->count();
+                        $totalLikes     = Like::count();
 
                         return  response()->json(
                                     [
@@ -76,7 +76,7 @@ class AjaxController extends Controller
         
         if ( $request->ajax() && $request->isMethod('get')) {
 
-                $Posts = Post::paginate(config('app.POSTS_LIMIT'));
+                $Posts = Post::with('cat')->paginate(config('app.POSTS_LIMIT'));
 
                 if( $Posts->currentPage() <= $Posts->lastPage() && $Posts->total() > config('app.POSTS_LIMIT') ) {
 
@@ -101,7 +101,7 @@ class AjaxController extends Controller
 
                 if( $request->has('pid') ) {
 
-                    $Post = Post::find( intval($request->input('pid')) );
+                    $Post = Post::with('cat')->find( intval($request->input('pid')) );
                     if( $Post ) Post::where('id', '=', $Post->id)->increment('views');
                     
                     return  response()->json(

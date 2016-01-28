@@ -15,8 +15,8 @@ class HomeController extends Controller
     public function index() {
 
         $title         = 'گروه طراحی و توسعه کامت';
-    	$TotalLikes    = Like::all()->count();
-    	$TotalPosts    = Post::all()->count();
+    	$TotalLikes    = Like::count();
+    	$TotalPosts    = Post::count();
     	$TotalNewPosts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
     	$Posts         = Post::with('cat')->paginate(config('app.POSTS_LIMIT'));
         $Page          = $Posts->currentPage();

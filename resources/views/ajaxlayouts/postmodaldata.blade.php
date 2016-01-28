@@ -12,7 +12,7 @@
 	<div class="modalEl" style="display:none;">
 		<div class="portfolio-modalimg">
 			<img src="{{ asset('images/portfolio/'.$Post->image) }}" class="img-responsive" alt="{{ $Post->title }}">
-		<div class="ribbon"><span>{{ $Post->type }}</span></div>
+		<div class="ribbon"><span>{{ $Post->cat->title }}</span></div>
 		</div>
 		<div class="text-center cometModalTxt">
 			<h2 class="hidden-xs yellow">{{ $Post->title }}</h2>
