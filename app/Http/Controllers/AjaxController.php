@@ -25,13 +25,13 @@ class AjaxController extends Controller
                 if( $Post->isLiked() > 0 ) {
                     # When User Liked this Post
                     $isDeleted = $Post->likes()->where([
-                                    ['post_id','=',$Post->id],
-                                    ['ip','=',$request->ip()],
+                                    ['post_id', $Post->id],
+                                    ['ip', $request->ip()],
                                 ])->delete();
 
                     if( $isDeleted ) {
 
-                        $totalPostLikes = $Post->likes()->where('post_id', '=', $Post->id)->count();
+                        $totalPostLikes = $Post->likes()->where('post_id', $Post->id)->count();
                         $totalLikes     = Like::count();
 
                         return  response()->json(
@@ -51,7 +51,7 @@ class AjaxController extends Controller
 
                     if( $Post->likes()->save($Like) ) {
 
-                        $totalPostLikes = $Post->likes()->where('post_id', '=', $Like->post_id)->count();
+                        $totalPostLikes = $Post->likes()->where('post_id', $Like->post_id)->count();
                         $totalLikes     = Like::count();
 
                         return  response()->json(
@@ -101,7 +101,7 @@ class AjaxController extends Controller
                 if( $request->has('pid') ) {
 
                     $Post = Post::with('cat','likes')->find( $request->input('pid') );
-                    if( $Post ) Post::where('id', '=', $Post->id)->increment('views');
+                    if( $Post ) Post::where('id', $Post->id)->increment('views');
                     
                     return  response()->json(
                                 [
@@ -155,7 +155,7 @@ class AjaxController extends Controller
 
             } else {
 
-                $SupportTicket = Support::where('ip' , '=' , $request->ip())
+                $SupportTicket = Support::where('ip', $request->ip())
                                   ->whereRaw('UTC_TIMESTAMP() <= TIMESTAMP(created_at + INTERVAL 30 MINUTE)')
                                   ->count();
 

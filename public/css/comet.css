@@ -691,6 +691,10 @@
         color: #fff;
         width: 100%;
         min-height: 100%;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
         background-position: top center;
         background-repeat: no-repeat;
         overflow: hidden;
@@ -1101,7 +1105,10 @@
         background-color: #888;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
     }
     section#contact .section-heading {
         color: #fff;

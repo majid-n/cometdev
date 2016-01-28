@@ -143,12 +143,6 @@ function LayoutFixer(){
     var ContactArea = $('#contact'),
         Header      = $('header'),
         HeaderTxt   = Header.find('.intro-text'),
-        AddBG       = function(){
-
-                        Background(Header,$('#configuration input[name="HeaderBack"]').val());
-                        Background(ContactArea,$('#configuration input[name="ContactBack"]').val());
-
-                    },
         FixPaddding = function() {
 
                         var Padding = Math.ceil($(window).height()/2-HeaderTxt.height());
@@ -160,7 +154,6 @@ function LayoutFixer(){
                     };
         
 
-    AddBG();
     FixPaddding();
 
     $(window).resize(function(event) { FixPaddding() });

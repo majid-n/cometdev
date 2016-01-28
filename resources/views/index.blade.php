@@ -68,7 +68,7 @@
 
 @section('content')
     <!-- Header Section -->
-    <header>
+    <header style="background-image:url({{ asset('img/backgrounds/'.array_shift($Background)) }});">
         <div class="container">
             <div class="intro-text">
                 <div class="intro-heading text-shadow">طـــراحی <b class="yellow">خاص</b> و منحصــر بـه فرد</div>
@@ -280,7 +280,7 @@
     @endif
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" style="background-image:url({{ asset('img/backgrounds/'.array_shift($Background)) }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -359,7 +359,6 @@
             Tooltip();
             Masonry('.masonry','.portfolio-item','.portfolio-item');
             HoverAnimation();
-            // Skills();
             PortfolioModalSetup();
             PostsLikeSetup();
             PortfolioPaginationSetup();

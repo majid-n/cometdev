@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Classes\BackGround;
 use App\Like;
 use App\Post;
 
@@ -15,6 +16,7 @@ class HomeController extends Controller
     public function index() {
 
         $title         = 'گروه طراحی و توسعه کامت';
+        $Background    = Background::Random(2);
     	$TotalLikes    = Like::count();
     	$TotalPosts    = Post::count();
     	$TotalNewPosts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
@@ -22,7 +24,7 @@ class HomeController extends Controller
         $Page          = $Posts->currentPage();
         $LastPage      = $Posts->lastPage();
 
-    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','Page','LastPage','title'));
+    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','Page','LastPage','title','Background'));
     }
 }
 

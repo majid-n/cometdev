@@ -58,6 +58,31 @@ return [
             'root'   => storage_path('app/portfolioThumb'),
         ],
 
+        'backgrounds' => [
+            'driver' => 'local',
+            'root'   => public_path('img/backgrounds'),
+        ],
+
+        'banner' => [
+            'driver' => 'local',
+            'root'   => public_path('img/banner'),
+        ],
+
+        'logo' => [
+            'driver' => 'local',
+            'root'   => public_path('img/logo'),
+        ],
+
+        'stuff' => [
+            'driver' => 'local',
+            'root'   => public_path('img/stuff'),
+        ],
+
+        'icons' => [
+            'driver' => 'local',
+            'root'   => public_path('img/icons'),
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',
