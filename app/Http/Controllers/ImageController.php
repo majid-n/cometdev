@@ -11,20 +11,40 @@ use Image;
 class ImageController extends Controller
 {
 
+	# Retrive Images
+    public function RetriveImages($Disk , $Filename) {	
 
-	# Retrive BackGround Images
-    public function Backgrounds($width, $height, $filename) {	
+		$File 	= Storage::disk($Disk)->get( $Filename );
+		$Image  = Image::make($File);
+	    $Type 	= $Image->mime();
 
-		$file = Storage::disk('local')->get('backgrounds/'. $filename);
+	    return $Image->response($Type);
+	}
 
-		if( $width === 'auto' && $height === 'auto' ) $img  = Image::make($file);
-		else $img  = Image::make($file)->resize($width, $height);
-	    
-	    $type = $img->mime();
+	# Retrive Images Advanced Mode
+	public function RetriveImagesAdvanced($Disk, $Width, $Height, $Watemark, $Filename){
 
-	    // insert watermark at bottom-right corner with 10px offset
-		$img->insert(public_path().'\\img\\logo\\comet_fa.png', 'bottom-right', 30, 30);
+		$FinalWidth   = ( $Width > 0 )  			? intval($Width)  	: NULL;
+		$FinalHeight  = ( $Height > 0 ) 			? intval($Height) 	: NULL;
+		$HasWatermark = ( $Watemark == 0 ) 			? false 			: true;
+		$Logo    	  = public_path('img/logo/').'watermark-comet.png';
 
-	    return $img->response($type);
+
+		$File 	= Storage::disk($Disk)->get( $Filename );
+		$Image  = Image::make($File);
+		$Type 	= $Image->mime();
+
+		if( isset($FinalWidth) || isset($FinalHeight) ) {
+
+			$Image->resize($FinalWidth, $FinalHeight, function ($constraint) {
+			    $constraint->aspectRatio();   # For Auto height or Auto width
+			    $constraint->upsize();		  # Prevent to retrieve higher resoloution than it self
+			});
+
+		}
+
+		if( $HasWatermark ) $Image->insert($Logo, 'bottom-right', 15, 15);
+
+		return $Image->response($Type);
 	}
 }

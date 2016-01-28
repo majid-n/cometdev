@@ -7,7 +7,7 @@
         <div class="shadow">
             <a class="portfolio-link" id="{{ $Post->id }}">
                 <div class="postimg">
-                    <img src="{{ asset('img/portfolioThumb/'.$Post->thumb) }}" class="img-responsive transition" alt="{{ $Post->title }}">
+                    <img src="{{ asset('images/portfolioThumb/'.$Post->thumb) }}" class="img-responsive transition" alt="{{ $Post->title }}">
                 </div>
             </a>
             <div class="ribbon"><span>{{ $Post->cat->title }}</span></div>

@@ -48,6 +48,16 @@ return [
             'root'   => storage_path('app'),
         ],
 
+        'portfolio' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/portfolio'),
+        ],
+
+        'portfolioThumb' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/portfolioThumb'),
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

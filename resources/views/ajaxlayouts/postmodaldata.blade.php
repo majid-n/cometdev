@@ -11,7 +11,7 @@
 	<!-- Modal Body -->
 	<div class="modalEl" style="display:none;">
 		<div class="portfolio-modalimg">
-			<img src="{{ asset('img/portfolio/'.$Post->image) }}" class="img-responsive" alt="{{ $Post->title }}">
+			<img src="{{ asset('images/portfolio/'.$Post->image) }}" class="img-responsive" alt="{{ $Post->title }}">
 		<div class="ribbon"><span>{{ $Post->type }}</span></div>
 		</div>
 		<div class="text-center cometModalTxt">

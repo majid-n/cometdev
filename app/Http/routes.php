@@ -10,7 +10,8 @@
 |
 */
 
-Route::get('backgrounds/{width}/{height}/{filename}', 'ImageController@Backgrounds');
+Route::get('images/{Disk}/{Filename}', 'ImageController@RetriveImages');
+Route::get('images/{Disk}/{Width}/{Height}/{Watemark}/{Filename}', 'ImageController@RetriveImagesAdvanced');
 
 
 /*
