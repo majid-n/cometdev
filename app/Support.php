@@ -11,5 +11,5 @@ class Support extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $guarded = ['replymsg','seen'];
+    protected $fillable = ['fullname','email','tel','description','ip'];
 }
