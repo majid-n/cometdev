@@ -12,7 +12,7 @@ class Post extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $guarded = ['views','active'];
+    protected $fillable = ['title','description','cat_id','smalldescription','link','thumb','image'];
     
     
     public function isLiked(){

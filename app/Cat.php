@@ -11,6 +11,8 @@ class Cat extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $fillable = ['title','parent'];
+
     public function posts() {
         return $this->hasMany('App\Post');
     }
