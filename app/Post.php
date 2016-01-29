@@ -11,6 +11,8 @@ class Post extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    protected $guarded = ['views','active'];
     
     
     public function isLiked(){

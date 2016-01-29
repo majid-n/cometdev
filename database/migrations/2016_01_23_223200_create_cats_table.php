@@ -15,11 +15,9 @@ class CreateCatsTable extends Migration
         Schema::create('cats', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 80);
-            $table->integer('parent')->unsigned();
+            $table->integer('parent')->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();
-            $table->index('id');
-            $table->index('parent');
         });
     }
 

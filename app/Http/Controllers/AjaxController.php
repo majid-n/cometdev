@@ -20,7 +20,7 @@ class AjaxController extends Controller
 
             if( $request->has('pid') ) {
 
-                $Post = Post::with('likes')->find( $request->input('pid') );
+                $Post = Post::with('likes')->find( $request->pid );
 
                 if( $Post->isLiked() > 0 ) {
                     # When User Liked this Post
@@ -100,7 +100,7 @@ class AjaxController extends Controller
 
                 if( $request->has('pid') ) {
 
-                    $Post = Post::with('cat','likes')->find( $request->input('pid') );
+                    $Post = Post::with('cat','likes')->find( $request->pid );
                     if( $Post ) Post::where('id', $Post->id)->increment('views');
                     
                     return  response()->json(
@@ -120,7 +120,7 @@ class AjaxController extends Controller
 
         if ( $request->ajax() && $request->isMethod('post')) {
             
-            parse_str( $request->input('data') , $data );
+            parse_str( $request->data , $data );
 
             $rules = [
                 'name' => 'required|farsi|min:3',

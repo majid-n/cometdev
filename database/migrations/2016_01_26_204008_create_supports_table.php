@@ -20,9 +20,9 @@ class CreateSupportsTable extends Migration
             $table->text('description');
             $table->string('ip', 20);
             $table->text('replymsg')->nullable();
+            $table->tinyInteger('seen')->default(0);
             $table->timestamps();
             $table->softDeletes();
-            $table->tinyInteger('seen')->default(0);
         });
     }
 
