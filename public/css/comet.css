@@ -695,6 +695,7 @@
         -moz-background-size: cover;
         -ms-background-size: cover;
         -o-background-size: cover;
+        background-size: cover;
         background-position: top center;
         background-repeat: no-repeat;
         overflow: hidden;
@@ -1109,6 +1110,7 @@
         -moz-background-size: cover;
         -ms-background-size: cover;
         -o-background-size: cover;
+        background-size: cover;
     }
     section#contact .section-heading {
         color: #fff;
