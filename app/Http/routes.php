@@ -31,4 +31,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('PaginatePost', 'AjaxController@PaginatePost');
 	Route::post('ModalPost', 'AjaxController@ModalPost');
 	Route::post('ContactForm', 'AjaxController@ContactForm');
+	
+	Route::get('/Posts', 'AdminController@Posts');
+	Route::post('/Post', 'AdminController@AddPost')->name('AddPost');
+	Route::delete('/Post/{Post}', 'AdminController@DeletePost');
 });

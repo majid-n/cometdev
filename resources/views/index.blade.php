@@ -52,9 +52,6 @@
     <meta property="og:site_name" content="کامت" />
 @endsection
 
-@section('css')
-    <link href="{{ asset('css/comet.css') }}" rel="stylesheet">
-@endsection
 
 @section('content')
     <!-- Header Section -->
