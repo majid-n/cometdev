@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Validator;
+use Mail;
 use App\Like;
 use App\Post;
 use App\Support;
@@ -75,9 +76,9 @@ class AjaxController extends Controller
         
         if ( $request->ajax() && $request->isMethod('get')) {
 
-                $Posts = Post::with('cat','likes')->paginate(config('app.POSTS_LIMIT'));
+                $Posts = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
 
-                if( $Posts->currentPage() <= $Posts->lastPage() && $Posts->total() > config('app.POSTS_LIMIT') ) {
+                if( $Posts->currentPage() <= $Posts->lastPage() && $Posts->total() > config('app.posts_per_page') ) {
 
                     return  response()->json(
                                 [
@@ -170,6 +171,14 @@ class AjaxController extends Controller
                     $Support->ip            = $request->ip();
 
                     if( $Support->save() ) {
+
+                        Mail::send('emails.support', ['Support' => $Support], function ($message) use ($Support) {
+                            $message->from(config('app.info_email'), 'کامت');
+                            $message->sender(config('app.info_email'), 'کامت');
+                            $message->to($Support->email, $Support->fullname)->subject('گروه طراحی و توسعه کامت');
+                            $message->replyTo(config('app.support_email'), 'کامت');
+                        });
+
                         return response()->json([ 'result' => 'success' ]);
                     }
                 }

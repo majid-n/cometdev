@@ -7,25 +7,15 @@
         "@context" : "http://schema.org",
         "@type" : "Organization",
         "description" : "طراحی ، توسعه و مدیریت وب سایت تخصص ماست و تلاش ما در راستای انجام پروژه در بهترین حالت ممکن می باشد بنابراین کامت با خلق محصولات دیجیتال، طراحی وب سایت های پویا و پروژه های چند منظوره به شرکت ها و برندها کمک می کند تا پیشرفت چشمگیری در دنیای ارتباطات داشته باشند. کامت نسبت به مشتریان خود در طول انجام پروژه و پس از اتمام آن، با توجه به اهداف پروژه، متعهد است و همچنین خدمت به مشتریان از اهداف اصلی این گروه می باشد.",
-        "name" : "name of the site",
-        "url" : "link of the site",
-        "logo": "logo of the site",
-        "email": "info email",
+        "name" : "{{ $title }}",
+        "url" : "{{ url()->current() }}",
+        "logo": "{{ asset('img/logo/comdet_fa.png') }}",
+        "email": "{{ config('app.info_email') }}",
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.5",
             "reviewCount": "152"
           },
-        "founders":[
-                  <?php //foreach ($Admins as $key => $Admin):?>
-                    {
-                      "@type": "Person",
-                      "image": name ofthe person",
-                      "jobTitle": "job title",
-                      "email":"email"
-                    }<?php //if( (count($Admins)-1) !== $key ) echo ","; ?>
-                  <?php //endforeach; ?>
-                  ],
         "foundingDate":"2015",
         "location": {
           "@type": "Place",
@@ -36,8 +26,8 @@
           }
         },
         "sameAs" : [
-          "twitter link",
-          "facebook link"
+          "https://twitter.com/{{ config('app.twitter') }}",
+          "https://facebook.com/{{ config('app.facebook') }}"
         ]
       }
     </script>
@@ -47,19 +37,19 @@
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="twitter name with at sign">
-    <meta name="twitter:title" content="title of the page">
+    <meta name="twitter:site" content="{{ '@'.config('app.twitter') }}">
+    <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="طراحی ، توسعه و مدیریت وب سایت تخصص ماست و تلاش ما در راستای انجام پروژه در بهترین حالت ممکن می باشد بنابراین کامت با خلق محصولات دیجیتال، طراحی وب سایت های پویا و پروژه های چند منظوره به شرکت ها و برندها کمک می کند تا پیشرفت چشمگیری در دنیای ارتباطات داشته باشند. کامت نسبت به مشتریان خود در طول انجام پروژه و پس از اتمام آن، با توجه به اهداف پروژه، متعهد است و همچنین خدمت به مشتریان از اهداف اصلی این گروه می باشد.">
-    <meta name="twitter:creator" content="twitter name with at sign">
-    <meta name="twitter:image:src" content="large picture for twitter share">
+    <meta name="twitter:creator" content="{{ '@'.config('app.twitter') }}">
+    <meta name="twitter:image:src" content="{{ asset('images/banner/0/0/1/banner_large.jpg') }}">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="title of the page" />
+    <meta property="og:title" content="{{ $title }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="link of the page" />
-    <meta property="og:image" content="large picture for other social network share" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="{{ asset('images/banner/0/0/1/banner_large.jpg') }}" />
     <meta property="og:description" content="طراحی ، توسعه و مدیریت وب سایت تخصص ماست و تلاش ما در راستای انجام پروژه در بهترین حالت ممکن می باشد بنابراین کامت با خلق محصولات دیجیتال، طراحی وب سایت های پویا و پروژه های چند منظوره به شرکت ها و برندها کمک می کند تا پیشرفت چشمگیری در دنیای ارتباطات داشته باشند. کامت نسبت به مشتریان خود در طول انجام پروژه و پس از اتمام آن، با توجه به اهداف پروژه، متعهد است و همچنین خدمت به مشتریان از اهداف اصلی این گروه می باشد." />
-    <meta property="og:site_name" content="the name of the site" />
+    <meta property="og:site_name" content="کامت" />
 @endsection
 
 @section('css')
@@ -237,7 +227,7 @@
                 </div>
                 @endforeach
             </div>
-            @if( $TotalPosts > config('app.POSTS_LIMITS') && $LastPage > 1 )
+            @if( $TotalPosts > config('app.posts_per_page') && $LastPage > 1 )
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <button class="btn btn-xl btn-primary transition loadmorePortfolio HoverAnimation">مشاهده پروژه های بیشتر<span class="Spin"></span><span class="comet-sattelite"></span></button>

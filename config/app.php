@@ -1,6 +1,18 @@
 <?php
 
 return [
+    
+    # Emails
+    'support_email'  => 'Support@CometDev.ir',
+    'info_email'     => 'Info@CometDev.ir',
+    'security_email' => 'Security@CometDev.ir',
+
+    # Social Network
+    'twitter'  => 'CometDevIr',
+    'facebook' => 'cometdevir',
+
+    # Total Posts per Pagination
+    'posts_per_page' => 6,
 
     /*
     |--------------------------------------------------------------------------
@@ -12,7 +24,7 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-    'POSTS_LIMIT' => 6,
+
     'env' => env('APP_ENV', 'production'),
 
     /*
