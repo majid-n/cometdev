@@ -119,5 +119,47 @@ class DatabaseSeeder extends Seeder
                 ]
             ]);
         
+
+    # Role Seeder
+        Sentinel::getRoleRepository()->createModel()->create([
+            'name' => 'Users',
+            'slug' => 'users',
+        ]);
+
+        Sentinel::getRoleRepository()->createModel()->create([
+            'name' => 'Admins',
+            'slug' => 'admins',
+        ]);
+        $this->command->info('Roles seeded!');
+
+    # User Seeder
+        Sentinel::registerAndActivate([
+            'email'    => 'user@user.com',
+            'password' => 'sentineluser',
+            'first_name' => 'UserFirstName',
+            'last_name' => 'UserLastName',
+        ]);
+
+        Sentinel::registerAndActivate([
+            'email'    => 'admin@admin.com',
+            'password' => 'sentineladmin',
+            'first_name' => 'AdminFirstName',
+            'last_name' => 'AdminLastName',
+        ]);
+        $this->command->info('Users seeded!');
+
+    # User Role Seeder
+        $userUser = Sentinel::findByCredentials(['login' => 'user@user.com']);
+        $adminUser = Sentinel::findByCredentials(['login' => 'admin@admin.com']);
+
+        $userRole = Sentinel::findRoleByName('Users');
+        $adminRole = Sentinel::findRoleByName('Admins');
+
+        $userRole->users()->attach($userUser);
+        $adminRole->users()->attach($adminUser);
+        $this->command->info('Users assigned to roles seeded!');
+
+
+
     }
 }

@@ -56,5 +56,6 @@
 
         <!-- Additional Js -->
         @yield('js')
+
     </body>
 </html>

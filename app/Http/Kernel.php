@@ -43,10 +43,22 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    // protected $routeMiddleware = [
+    //     'auth' => \App\Http\Middleware\Authenticate::class,
+    //     'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    //     'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+    //     'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+    // ];
+
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        //'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth' => \App\Http\Middleware\SentinelAuthenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        //'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \App\Http\Middleware\SentinelRedirectIfAuthenticated::class,
+        'standardUser' => \App\Http\Middleware\SentinelStandardUser::class,
+        'admin' => \App\Http\Middleware\SentinelAdminUser::class,
+        'notCurrentUser' => \App\Http\Middleware\SentinelNotCurrentUser::class,
+        'redirectAdmin' => \App\Http\Middleware\SentinelRedirectAdmin::class,
     ];
 }

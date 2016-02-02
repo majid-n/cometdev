@@ -7,6 +7,7 @@
 		<img src="{{ asset('images/portfolioThumb/'.$post->thumb) }}">
 		<p>active : {{ $post->active }}</p>
 		<p>views : {{ $post->views }}</p>
+		<p>link : {{ $post->link }}</p>
 		<p>likes : {{ $post->likes()->count() }}</p>
 		<p>cat : {{ $post->cat->title }}</p>
 		<a href="{{ route('post.edit', ['post' => $post->id]) }}">edit</a>
@@ -18,3 +19,5 @@
 	<br>
 
 @endforeach
+
+{!! $posts->links() !!}
