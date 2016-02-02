@@ -21,7 +21,6 @@
                 </li>
                 
                 <li><a class="scroll" href="#contact">تماس با ما</a></li>
-                <li><a class="scroll" href="#team">تیم طراحی</a></li>
                 <li>
                     <a class="scroll" href="#portfolio">پروژه ها</a>
                     @if( $TotalNewPosts > 0 )

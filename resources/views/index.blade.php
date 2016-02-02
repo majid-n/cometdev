@@ -304,7 +304,7 @@
                         <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-align-left"></span></span>
-                                {{ Form::textarea('des',null, array('class' => 'form-control transitionslow', 'placeholder' => 'توضیحات')) }}
+                                {{ Form::textarea('des',null, array('class' => 'form-control transitionslow', 'placeholder' => 'توضیحات', 'rows' => 7)) }}
                             </div>
                         </div>
                         <div class="btn-group btn-group-lg shadow" role="group" aria-label="...">
