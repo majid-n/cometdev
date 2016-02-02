@@ -15,52 +15,52 @@ use App\Support;
 class AjaxController extends Controller
 {
     # Like each Post from Portfiolio Section
-    public function LikePost(Request $request) {
+    public function likePost(Request $request) {
 
         if ( $request->ajax() && $request->isMethod('post')) {
 
             if( $request->has('pid') ) {
 
-                $Post = Post::with('likes')->find( $request->pid );
+                $post = Post::with('likes')->find( $request->pid );
 
-                if( $Post->isLiked() > 0 ) {
+                if( $post->isLiked() > 0 ) {
                     # When User Liked this Post
-                    $isDeleted = $Post->likes()->where([
-                                    ['post_id', $Post->id],
+                    $isdeleted = $post->likes()->where([
+                                    ['post_id', $post->id],
                                     ['ip', $request->ip()],
                                 ])->delete();
 
-                    if( $isDeleted ) {
+                    if( $isdeleted ) {
 
-                        $totalPostLikes = $Post->likes()->where('post_id', $Post->id)->count();
-                        $totalLikes     = Like::count();
+                        $totalpostlikes = $post->likes()->where('post_id', $post->id)->count();
+                        $totallikes     = Like::count();
 
                         return  response()->json(
                                     [
                                         'result'            => true,
                                         'status'            => 'unlike',
-                                        'totalPostLikes'    => $totalPostLikes,
-                                        'totalLikes'        => $totalLikes
+                                        'totalpostlikes'    => $totalpostlikes,
+                                        'totallikes'        => $totallikes
                                     ]
                                 );
                     }
                 }else{
                     # When User didn't Like this Post before
-                    $Like           = new Like;
-                    $Like->ip       = $request->ip();
-                    $Like->post_id  = $Post->id;
+                    $like           = new Like;
+                    $like->ip       = $request->ip();
+                    $like->post_id  = $post->id;
 
-                    if( $Post->likes()->save($Like) ) {
+                    if( $post->likes()->save($like) ) {
 
-                        $totalPostLikes = $Post->likes()->where('post_id', $Like->post_id)->count();
-                        $totalLikes     = Like::count();
+                        $totalpostlikes = $post->likes()->where('post_id', $like->post_id)->count();
+                        $totallikes     = Like::count();
 
                         return  response()->json(
                                     [
                                         'result'            => true,
                                         'status'            => 'like',
-                                        'totalPostLikes'    => $totalPostLikes,
-                                        'totalLikes'        => $totalLikes
+                                        'totalpostlikes'    => $totalpostlikes,
+                                        'totallikes'        => $totallikes
                                     ]
                                 );
                     }
@@ -72,20 +72,20 @@ class AjaxController extends Controller
     }
 
     # Portfolio Pagination on Post Items
-    public function PaginatePost(Request $request) {
+    public function paginatePost(Request $request) {
         
         if ( $request->ajax() && $request->isMethod('get')) {
 
-                $Posts = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
+                $posts = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
 
-                if( $Posts->currentPage() <= $Posts->lastPage() && $Posts->total() > config('app.posts_per_page') ) {
+                if( $posts->currentPage() <= $posts->lastPage() && $posts->total() > config('app.posts_per_page') ) {
 
                     return  response()->json(
                                 [
                                     'result'    => true,
-                                    'page'      => $Posts->currentPage(),
-                                    'lastpage'  => $Posts->lastPage(),
-                                    'html'      => view('ajaxlayouts.pagination', array('Posts' => $Posts))->render()
+                                    'page'      => $posts->currentPage(),
+                                    'lastpage'  => $posts->lastPage(),
+                                    'html'      => view('ajaxlayouts.pagination', array('posts' => $posts))->render()
                                 ]
                             );
                 }
@@ -95,19 +95,19 @@ class AjaxController extends Controller
     }
 
     # Load Post data on Modal
-    public function ModalPost(Request $request) {
+    public function modalPost(Request $request) {
         
         if ( $request->ajax() && $request->isMethod('post')) {
 
                 if( $request->has('pid') ) {
 
-                    $Post = Post::with('cat','likes')->find( $request->pid );
-                    if( $Post ) Post::where('id', $Post->id)->increment('views');
+                    $post = Post::with('cat','likes')->find( $request->pid );
+                    if( $post ) Post::where('id', $post->id)->increment('views');
                     
                     return  response()->json(
                                 [
                                     'result'      => true,
-                                    'modaldata'   => view('ajaxlayouts.postmodaldata',  array('Post' => $Post))->render()
+                                    'modaldata'   => view('ajaxlayouts.postmodaldata',  array('post' => $post))->render()
                                 ]
                             );
                 }
@@ -117,7 +117,7 @@ class AjaxController extends Controller
     }
 
     # Contact form Ajax
-    public function ContactForm(Request $request) {
+    public function contactForm(Request $request) {
 
         if ( $request->ajax() && $request->isMethod('post')) {
             
@@ -156,26 +156,26 @@ class AjaxController extends Controller
 
             } else {
 
-                $SupportTicket = Support::where('ip', $request->ip())
+                $supportticket = Support::where('ip', $request->ip())
                                   ->whereRaw('UTC_TIMESTAMP() <= TIMESTAMP(created_at + INTERVAL 30 MINUTE)')
                                   ->count();
 
-                if( $SupportTicket > 0 ) return response()->json([ 'result' => 'wait' ]);
+                if( $supportticket > 0 ) return response()->json([ 'result' => 'wait' ]);
                 else {
 
-                    $Support                = new Support;
-                    $Support->fullname      = $data['name'];
-                    $Support->email         = $data['mail'];
-                    $Support->tel           = $data['tel'];
-                    $Support->description   = $data['des'];
-                    $Support->ip            = $request->ip();
+                    $support                = new Support;
+                    $support->fullname      = $data['name'];
+                    $support->email         = $data['mail'];
+                    $support->tel           = $data['tel'];
+                    $support->description   = $data['des'];
+                    $support->ip            = $request->ip();
 
-                    if( $Support->save() ) {
+                    if( $support->save() ) {
 
-                        Mail::send('emails.support', ['Support' => $Support], function ($message) use ($Support) {
+                        Mail::send('emails.support', ['support' => $support], function ($message) use ($support) {
                             $message->from(config('app.info_email'), 'کامت');
                             $message->sender(config('app.info_email'), 'کامت');
-                            $message->to($Support->email, $Support->fullname)->subject('گروه طراحی و توسعه کامت');
+                            $message->to($support->email, $support->fullname)->subject('گروه طراحی و توسعه کامت');
                             $message->replyTo(config('app.support_email'), 'کامت');
                         });
 

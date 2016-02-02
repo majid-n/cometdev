@@ -15,18 +15,14 @@ class HomeController extends Controller
     # Create Index Page
     public function index() {
 
-        $title         = 'گروه طراحی و توسعه کامت';
-        $Background    = Background::Random(2);
-    	$TotalLikes    = Like::count();
-    	$TotalPosts    = Post::count();
-    	$TotalNewPosts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
-    	$Posts         = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
-        $Page          = $Posts->currentPage();
-        $LastPage      = $Posts->lastPage();
+        $background    = Background::Random(2);
+    	$totallikes    = Like::count();
+    	$totalposts    = Post::count();
+    	$totalnewposts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
+    	$posts         = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
+        $page          = $posts->currentPage();
+        $lastpage      = $posts->lastPage();
 
-    	return view('index',compact('TotalLikes','TotalPosts','TotalNewPosts','Posts','Page','LastPage','title','Background'));
+    	return view('index',compact('totallikes','totalposts','totalnewposts','posts','page','lastpage','title','background'));
     }
 }
-
-    // $Admins         = Team::Admins("id,fullname,image,type,email,github,facebook,twitter,instagram,php,mysql,javascript,jquery,angular,node,html,css,ps,ai");
-    // $Members        = Team::Members("id,fullname,image,type,email,github,facebook,twitter,instagram,php,mysql,javascript,jquery,angular,node,html,css,ps,ai");

@@ -12,39 +12,39 @@ class ImageController extends Controller
 {
 
 	# Retrive Images
-    public function RetriveImages($Disk , $Filename) {	
+    public function retriveImages($disk , $filename) {	
 
-		$File 	= Storage::disk($Disk)->get( $Filename );
-		$Image  = Image::make($File);
-	    $Type 	= $Image->mime();
+		$file 	= Storage::disk($disk)->get( $filename );
+		$image  = Image::make($file);
+	    $type 	= $image->mime();
 
-	    return $Image->response($Type);
+	    return $image->response($type);
 	}
 
 	# Retrive Images Advanced Mode
-	public function RetriveImagesAdvanced($Disk, $Width, $Height, $Watemark, $Filename){
+	public function retriveImagesAdvanced($disk, $width, $height, $watemark, $filename){
 
-		$FinalWidth   = ( $Width > 0 )  			? intval($Width)  	: NULL;
-		$FinalHeight  = ( $Height > 0 ) 			? intval($Height) 	: NULL;
-		$HasWatermark = ( $Watemark == 0 ) 			? false 			: true;
-		$Logo    	  = public_path('img/logo/').'watermark-comet.png';
+		$finalwidth   = ( $width > 0 )  			? intval($width)  	: NULL;
+		$finalheight  = ( $height > 0 ) 			? intval($height) 	: NULL;
+		$haswatermark = ( $watemark == 0 ) 			? false 			: true;
+		$logo    	  = public_path('img/logo/').'watermark-comet.png';
 
 
-		$File 	= Storage::disk($Disk)->get( $Filename );
-		$Image  = Image::make($File);
-		$Type 	= $Image->mime();
+		$file 	= Storage::disk($disk)->get( $filename );
+		$image  = Image::make($file);
+		$type 	= $image->mime();
 
-		if( isset($FinalWidth) || isset($FinalHeight) ) {
+		if( isset($finalwidth) || isset($finalheight) ) {
 
-			$Image->resize($FinalWidth, $FinalHeight, function ($constraint) {
+			$image->resize($finalwidth, $finalheight, function ($constraint) {
 			    $constraint->aspectRatio();   # For Auto height or Auto width
 			    $constraint->upsize();		  # Prevent to retrieve higher resoloution than it self
 			});
 
 		}
 
-		if( $HasWatermark ) $Image->insert($Logo, 'bottom-right', 15, 15);
+		if( $haswatermark ) $image->insert($logo, 'bottom-right', 15, 15);
 
-		return $Image->response($Type);
+		return $image->response($type);
 	}
 }

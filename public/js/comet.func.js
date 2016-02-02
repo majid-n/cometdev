@@ -295,7 +295,7 @@ function PortfolioModalSetup(){
             ModalLoader = Modal.find('.modal-content .cometModalLoader');
 
         $.ajax({
-            url  : 'ModalPost',
+            url  : 'modalpost',
             type : 'POST',
             data : {pid: PID}
         })
@@ -361,7 +361,7 @@ function PostsLikeSetup(){
        
 
         $.ajax({
-            url  : 'LikePost',
+            url  : 'likepost',
             type : 'POST',
             data : {pid: PID}
         })
@@ -379,13 +379,13 @@ function PostsLikeSetup(){
                 }
 
                 if( ModalOpen ) {
-                    if( parseInt(data.totalPostLikes) === 0 ) ModalLikeParagraph.html("لایک کنید!");
-                    else ModalLikeParagraph.html(data.totalPostLikes);
+                    if( parseInt(data.totalpostlikes) === 0 ) ModalLikeParagraph.html("لایک کنید!");
+                    else ModalLikeParagraph.html(data.totalpostlikes);
                 }
 
-                if( parseInt(data.totalPostLikes) === 0 ) LikeParagraph.html('');
-                else LikeParagraph.html(data.totalPostLikes);
-                TotalNav.html(data.totalLikes);
+                if( parseInt(data.totalpostlikes) === 0 ) LikeParagraph.html('');
+                else LikeParagraph.html(data.totalpostlikes);
+                TotalNav.html(data.totallikes);
 
             }else{
 
@@ -434,7 +434,7 @@ function PortfolioPaginationSetup(){
 
             $.ajax({
                 type : 'GET',
-                url  : 'PaginatePost?page='+Page
+                url  : 'paginatepost?page='+Page
             })
             .done(function(data) {
 
@@ -503,7 +503,7 @@ function ContactFormSetup(){
        //Ajax
        $.ajax({
             type: 'POST',
-            url: 'ContactForm',
+            url: 'contactform',
             data: {data: data}
        })
        .done(function(data) {

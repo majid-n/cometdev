@@ -41,9 +41,9 @@
 		   </div>
 		@endif
 
-	    {!! Form::open(array('method' => 'post', 'class' => 'ContactForm', 'route' => 'AddPost', 'files' => true)) !!}
+	    {!! Form::open(array('method' => 'post', 'class' => 'ContactForm', 'route' => 'post.store', 'files' => true)) !!}
         	<div class="form-group col-md-6">
-        		{!! Form::select('cat_id', $listArray, null, array('class' => 'form-control', 'dir' => 'rtl', 'style' => 'height:57px;')) !!}
+        		{!! Form::select('cat_id', $cats, null, array('class' => 'form-control', 'dir' => 'rtl', 'style' => 'height:57px;')) !!}
         	</div>
             <div class="form-group col-md-6">
             	{!! Form::text('title', null, array('class' => 'form-control','placeholder' => ' نـــام پست ...')) !!}

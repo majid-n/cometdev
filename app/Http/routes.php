@@ -10,8 +10,8 @@
 |
 */
 
-Route::get('images/{Disk}/{Filename}', 'ImageController@RetriveImages');
-Route::get('images/{Disk}/{Width}/{Height}/{Watemark}/{Filename}', 'ImageController@RetriveImagesAdvanced');
+Route::get('images/{disk}/{filename}', 'ImageController@retriveImages');
+Route::get('images/{disk}/{width}/{height}/{watemark}/{filename}', 'ImageController@retriveImagesAdvanced');
 
 
 /*
@@ -25,14 +25,17 @@ Route::get('images/{Disk}/{Width}/{Height}/{Watemark}/{Filename}', 'ImageControl
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group([ 'middleware' => ['web'] ], function () {
+
+	# Home page
 	Route::get('/', 'HomeController@index');
-	Route::post('LikePost', 'AjaxController@LikePost');
-	Route::get('PaginatePost', 'AjaxController@PaginatePost');
-	Route::post('ModalPost', 'AjaxController@ModalPost');
-	Route::post('ContactForm', 'AjaxController@ContactForm');
+
+	# Ajax
+	Route::post('likepost', 'AjaxController@likePost');
+	Route::get('paginatepost', 'AjaxController@paginatePost');
+	Route::post('modalpost', 'AjaxController@modalPost');
+	Route::post('contactform', 'AjaxController@contactForm');
 	
-	Route::get('/Posts', 'AdminController@Posts');
-	Route::post('/Post', 'AdminController@AddPost')->name('AddPost');
-	Route::delete('/Post/{Post}', 'AdminController@DeletePost');
+	# Post element Methods
+	Route::resource('post', 'PostController');
 });

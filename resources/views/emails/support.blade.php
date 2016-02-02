@@ -3,18 +3,18 @@
 	use App\Classes\BackGround;
 
 	# Generate email pictures
-	$Background = Background::Random();
+	$background = Background::Random();
 
 ?>
 <html><body>
-<div style="background-size:cover;background:url({{ asset('img/backgrounds/'.$Background) }}) repeat center center;padding:20px;">
+<div style="background-size:cover;background:url({{ asset('img/backgrounds/'.$background) }}) repeat center center;padding:20px;">
 	<div style="border-radius:4px;overflow:hidden;background:rgba(245,245,245,0.9);direction:rtl;">
 		<div style="border-bottom: 1px solid #eee;padding:15px;background-color:rgba(255,255,255,0.7);">
 			<img style="display: block;" src="{{ asset('img/logo/comet_fa_black.png') }}" height="20">
 		</div>
 		<div>
 
-			<p style="margin:25px 15px 7px;"><b style="color:#fec503">{{ $Support->fullname }}</b> عزیز,</p>
+			<p style="margin:25px 15px 7px;"><b style="color:#fec503">{{ $support->fullname }}</b> عزیز,</p>
 
 			<p style="margin:0px 15px 7px;">پیام شما با موفقیت ارسال شد، تیم کامت به زودی پیام شما را مورد بررسی قرار داده و در اولین فرصت با شما تماس خواهند گرفت.</p>
 

@@ -7,7 +7,7 @@
         "@context" : "http://schema.org",
         "@type" : "Organization",
         "description" : "طراحی ، توسعه و مدیریت وب سایت تخصص ماست و تلاش ما در راستای انجام پروژه در بهترین حالت ممکن می باشد بنابراین کامت با خلق محصولات دیجیتال، طراحی وب سایت های پویا و پروژه های چند منظوره به شرکت ها و برندها کمک می کند تا پیشرفت چشمگیری در دنیای ارتباطات داشته باشند. کامت نسبت به مشتریان خود در طول انجام پروژه و پس از اتمام آن، با توجه به اهداف پروژه، متعهد است و همچنین خدمت به مشتریان از اهداف اصلی این گروه می باشد.",
-        "name" : "{{ $title }}",
+        "name" : "گروه طراحی و توسعه کامت",
         "url" : "{{ url()->current() }}",
         "logo": "{{ asset('img/logo/comdet_fa.png') }}",
         "email": "{{ config('app.info_email') }}",
@@ -38,13 +38,13 @@
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="{{ '@'.config('app.twitter') }}">
-    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:title" content="گروه طراحی و توسعه کامت">
     <meta name="twitter:description" content="طراحی ، توسعه و مدیریت وب سایت تخصص ماست و تلاش ما در راستای انجام پروژه در بهترین حالت ممکن می باشد بنابراین کامت با خلق محصولات دیجیتال، طراحی وب سایت های پویا و پروژه های چند منظوره به شرکت ها و برندها کمک می کند تا پیشرفت چشمگیری در دنیای ارتباطات داشته باشند. کامت نسبت به مشتریان خود در طول انجام پروژه و پس از اتمام آن، با توجه به اهداف پروژه، متعهد است و همچنین خدمت به مشتریان از اهداف اصلی این گروه می باشد.">
     <meta name="twitter:creator" content="{{ '@'.config('app.twitter') }}">
     <meta name="twitter:image:src" content="{{ asset('images/banner/0/0/1/banner_large.jpg') }}">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="{{ $title }}" />
+    <meta property="og:title" content="گروه طراحی و توسعه کامت" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:image" content="{{ asset('images/banner/0/0/1/banner_large.jpg') }}" />
@@ -52,10 +52,13 @@
     <meta property="og:site_name" content="کامت" />
 @endsection
 
+@section('title')
+    {{ 'گروه طراحی و توسعه کامت' }}
+@endsection
 
 @section('content')
     <!-- Header Section -->
-    <header style="background-image:url({{ asset('img/backgrounds/'.array_shift($Background)) }});">
+    <header style="background-image:url({{ asset('img/backgrounds/'.array_shift($background)) }});">
         <div class="container">
             <div class="intro-text">
                 <div class="intro-heading text-shadow">طـــراحی <b class="yellow">خاص</b> و منحصــر بـه فرد</div>
@@ -183,7 +186,7 @@
 
 
     <!-- Portfolio Section -->
-    @if( $TotalPosts > 0 )
+    @if( $totalposts > 0 )
     <section id="portfolio" class="bg-light-gray">
         <div class="container">
             <div class="row">
@@ -193,28 +196,28 @@
             </div>
             <div class="row masonry">
 
-                @foreach($Posts as $Post)
+                @foreach($posts as $post)
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 portfolio-item">
                     <div class="shadow">
-                        <a id="{{ $Post->id }}" class="portfolio-link">
+                        <a id="{{ $post->id }}" class="portfolio-link">
                             <div class="postimg">
-                                <img src="{{ asset('images/portfolioThumb/'.$Post->thumb) }}" class="img-responsive transition" alt='{{ $Post->title }}'>
+                                <img src="{{ asset('images/portfolioThumb/'.$post->thumb) }}" class="img-responsive transition" alt='{{ $post->title }}'>
                             </div>
                         </a>
-                        <div class="ribbon"><span>{{ $Post->cat->title }}</span></div> 
+                        <div class="ribbon"><span>{{ $post->cat->title }}</span></div> 
                         <div class="portfolio-caption">
                             <div class="portfolio-ajaxloader">
                                 <img src="{{ asset('img/svg/3dots.svg') }}" width="45">
                             </div>
                             <div class="portfolio-like">
-                                <h4>{{ $Post->title }}</h4>
-                                    @if( $Post->isLiked() === 0 )
-                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart enable transitionfast likePost"></span>
+                                <h4>{{ $post->title }}</h4>
+                                    @if( $post->isLiked() === 0 )
+                                    <span id="{{ $post->id }}" class="glyphicon glyphicon-heart enable transitionfast likePost"></span>
                                     @else
-                                    <span id="{{ $Post->id }}" class="glyphicon glyphicon-heart disable transitionfast likePost"></span>
+                                    <span id="{{ $post->id }}" class="glyphicon glyphicon-heart disable transitionfast likePost"></span>
                                     @endif
-                                @if( $Post->likes()->count() > 0 )
-                                    <p class="likecount">{{ $Post->likes()->count() }}</p>
+                                @if( $post->likes()->count() > 0 )
+                                    <p class="likecount">{{ $post->likes()->count() }}</p>
                                 @else
                                     <p class="likecount"></p>
                                 @endif
@@ -224,7 +227,7 @@
                 </div>
                 @endforeach
             </div>
-            @if( $TotalPosts > config('app.posts_per_page') && $LastPage > 1 )
+            @if( $totalposts > config('app.posts_per_page') && $lastpage > 1 )
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <button class="btn btn-xl btn-primary transition loadmorePortfolio HoverAnimation">مشاهده پروژه های بیشتر<span class="Spin"></span><span class="comet-sattelite"></span></button>
@@ -236,19 +239,19 @@
             <div class="row text-center">
                 <div class="PortfolioNav-item text-center">
                     <span class="glyphicon glyphicon-heart" data-toggle="tooltipfa" data-placement="top" title="مجموع لایک ها"></span>
-                    <p class="yellow text-shadow">{{ $TotalLikes }}</p>
+                    <p class="yellow text-shadow">{{ $totallikes }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
                     <span data-toggle="tooltipfa" data-placement="top" title="مجموع پروژه ها" class="glyphicon glyphicon-briefcase"></span>
-                    <p class="green text-shadow">{{ $TotalPosts }}</p>
+                    <p class="green text-shadow">{{ $totalposts }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
                     <span data-toggle="tooltipfa" data-placement="top" title="مجموع صفحات" class="glyphicon glyphicon-inbox"></span>
-                    <p class="cyan text-shadow LastPage">{{ $LastPage }}</p>
+                    <p class="cyan text-shadow LastPage">{{ $lastpage }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
                     <span data-toggle="tooltipfa" data-placement="top" title="صفحه در حال مشاهده" class="glyphicon glyphicon-eye-open"></span>
-                    <p class="pink text-shadow">{{ $Page }}</p>
+                    <p class="pink text-shadow">{{ $page }}</p>
                 </div>
             </div>
         </div>
@@ -267,7 +270,7 @@
     @endif
 
     <!-- Contact Section -->
-    <section id="contact" style="background-image:url({{ asset('img/backgrounds/'.array_shift($Background)) }});">
+    <section id="contact" style="background-image:url({{ asset('img/backgrounds/'.array_shift($background)) }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

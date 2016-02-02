@@ -13,7 +13,7 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">نام و نام خانوادگی <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{{ URL::to('Posts') }}">مدیریت پست ها</a></li>
+                    <li><a href="{{ route('post.index') }}">مدیریت پست ها</a></li>
                     <li><a href="#">ADMIN</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">Another action</a></li>
@@ -23,9 +23,9 @@
                 <li><a class="scroll" href="#contact">تماس با ما</a></li>
                 <li>
                     <a class="scroll" href="#portfolio">پروژه ها</a>
-                    @if( $TotalNewPosts > 0 )
-                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $TotalNewPosts }}"></span>
-                    <span class="badge backYellow shadow visible-xs" data-number="{{ $TotalNewPosts }}"></span>
+                    @if( $totalnewposts > 0 )
+                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $totalnewposts }}"></span>
+                    <span class="badge backYellow shadow visible-xs" data-number="{{ $totalnewposts }}"></span>
                     @endif
                 </li>
                 <li><a class="scroll" href="#services">سرویس ها</a></li>
