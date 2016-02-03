@@ -14,11 +14,7 @@
         @yield('seo')
 
         <title>
-            @if( isset($title) )
-                {{ $title }}
-            @else
-                @yield('title')
-            @endif
+            @yield('title')
         </title>
 
         <link rel="shortcut icon" href="{{ asset('img/logo/comet.ico') }}" type="image/x-icon">

@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+        DB::table('cats')->delete();
         DB::table('cats')->insert([
 
                 [ 'title' => 'وب سایت',     'parent' => 0 ],
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                 [ 'title' => 'بروشور',       'parent' => 2 ],
             ]);
 
+        DB::table('posts')->delete();
         DB::table('posts')->insert([ 
         		[
                     'title' 			=> 'شرکت ایرانیان گرافیک',
@@ -121,11 +122,11 @@ class DatabaseSeeder extends Seeder
         
 
     # Role Seeder
+        DB::table('roles')->delete();
         Sentinel::getRoleRepository()->createModel()->create([
             'name' => 'Users',
             'slug' => 'users',
         ]);
-
         Sentinel::getRoleRepository()->createModel()->create([
             'name' => 'Admins',
             'slug' => 'admins',
@@ -133,22 +134,24 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Roles seeded!');
 
     # User Seeder
+        DB::table('users')->delete();
         Sentinel::registerAndActivate([
             'email'    => 'user@user.com',
-            'password' => 'sentineluser',
-            'first_name' => 'UserFirstName',
-            'last_name' => 'UserLastName',
+            'password' => 'user',
+            'first_name' => 'علی',
+            'last_name' => 'شفاعت',
         ]);
-
         Sentinel::registerAndActivate([
             'email'    => 'admin@admin.com',
-            'password' => 'sentineladmin',
-            'first_name' => 'AdminFirstName',
-            'last_name' => 'AdminLastName',
+            'password' => 'admin',
+            'first_name' => 'مجید',
+            'last_name' => 'نورعلی',
         ]);
         $this->command->info('Users seeded!');
 
     # User Role Seeder
+
+        DB::table('role_users')->delete();        
         $userUser = Sentinel::findByCredentials(['login' => 'user@user.com']);
         $adminUser = Sentinel::findByCredentials(['login' => 'admin@admin.com']);
 

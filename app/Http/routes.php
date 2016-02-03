@@ -25,17 +25,30 @@ Route::get('images/{disk}/{width}/{height}/{watemark}/{filename}', 'ImageControl
 |
 */
 
+
 Route::group([ 'middleware' => ['web'] ], function () {
+
+	Route::get('login', 'AuthController@login');
+	Route::post('login', 'AuthController@postLogin');
+	Route::get('logout', 'AuthController@logout');
+
+	Route::get('register', 'AuthController@register');
+	Route::post('register', 'AuthController@postRegister');
 
 	# Home page
 	Route::get('/', 'HomeController@index');
+
 
 	# Ajax
 	Route::post('likepost', 'AjaxController@likePost');
 	Route::get('paginatepost', 'AjaxController@paginatePost');
 	Route::post('modalpost', 'AjaxController@modalPost');
 	Route::post('contactform', 'AjaxController@contactForm');
-	
+
 	# Post element Methods
 	Route::resource('post', 'PostController');
+
 });
+
+
+	

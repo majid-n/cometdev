@@ -14,9 +14,10 @@ use Storage;
 class PostController extends Controller
 {   
 
-    # Dependency Injection & Controllers
+    # Dependency Injection & Controllers & Middlewares
     public function __construct(){
         // Define Middleware
+        $this->middleware('role:Admins', [ 'except' => ['show'] ]);
     }
 
     # Show All resources.
@@ -66,9 +67,8 @@ class PostController extends Controller
 
             $errors = $validator->messages();
 
-            return redirect()->back()
-                             ->withInput()
-                             ->withErrors($errors);
+            return back()->withInput()
+                         ->withErrors($errors);
 
         } else {
 
@@ -103,9 +103,8 @@ class PostController extends Controller
             } 
         }
 
-        return Redirect()->back()
-                         ->withInput()
-                         ->with('fail','محصول با موفقیت ثبت شد.');
+        return back()->withInput()
+                     ->with('fail','محصول با موفقیت ثبت شد.');
     }
 
     # Display the specified resource.
@@ -153,9 +152,8 @@ class PostController extends Controller
 
         if ( $validator->fails() ) {
 
-            return redirect()->back()
-                             ->withInput()
-                             ->withErrors($validator);
+            return back()->withInput()
+                         ->withErrors($validator);
 
         } else {
 
@@ -174,9 +172,8 @@ class PostController extends Controller
                 }
         }
 
-        return Redirect()->back()
-                         ->withInput()
-                         ->with('fail','محصول با موفقیت ثبت شد.');
+        return back()->withInput()
+                     ->with('fail','محصول با موفقیت ثبت شد.');
     }
 
     # Remove the specified resource from storage

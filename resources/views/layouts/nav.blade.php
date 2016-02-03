@@ -10,15 +10,17 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
+                @if( $user = Sentinel::check() )
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">نام و نام خانوادگی <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->first_name . " " . $user->last_name}}<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="{{ route('post.index') }}">مدیریت پست ها</a></li>
                     <li><a href="#">ADMIN</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Another action</a></li>
+                    <li><a href="{{ url('logout') }}">خروج</a></li>
                   </ul>
                 </li>
+                @endif
                 
                 <li><a class="scroll" href="#contact">تماس با ما</a></li>
                 <li>

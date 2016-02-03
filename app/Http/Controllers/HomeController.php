@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Classes\BackGround;
+use Validator;
+use Sentinel;
 use App\Like;
 use App\Post;
 
@@ -24,4 +26,6 @@ class HomeController extends Controller
 
     	return view('index',compact('totallikes','totalposts','posts','page','lastpage','title','background'));
     }
+
+    
 }
