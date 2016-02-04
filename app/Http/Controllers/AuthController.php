@@ -145,6 +145,6 @@ class AuthController extends Controller
     # Logout User
     public function logout() {
         Sentinel::logout();
-        return redirect('login');
+        return redirect('/');
     }
 }
