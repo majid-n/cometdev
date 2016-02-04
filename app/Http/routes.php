@@ -47,7 +47,12 @@ Route::group([ 'middleware' => ['web'] ], function () {
 	# Post Model RESTful Resource Routes
 	Route::resource('post', 'PostController');
 
+	Route::get('activate/{user}/{code}', 'AuthController@activate');
+	Route::get('activate', 'AuthController@reactivate');
+	Route::post('activate', 'AuthController@generateActivate');
+
 });
+
 
 
 	
