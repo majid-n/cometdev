@@ -4,13 +4,11 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    # Seed into DB
     public function run()
     {
+
+    # Cats Seeder
         DB::table('cats')->delete();
         DB::table('cats')->insert([
 
@@ -25,7 +23,9 @@ class DatabaseSeeder extends Seeder
                 [ 'title' => 'کارت ویزیت',  'parent' => 2 ],
                 [ 'title' => 'بروشور',       'parent' => 2 ],
             ]);
+        $this->command->info('Cats seeded!');
 
+    # Posts Seeder
         DB::table('posts')->delete();
         DB::table('posts')->insert([ 
         		[
@@ -119,16 +119,16 @@ class DatabaseSeeder extends Seeder
                     'image' 			=> 'roundicons-free.png',
                 ]
             ]);
+        $this->command->info('Posts seeded!');
         
-
     # Role Seeder
         DB::table('roles')->delete();
         Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'Users',
+            'name' => 'users',
             'slug' => 'users',
         ]);
         Sentinel::getRoleRepository()->createModel()->create([
-            'name' => 'Admins',
+            'name' => 'admins',
             'slug' => 'admins',
         ]);
         $this->command->info('Roles seeded!');
@@ -150,7 +150,6 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Users seeded!');
 
     # User Role Seeder
-
         DB::table('role_users')->delete();        
         $userUser = Sentinel::findByCredentials(['login' => 'user@user.com']);
         $adminUser = Sentinel::findByCredentials(['login' => 'admin@admin.com']);
@@ -161,8 +160,6 @@ class DatabaseSeeder extends Seeder
         $userRole->users()->attach($userUser);
         $adminRole->users()->attach($adminUser);
         $this->command->info('Users assigned to roles seeded!');
-
-
 
     }
 }

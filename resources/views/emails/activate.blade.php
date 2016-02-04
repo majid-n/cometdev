@@ -1,1 +1,1 @@
-Activate your account by clicking <a href="{{ URL::to("activate/{$user->getUserId()}/{$code}") }}">here</a>
+Activate your account by clicking <a href="{{ url('activate/'.$user->id.'/'.$activation->code) }}">here</a>

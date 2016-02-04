@@ -13,7 +13,6 @@
 Route::get('images/{disk}/{filename}', 'ImageController@retriveImages');
 Route::get('images/{disk}/{width}/{height}/{watemark}/{filename}', 'ImageController@retriveImagesAdvanced');
 
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -25,27 +24,27 @@ Route::get('images/{disk}/{width}/{height}/{watemark}/{filename}', 'ImageControl
 |
 */
 
-
 Route::group([ 'middleware' => ['web'] ], function () {
 
-	Route::get('login', 'AuthController@login');
-	Route::post('login', 'AuthController@postLogin');
+
+	# Login and Register Routes
+	Route::get(	'login', 'AuthController@login');
+	Route::post('login', 'AuthController@authenticate');
 	Route::get('logout', 'AuthController@logout');
-
 	Route::get('register', 'AuthController@register');
-	Route::post('register', 'AuthController@postRegister');
+	Route::post('register', 'AuthController@store');
 
-	# Home page
+	# Home page Routes
 	Route::get('/', 'HomeController@index');
 
 
-	# Ajax
+	# Ajax Routes
 	Route::post('likepost', 'AjaxController@likePost');
 	Route::get('paginatepost', 'AjaxController@paginatePost');
 	Route::post('modalpost', 'AjaxController@modalPost');
 	Route::post('contactform', 'AjaxController@contactForm');
 
-	# Post element Methods
+	# Post Model RESTful Resource Routes
 	Route::resource('post', 'PostController');
 
 });

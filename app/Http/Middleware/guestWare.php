@@ -6,16 +6,10 @@ use Closure;
 use Sentinel;
 use Illuminate\Support\Facades\Auth;
 
-class redirectAuth
+class guestWare
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
-     * @return mixed
-     */
+
+    # Continue if the request was in GUEST role
     public function handle($request, Closure $next)
     {
         if ( Sentinel::check() ) {

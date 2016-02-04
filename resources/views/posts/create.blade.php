@@ -20,7 +20,7 @@
 <div class="container" style="margin-top:100px;">
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
-
+	
 	<!-- Show Errors And Success -->
 		@if ($errors->any())
 		   <div class="alert alert-danger alert-block">

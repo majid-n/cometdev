@@ -7,7 +7,7 @@ use Sentinel;
 
 class roleWare
 {
-    # Admin Middle Ware
+    # Continue if the user had the specific role
     public function handle($request, Closure $next, $role)
     {
     	

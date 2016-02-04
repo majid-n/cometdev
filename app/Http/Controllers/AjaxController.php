@@ -14,6 +14,7 @@ use App\Support;
 
 class AjaxController extends Controller
 {
+    
     # Like each Post from Portfiolio Section
     public function likePost(Request $request) {
 

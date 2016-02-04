@@ -16,8 +16,8 @@ class PostController extends Controller
 
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
-        // Define Middleware
-        $this->middleware('role:Admins', [ 'except' => ['show'] ]);
+        # Define Middleware
+        $this->middleware('role:admins', [ 'except' => ['show'] ]);
     }
 
     # Show All resources.
@@ -98,13 +98,13 @@ class PostController extends Controller
 
                 # Redirect on Success
                 if ( $post->save() ) {
-                    return Redirect('/post')->with('success','محصول با موفقیت ثبت شد.');
+                    return Redirect('/post')->withErrors('محصول با موفقیت ثبت شد.');
                 }
             } 
         }
 
         return back()->withInput()
-                     ->with('fail','محصول با موفقیت ثبت شد.');
+                     ->withErrors('محصول با موفقیت ثبت شد.');
     }
 
     # Display the specified resource.
@@ -168,12 +168,12 @@ class PostController extends Controller
 
                 # Redirect on Success
                 if ( $post->save() ) {
-                    return Redirect('/post')->with('success','محصول با موفقیت ثبت شد.');
+                    return Redirect('/post')->withErrors('محصول با موفقیت ثبت شد.');
                 }
         }
 
         return back()->withInput()
-                     ->with('fail','محصول با موفقیت ثبت شد.');
+                     ->withErrors('محصول با موفقیت ثبت شد.');
     }
 
     # Remove the specified resource from storage
@@ -181,6 +181,6 @@ class PostController extends Controller
         Storage::disk('portfolio')->delete( $post->image );
         Storage::disk('portfolioThumb')->delete( $post->thumb );
         $post->delete();
-        return redirect('/post')->with('success','محصول با موفقیت ثبت شد.');
+        return redirect('/post')->withErrors('محصول با موفقیت ثبت شد.');
     }
 }
