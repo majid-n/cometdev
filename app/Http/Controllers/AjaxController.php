@@ -86,7 +86,7 @@ class AjaxController extends Controller
                                     'result'    => true,
                                     'page'      => $posts->currentPage(),
                                     'lastpage'  => $posts->lastPage(),
-                                    'html'      => view('ajaxlayouts.pagination', array('posts' => $posts))->render()
+                                    'html'      => view('ajax.pagination', array('posts' => $posts))->render()
                                 ]
                             );
                 }
@@ -108,7 +108,7 @@ class AjaxController extends Controller
                     return  response()->json(
                                 [
                                     'result'      => true,
-                                    'modaldata'   => view('ajaxlayouts.postmodaldata',  array('post' => $post))->render()
+                                    'modaldata'   => view('ajax.postmodaldata',  array('post' => $post))->render()
                                 ]
                             );
                 }

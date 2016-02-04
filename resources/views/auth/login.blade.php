@@ -19,7 +19,7 @@
 			<div class="form-group">
 				{!! Form::password('password', array('placeholder' => ' کلمـــه عبـــور ...', 'class' => 'form-control')) !!}
 			
-				<a role="button" href="{{ URL::to('reset') }}" class="ig-color pull-left">{{trans('general.forgetpassword')}}</a><br>
+				<a role="button" href="{{ url('forgot') }}" class="ig-color pull-left">{{trans('general.forgetpassword')}}</a><br>
 			</div>
 
 			<div class="form-group">

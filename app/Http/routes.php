@@ -30,13 +30,24 @@ Route::group([ 'middleware' => ['web'] ], function () {
 	# Login and Register Routes
 	Route::get(	'login', 'AuthController@login');
 	Route::post('login', 'AuthController@authenticate');
-	Route::get('logout', 'AuthController@logout');
 	Route::get('register', 'AuthController@register');
 	Route::post('register', 'AuthController@store');
+	Route::get('logout', 'AuthController@logout');
+	Route::get('logout/everywhere', 'AuthController@logoutEverywhere');
+
+	# Activation Progress Routes
+	Route::get('activate', 'ActivationController@reactivate');
+	Route::post('activate', 'ActivationController@generateActivate');
+	Route::get('activate/{user}/{code}', 'ActivationController@activate');
+
+	# Reset Password Progress Routes
+	Route::get('forgot', 'PasswordController@forgot');
+	Route::post('forgot', 'PasswordController@prepareReset');
+	Route::get('reset/{code}', 'PasswordController@reset');
+	Route::post('reset', 'PasswordController@resetPassword');
 
 	# Home page Routes
 	Route::get('/', 'HomeController@index');
-
 
 	# Ajax Routes
 	Route::post('likepost', 'AjaxController@likePost');
@@ -46,11 +57,6 @@ Route::group([ 'middleware' => ['web'] ], function () {
 
 	# Post Model RESTful Resource Routes
 	Route::resource('post', 'PostController');
-
-	Route::get('activate/{user}/{code}', 'AuthController@activate');
-	Route::get('activate', 'AuthController@reactivate');
-	Route::post('activate', 'AuthController@generateActivate');
-
 });
 
 
