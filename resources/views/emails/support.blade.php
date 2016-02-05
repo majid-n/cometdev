@@ -20,7 +20,7 @@
 
 			<p style="margin:0px 15px 7px;">این ایمیل توسط دستگاه ارسال شده است، لطفا از ارسال ایمیل به این آدرس خودداری کنید.</p>
 
-			<div style="text-align:center;margin:40px 15px;"><a style="border-radius:4px;background:#fec503;text-decoration:none;color:#fff;padding:15px 35px;font-weight:bold;" href="http://cometdev.ir/">مشاهده صفحه اصلی</a></div>
+			<div style="text-align:center;margin:40px 15px;"><a style="border-radius:4px;background:#fec503;text-decoration:none;color:#fff;padding:15px 35px;font-weight:bold;" href="{{ route('home') }}">مشاهده صفحه اصلی</a></div>
 
 		</div>
 		<div style="border-top: 1px solid #eee;text-align:center;padding:9px;background:rgba(255,255,255,0.7);margin-top:45px;">		

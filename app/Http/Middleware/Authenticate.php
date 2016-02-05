@@ -3,7 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Sentinel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class Authenticate
 {
@@ -15,14 +18,12 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard($guard)->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
-            }
+        if ( !Sentinel::check() ) {
+
+            if ( $request->ajax() ) return response('Unauthorized.', 401);
+            else return redirect()->route('login')->with('fail', 'جهت دسترسی به این صفحه به سایت وارد شوید.');
         }
 
         return $next($request);

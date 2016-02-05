@@ -21,6 +21,7 @@
         <link rel="icon" href="{{ asset('img/logo/comet.ico') }}" type="image/x-icon">
 
         <link href='{{ asset('css/bootstrap.min.css') }}' rel="stylesheet">
+        <link href='{{ asset('css/animate.css') }}' rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/comet.css') }}" rel="stylesheet">
         <!--[if lt IE 9]>
@@ -34,7 +35,6 @@
     </head>
 
     <body id="home">
-
         <!-- Navigation -->
         @include('layouts.nav')
 
@@ -52,6 +52,40 @@
 
         <!-- Additional Js -->
         @yield('js')
+
+        <script src='{{ asset('js/comet.func.js') }}'></script>
+
+        @yield('customjs')
+        
+        <!-- Handle Errors -->
+        @if( session()->has('success') )
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    Notify({
+                        icon    : 'success',
+                        title   : 'هوراااا،',
+                        message : '{!! session('success') !!}',
+                        type    : 'success',
+                        interval: 2
+                    });
+                });
+            </script>
+            <?php session()->forget('success'); ?>
+        @endif
+
+        @if( session()->has('fail') )
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    Notify({
+                        title   : 'خطا:',
+                        message : '{!! session('fail') !!}',
+                        type    : 'danger',
+                        interval: 2
+                    });
+                });
+            </script>
+            <?php session()->forget('fail'); ?>
+        @endif
 
     </body>
 </html>

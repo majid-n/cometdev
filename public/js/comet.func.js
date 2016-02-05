@@ -55,7 +55,7 @@ function isOpenModal(){
 }
 // is Comet Modal Open or not?
 function isOpenCometModal(){
-     return typeof ModalParent === 'object' && ModalParent !== undefined && ModalParent !== null && isOpenModal();
+    return typeof ModalParent === 'object' && ModalParent !== undefined && ModalParent !== null && isOpenModal();
 }
 // Detect Touch Screen
 function isTouch(){
@@ -295,9 +295,8 @@ function PortfolioModalSetup(){
             ModalLoader = Modal.find('.modal-content .cometModalLoader');
 
         $.ajax({
-            url  : 'modalpost',
-            type : 'POST',
-            data : {pid: PID}
+            url  : 'post/'+PID,
+            type : 'GET'
         })
         .done(function(data) {
 
@@ -434,7 +433,7 @@ function PortfolioPaginationSetup(){
 
             $.ajax({
                 type : 'GET',
-                url  : 'paginatepost?page='+Page
+                url  : 'post?page='+Page
             })
             .done(function(data) {
 
@@ -561,60 +560,50 @@ function ContactFormSetup(){
        });
     });
 }
-// Skills Setup
-function Skills(){
+// Fucking Notify
+function Notify(params){
 
-    var Circles    = $('.skill'),
-        LoadSkills = function(){
+    var icon        = 'icon'        in params ? params.icon     : 'exclamation',
+        title       = 'title'       in params ? params.title    : 'خطا',
+        message     = 'message'     in params ? params.message  : 'لطفا مجددا تلاش کنید.',
+        element     = 'element'     in params ? params.element  : 'body',
+        position    = 'position'    in params ? params.position : 'fixed',
+        align       = 'align'       in params ? params.align    : 'right',
+        from        = 'from'        in params ? params.from     : 'bottom',
+        enter       = 'enter'       in params ? params.enter    : 'bounceInUp',
+        exit        = 'exit'        in params ? params.exit     : 'flipOutX',
+        delay       = 'delay'       in params ? params.delay    : 5000,
+        over        = 'over'        in params ? params.over     : 'pause',
+        type        = 'type'        in params ? params.type     : 'info',
+        interval    = 'interval'    in params ? params.interval : 3,
+        init        = function(){
+            $.notify(
+                {
+                    icon        : 'fa fa-'+icon,
+                    title       : title,
+                    message     : message
+                },
+                {
+                    element     : element,
+                    position    : position,
+                    placement   : {
+                        align : align,
+                        from  : from
+                    },
+                    type        : type,
+                    animate     : {
+                        enter: 'animated '+enter,
+                        exit: 'animated '+exit
+                    },
+                    delay       : delay,
+                    mouse_over  : over,
+                    offset      :{
+                        y:30,
+                        x:30
+                    }
+                }
+            );
+        };
 
-                        if( typeof SkillsLoaded === 'boolean' && SkillsLoaded === false && $('#team:in-viewport').length ) {
-                            
-                            SkillsLoaded = true;
-
-                            Circles.each(function () {
-
-                                var skilledPercentage = $(this).attr('skilled-pct'),
-                                    skilledColour     = $(this).attr('skilled-color'),
-                                    options           = {
-                                                            responsive:false,
-                                                            maintainAspectRatio: false,
-                                                            showTooltips: false,
-                                                            animationEasing: "easeOut",
-                                                            animationSteps: 40,
-                                                            onAnimationComplete: function () {
-                                                                //setup the font and center it's position
-                                                                this.chart.ctx.font = 'bold 1em yekan';
-                                                                this.chart.ctx.fillStyle = '#555';
-                                                                this.chart.ctx.textAlign = 'center';
-                                                                this.chart.ctx.textBaseline = 'middle';
-                                                                //put the pabel together based on the given 'skilled' percentage
-                                                                var valueLabel = this.segments[0].value;
-                                                                //find the center point
-                                                                var x = this.chart.canvas.clientWidth / 2;
-                                                                var y = this.chart.canvas.clientHeight / 2;
-                                                                //hack to center different fonts
-                                                                var x_fix = 0;
-                                                                var y_fix = 0;
-                                                                //render the text
-                                                                this.chart.ctx.fillText(valueLabel, x + x_fix, y + y_fix);
-                                                            }
-                                                        },
-                                    data              = [
-                                                            {
-                                                                value: skilledPercentage,
-                                                                color: skilledColour
-                                                            },
-                                                            {
-                                                                value: 10 - skilledPercentage,
-                                                                color: '#ffffff'
-                                                            }
-                                                        ],
-                                    ctx               = $(this).get(0).getContext("2d");
-                                    chart             = new Chart(ctx).Doughnut(data,options);
-                            });
-                        }
-                    };
-
-    LoadSkills();
-    $(window).scroll(function(event) { LoadSkills() });
+    setTimeout(init, interval*1000);
 }

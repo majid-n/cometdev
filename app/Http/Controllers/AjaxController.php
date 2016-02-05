@@ -72,51 +72,6 @@ class AjaxController extends Controller
         return response()->json([ 'result' =>  false ]);
     }
 
-    # Portfolio Pagination on Post Items
-    public function paginatePost(Request $request) {
-        
-        if ( $request->ajax() && $request->isMethod('get')) {
-
-                $posts = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
-
-                if( $posts->currentPage() <= $posts->lastPage() && $posts->total() > config('app.posts_per_page') ) {
-
-                    return  response()->json(
-                                [
-                                    'result'    => true,
-                                    'page'      => $posts->currentPage(),
-                                    'lastpage'  => $posts->lastPage(),
-                                    'html'      => view('ajax.pagination', array('posts' => $posts))->render()
-                                ]
-                            );
-                }
-        }
-
-        return  response()->json([ 'result' => false ]);
-    }
-
-    # Load Post data on Modal
-    public function modalPost(Request $request) {
-        
-        if ( $request->ajax() && $request->isMethod('post')) {
-
-                if( $request->has('pid') ) {
-
-                    $post = Post::with('cat','likes')->find( $request->pid );
-                    if( $post ) Post::where('id', $post->id)->increment('views');
-                    
-                    return  response()->json(
-                                [
-                                    'result'      => true,
-                                    'modaldata'   => view('ajax.postmodaldata',  array('post' => $post))->render()
-                                ]
-                            );
-                }
-        }
-
-        return  response()->json([ 'result' => false ]);
-    }
-
     # Contact form Ajax
     public function contactForm(Request $request) {
 
@@ -131,20 +86,7 @@ class AjaxController extends Controller
                 'des'  => 'required|min:10|max:500'
             ];
 
-            $messsages = [
-                'mail.required'         =>'لطفا ایمیل خود را وارد کنید.',
-                'mail.email'            =>'لطفا ایمیل خود را به درستی وارد کنید.',
-                'name.required'         =>'لطفا نام خود را وارد کنید.',
-                'name.farsi'            =>'لطفا در نام خود فقط از حروف فارسی استفاده کنید.',
-                'name.min'              =>'نام شما باید حداقل دارای :min حرف باشد.',
-                'tel.required'          =>'لطفا تلفن خود را وارد کنید.',
-                'tel.digits_between'    =>'شماره تلفن شما باید حداقل :min و حداکثر :max عدد باشد.',
-                'des.required'          =>'لطفا متن توضیحات خود را وارد کنید.',
-                'des.min'               =>'متن توضیحات شما باید حداقل دارای :min عدد باشد.',
-                'des.max'               =>'متن توضیحات شما باید حداکثر دارای :max عدد باشد.',
-            ];
-
-            $validator = Validator::make($data, $rules, $messsages);
+            $validator = Validator::make($data, $rules );
 
             if ( $validator->fails() ) {
 

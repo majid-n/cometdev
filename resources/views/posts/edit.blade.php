@@ -1,5 +1,8 @@
+@extends('layouts.template')
 
-	<div>
+@section('content')
+
+	<div style="margin-top:150px;">
 		<ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -9,7 +12,7 @@
 		<!-- Create form here and add this data in it -->
 		<img src="{{ asset('images/portfolioThumb/'.$post->thumb) }}">
 
-	    {!! Form::open(array('method' => 'post', 'route' => array('post.update', $post->id))) !!}
+	    {!! Form::open(array('method' => 'post', 'route' => array('admin.post.update', $post->id))) !!}
         	
         	{!! method_field('PUT') !!}
 
@@ -23,7 +26,7 @@
 	        {!! Form::button('edit', array('type' => 'submit')) !!}
 	    {!! Form::close() !!}
 
-	    {!! Form::open(array('method' => 'post', 'route' => array('post.destroy', $post->id))) !!}
+	    {!! Form::open(array('method' => 'post', 'route' => array('admin.post.destroy', $post->id))) !!}
         	
         	{!! method_field('DELETE') !!}
         	
@@ -31,3 +34,5 @@
 	    {!! Form::close() !!}
 
 	</div>
+
+@stop

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -18,7 +18,6 @@ class PasswordController extends Controller
     # Dependency Injection & Controllers & Middlewares
 	public function __construct(){
 	    # Define Middleware
-	    $this->middleware('guest');
 	}
 
 	# Make Forgot Password Page
@@ -63,11 +62,11 @@ class PasswordController extends Controller
 	            $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
 	        });
 
-	        return redirect('login')->withErrors('ایمیل تغییر و ریست رمز عبور ارسال شد.');
+	        return redirect()->route('login')->with('success', 'ایمیل تغییر و ریست رمز عبور ارسال شد.');
 	    }
 
 	    return back()->withInput()
-	                 ->withErrors('ایمیلی با این مشخصات یافت نشد.');
+	                 ->with('fail', 'ایمیلی با این مشخصات یافت نشد.');
 	}
 
 	# Make Reset Password Page
@@ -75,7 +74,7 @@ class PasswordController extends Controller
 
 		if( !empty( $code ) ) return view('auth.reset',compact('code'));
 
-		return redirect('forgot')->withErrors('کد امنیتی جهت ریست رمز عبور صحیح نمی باشد.');
+		return redirect()->route('forgot')->with('fail', 'کد امنیتی جهت ریست رمز عبور صحیح نمی باشد.');
 	}
 
 	# Reset Password
@@ -89,19 +88,13 @@ class PasswordController extends Controller
 
 	    $rules = [
 	        'email'             => 'required|email|exists:users,email',
-	        'password'          => 'required',
+	        'password'          => 'required|alpha_num|min:6|max:20',
 	        'password_confirm'  => 'required|same:password',
 	        'code'              => 'required'
 	    ];
 
 	    $messsages = [
-	        'email.required'            => 'لطفا ایمیل خود را وارد کنید.',
-	        'email.email'               => 'لطفا ایمیل خود را به درستی وارد کنید.',
-	        'email.exists'              => 'ایمیل وارد شده ثبت نامنشده است.',
-	        'password.required'         => 'لطفا رمز عبور خود را وارد کنید.',
-	        'password_confirm.required' => 'لطفا تائید رمز عبور خود را وارد کنید.',
-	        'password_confirm.same'     => 'لطفا رمز عبور و تائیدیه آن را به صورت یکسان وارد کنید.',
-	        'code.required'             => 'خطای امنیتی. لطفا عمیات تغییر رمز عبور را مجددا انجام دهید.'
+	        'code.required'             => 'خطای امنیتی. لطفا عملیات تغییر رمز عبور را مجددا انجام دهید.'
 	    ];
 
 	    $validator = Validator::make($input, $rules, $messsages);
@@ -122,12 +115,11 @@ class PasswordController extends Controller
 	        	    $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
 	        	});
 
-	        	return redirect('login')->withErrors('عملیات تغییر رمز عبور با موفقیت انجام شد.');
-
+	        	return redirect()->route('login')->with('success', 'عملیات تغییر رمز عبور با موفقیت انجام شد.');
 	        }
 	    }
 
 	    return back()->withInput()
-	                 ->withErrors('خطای امنیتی. لطفا عمیات تغییر رمز عبور را مجددا انجام دهید.');
+	                 ->with('fail', 'خطای امنیتی. لطفا عمیات تغییر رمز عبور را مجددا انجام دهید.');
 	}
 }

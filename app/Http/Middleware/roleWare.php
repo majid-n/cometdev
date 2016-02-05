@@ -12,9 +12,9 @@ class roleWare
     {
     	
     	if( Sentinel::check() ) {
-    		if ( !Sentinel::inRole($role) ) return redirect('/')->withErrors('شما امکان دسترسی به این محدوده را ندارید.');
+    		if ( !Sentinel::inRole($role) ) return redirect()->route('home')->with('fail', 'شما امکان دسترسی به این محدوده را ندارید.');
     	} else { 
-    		return redirect('/');
+    		return redirect()->route('home');
     	}
         
         return $next($request);

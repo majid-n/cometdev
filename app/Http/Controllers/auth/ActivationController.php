@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -18,7 +18,6 @@ class ActivationController extends Controller
 	# Dependency Injection & Controllers & Middlewares
 	public function __construct(){
 	    # Define Middleware
-	    $this->middleware('guest');
 	}
 
     # Make the Activation Page
@@ -39,13 +38,7 @@ class ActivationController extends Controller
             'email' => 'required|email|exists:users,email',
         ];
 
-        $messsages = [
-            'email.required'            => 'لطفا ایمیل خود را وارد کنید.',
-            'email.email'               => 'لطفا ایمیل خود را به درستی وارد کنید.',
-            'email.exists'              => 'ایمیل وارد شده ثبت نامنشده است.',
-        ];
-
-        $validator = Validator::make($input, $rules, $messsages);
+        $validator = Validator::make($input, $rules );
 
         if ( $validator->fails() ) {
             return back()->withInput()
@@ -63,11 +56,11 @@ class ActivationController extends Controller
                 $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
             });
 
-            return redirect('login')->withErrors('کد فعال سازی برای شما ارسال شد.');
+            return redirect()->route('login')->with('success', 'کد فعال سازی برای شما ارسال شد.');
         }
 
         return back()->withInput()
-                     ->withErrors('ایمیلی با این مشخصات یافت نشد.');
+                     ->with('fail', 'ایمیلی با این مشخصات یافت نشد.');
     }
 
     # Activate User
@@ -76,9 +69,9 @@ class ActivationController extends Controller
         if ( Activation::complete($user, $code ) ) {
 
             Sentinel::login($user);
-            return redirect('/')->withErrors('حساب کاربری شما فعال شد.');
+            return redirect()->route('home')->with('success', 'حساب کاربری شما فعال شد.');
         }
 
-        return Redirect('activate')->withErrors('حساب کاربری شما غیر فعال است. جهت ارسال کد فعال سازی ایمیل خود را وارد کنید.');
+        return Redirect()->route('reactivate')->with('fail', 'حساب کاربری شما غیر فعال است. جهت ارسال کد فعال سازی ایمیل خود را وارد کنید.');
     }
 }

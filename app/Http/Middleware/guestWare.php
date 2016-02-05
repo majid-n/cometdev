@@ -13,7 +13,7 @@ class guestWare
     public function handle($request, Closure $next)
     {
         if ( Sentinel::check() ) {
-            return redirect('/');
+            return redirect()->route('home');
         }
 
         return $next($request);

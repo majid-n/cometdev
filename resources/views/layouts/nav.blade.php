@@ -14,10 +14,12 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->first_name . " " . $user->last_name}}<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{{ route('post.index') }}">مدیریت پست ها</a></li>
+                    @if( Sentinel::inRole('admins') )
+                        <li><a href="{{ route('admin.post.index') }}">مدیریت پست ها</a></li>
+                    @endif
                     <li><a href="#">ADMIN</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="{{ url('logout') }}">خروج</a></li>
+                    <li><a href="{{ route('logout') }}">خروج</a></li>
                   </ul>
                 </li>
                 @endif

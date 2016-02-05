@@ -1,5 +1,8 @@
+@extends('layouts.template')
 
-	<div>
+@section('content')
+
+	<div style="margin-top:150px;">
 		<h1>{{ $post->title }}</h1>
 		<p>{{ $post->description }}</p>
 		<img src="{{ asset('images/portfolio/'.$post->thumb) }}">
@@ -7,10 +10,12 @@
 		<p>views : {{ $post->views }}</p>
 		<p>likes : {{ $post->likes()->count() }}</p>
 		<p>cat : {{ $post->cat->title }}</p>
-		<a href="{{ route('post.edit', ['post' => $post->id]) }}">edit</a>
-		<a href="{{ route('post.destroy', ['post' => $post->id]) }}">delete</a>
+		<a href="{{ route('admin.post.edit', ['post' => $post->id]) }}">edit</a>
+		<a href="{{ route('admin.post.destroy', ['post' => $post->id]) }}">delete</a>
 
 	</div>
 
 	<br>
 	<br>
+
+@stop

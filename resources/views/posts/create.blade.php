@@ -17,31 +17,18 @@
 @section('content')
 
 <section id="contact">
-<div class="container" style="margin-top:100px;">
+<div class="container" style="margin-top:150px;">
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 	
 	<!-- Show Errors And Success -->
-		@if ($errors->any())
-		   <div class="alert alert-danger alert-block">
-		      <button type="button" class="close" data-dismiss="alert"><i class="fa fa-minus-square"></i></button>
-		      <strong>{{trans('general.error')}}</strong>
-		      @if ($message = $errors->first(0, ':message'))
-		         {{ $message }}
-		      @else
-		         {{trans('validation.check_errors')}}
-		      @endif
-		   </div>
-		@endif
+		<ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
 
-		@if ($message = Session::get('success'))
-		   <div class="alert alert-success alert-block">
-		      <button type="button" class="close" data-dismiss="alert"><i class="fa fa-minus-square"></i></button>
-		      <strong>{{trans('general.success')}}</strong> {{ $message }}
-		   </div>
-		@endif
-
-	    {!! Form::open(array('method' => 'post', 'class' => 'ContactForm', 'route' => 'post.store', 'files' => true)) !!}
+	    {!! Form::open(array('method' => 'post', 'class' => 'ContactForm', 'route' => 'admin.post.store', 'files' => true)) !!}
         	<div class="form-group col-md-6">
         		{!! Form::select('cat_id', $cats, null, array('class' => 'form-control', 'dir' => 'rtl', 'style' => 'height:57px;')) !!}
         	</div>

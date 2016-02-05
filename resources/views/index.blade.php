@@ -336,8 +336,9 @@
 @section('js')
     <script src='{{ asset('js/imageloaded.min.js') }}'></script>
     <script src='{{ asset('js/masonry.min.js') }}'></script>
-    <script src='{{ asset('js/chart.min.js') }}'></script>
-    <script src='{{ asset('js/comet.func.js') }}'></script>
+@endsection
+
+@section('customjs')
     <script type="text/javascript">
         $(document).ready(function() {
             AjaxSetup();
