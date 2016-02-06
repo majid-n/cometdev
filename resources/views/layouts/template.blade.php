@@ -64,10 +64,9 @@
                 $(document).ready(function() {
                     Notify({
                         icon    : 'success',
-                        title   : 'هوراااا،',
+                        title   : '',
                         message : '{!! session('success') !!}',
-                        type    : 'success',
-                        interval: 2
+                        type    : 'success'
                     });
                 });
             </script>
@@ -78,10 +77,9 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     Notify({
-                        title   : 'خطا:',
+                        title   : '',
                         message : '{!! session('fail') !!}',
-                        type    : 'danger',
-                        interval: 2
+                        type    : 'danger'
                     });
                 });
             </script>

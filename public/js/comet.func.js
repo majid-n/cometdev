@@ -575,7 +575,7 @@ function Notify(params){
         delay       = 'delay'       in params ? params.delay    : 5000,
         over        = 'over'        in params ? params.over     : 'pause',
         type        = 'type'        in params ? params.type     : 'info',
-        interval    = 'interval'    in params ? params.interval : 3,
+        interval    = 'interval'    in params ? params.interval : 2,
         init        = function(){
             $.notify(
                 {

@@ -18,6 +18,8 @@ class CreateCatsTable extends Migration
             $table->integer('parent')->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->engine = 'InnoDB';
         });
     }
 

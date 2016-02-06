@@ -7,8 +7,6 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Classes\BackGround;
-use Validator;
-use Sentinel;
 use App\Like;
 use App\Post;
 

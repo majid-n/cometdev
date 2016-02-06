@@ -12,10 +12,7 @@ class guestWare
     # Continue if the request was in GUEST role
     public function handle($request, Closure $next)
     {
-        if ( Sentinel::check() ) {
-            return redirect()->route('home');
-        }
-
+        if ( Sentinel::check() ) return redirect()->route('home');
         return $next($request);
     }
 }

@@ -86,7 +86,7 @@ class AjaxController extends Controller
                 'des'  => 'required|min:10|max:500'
             ];
 
-            $validator = Validator::make($data, $rules );
+            $validator = Validator::make( $data, $rules );
 
             if ( $validator->fails() ) {
 

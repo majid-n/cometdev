@@ -21,6 +21,8 @@ class CreateLikesTable extends Migration
                   ->references('id')->on('posts')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
+
+            $table->engine = 'InnoDB';
         });
     }
 

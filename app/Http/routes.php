@@ -55,7 +55,7 @@ Route::group([ 'namespace' => 'auth' ], function () {
 	# Reset Password Progress Routes
 	Route::get('forgot', 'PasswordController@forgot')->name('forgot');
 	Route::post('forgot', 'PasswordController@prepareReset')->name('forgot.post');
-	Route::get('reset/{code}', 'PasswordController@reset')->name('reset');
+	Route::get('reset/{user}/{code}', 'PasswordController@reset')->name('reset');
 	Route::post('reset', 'PasswordController@resetPassword')->name('reset.post');
 });
 

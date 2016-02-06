@@ -43,7 +43,7 @@ class AuthController extends Controller
 
             $rules = [
                 'email'    => 'required|email',
-                'password' => 'required|alpha_num|min:5|max:20',
+                'password' => 'required|alpha_num|min:6|max:20',
             ];
 
             $validator = Validator::make($input, $rules );

@@ -11,10 +11,6 @@
                 {!! Form::open(array('method' => 'post','route'=>'reset.post')) !!}
 
                     <div class="form-group">
-                        {!! Form::text('email', null, array('placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required')) !!}
-                    </div>
-
-                    <div class="form-group">
                         {!! Form::password('password', array('placeholder' => 'Password', 'required' => 'required')) !!}
                     </div>
 
@@ -23,6 +19,7 @@
                     </div>
 
                     {!! Form::hidden('code', $code )!!}
+                    {!! Form::hidden('email', $user->email )!!}
 
 
                     <div class="form-group">

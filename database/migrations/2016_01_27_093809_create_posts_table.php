@@ -29,6 +29,8 @@ class CreatePostsTable extends Migration
                   ->references('id')->on('cats')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
+
+            $table->engine = 'InnoDB';
         });
     }
 

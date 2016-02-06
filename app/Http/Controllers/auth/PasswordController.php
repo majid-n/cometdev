@@ -9,6 +9,7 @@ use Validator;
 use Sentinel;
 use Reminder;
 use Mail;
+use App\User;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 
@@ -38,13 +39,7 @@ class PasswordController extends Controller
 	        'email' => 'required|email|exists:users,email',
 	    ];
 
-	    $messsages = [
-	        'email.required'            => 'لطفا ایمیل خود را وارد کنید.',
-	        'email.email'               => 'لطفا ایمیل خود را به درستی وارد کنید.',
-	        'email.exists'              => 'ایمیل وارد شده ثبت نامنشده است.',
-	    ];
-
-	    $validator = Validator::make($input, $rules, $messsages);
+	    $validator = Validator::make( $input, $rules );
 
 	    if ( $validator->fails() ) {
 	        return back()->withInput()
@@ -70,10 +65,8 @@ class PasswordController extends Controller
 	}
 
 	# Make Reset Password Page
-	public function reset( $code ) {
-
-		if( !empty( $code ) ) return view('auth.reset',compact('code'));
-
+	public function reset( User $user, $code ) {
+		if( !empty( $code ) ) return view('auth.reset',compact('code','user'));
 		return redirect()->route('forgot')->with('fail', 'کد امنیتی جهت ریست رمز عبور صحیح نمی باشد.');
 	}
 

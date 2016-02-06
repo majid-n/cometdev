@@ -43,14 +43,17 @@ class PostController extends Controller
             'image'             => 'required|mimes:jpeg,jpg,png'
         ];
 
-        $validator = Validator::make( $request->all(), $rules );
+        $messeages = [
+            'cat_id.required' => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'image.required'  => 'لطفا یک عکس برای پست انتخاب کنید.'
+        ];
+
+        $validator = Validator::make( $request->all(), $rules, $messeages );
 
         if ( $validator->fails() ) {
 
-            $errors = $validator->messages();
-
             return back()->withInput()
-                         ->withErrors($errors);
+                         ->withErrors($validator);
 
         } else {
 
@@ -113,7 +116,11 @@ class PostController extends Controller
             'active'            => 'regex:/[0-1]{1}/',
         ];
 
-        $validator = Validator::make( $request->all(), $rules);
+        $messeages = [
+            'cat_id.required' => 'از لیست دسته ها یکی را انتخاب کنید.',
+        ];
+
+        $validator = Validator::make( $request->all(), $rules, $messeages);
 
         if ( $validator->fails() ) {
 

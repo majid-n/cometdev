@@ -23,6 +23,8 @@ class CreateSupportsTable extends Migration
             $table->tinyInteger('seen')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->engine = 'InnoDB';
         });
     }
 

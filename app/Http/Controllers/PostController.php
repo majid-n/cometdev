@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Validator;
 use App\Post;
 use App\Cat;
-use Image;
-use Storage;
 
 class PostController extends Controller
 {   

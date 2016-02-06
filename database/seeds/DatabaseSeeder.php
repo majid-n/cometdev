@@ -137,13 +137,13 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
         Sentinel::registerAndActivate([
             'email'    => 'user@user.com',
-            'password' => 'user',
+            'password' => 'user123',
             'first_name' => 'علی',
             'last_name' => 'شفاعت',
         ]);
         Sentinel::registerAndActivate([
             'email'    => 'admin@admin.com',
-            'password' => 'admin',
+            'password' => 'admin123',
             'first_name' => 'مجید',
             'last_name' => 'نورعلی',
         ]);
@@ -154,8 +154,8 @@ class DatabaseSeeder extends Seeder
         $userUser = Sentinel::findByCredentials(['login' => 'user@user.com']);
         $adminUser = Sentinel::findByCredentials(['login' => 'admin@admin.com']);
 
-        $userRole = Sentinel::findRoleByName('Users');
-        $adminRole = Sentinel::findRoleByName('Admins');
+        $userRole = Sentinel::findRoleByName('users');
+        $adminRole = Sentinel::findRoleByName('admins');
 
         $userRole->users()->attach($userUser);
         $adminRole->users()->attach($adminUser);
