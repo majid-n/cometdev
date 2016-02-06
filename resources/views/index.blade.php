@@ -212,9 +212,9 @@
                             <div class="portfolio-like">
                                 <h4>{{ $post->title }}</h4>
                                     @if( $post->isLiked() === 0 )
-                                    <span id="{{ $post->id }}" class="glyphicon glyphicon-heart enable transitionfast likePost"></span>
+                                    <i id="{{ $post->id }}" class="fa fa-heart enable transitionfast likePost"></i>
                                     @else
-                                    <span id="{{ $post->id }}" class="glyphicon glyphicon-heart disable transitionfast likePost"></span>
+                                    <i id="{{ $post->id }}" class="fa fa-heart disable transitionfast likePost"></i>
                                     @endif
                                 @if( $post->likes()->count() > 0 )
                                     <p class="likecount">{{ $post->likes()->count() }}</p>
@@ -238,19 +238,19 @@
         <div class="container-fluid PortfolioNav">
             <div class="row text-center">
                 <div class="PortfolioNav-item text-center">
-                    <span class="glyphicon glyphicon-heart" data-toggle="tooltipfa" data-placement="top" title="مجموع لایک ها"></span>
+                    <i class="fa fa-heart" data-toggle="tooltipfa" data-placement="top" title="مجموع لایک ها"></i>
                     <p class="yellow text-shadow">{{ $totallikes }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
-                    <span data-toggle="tooltipfa" data-placement="top" title="مجموع پروژه ها" class="glyphicon glyphicon-briefcase"></span>
+                    <i data-toggle="tooltipfa" data-placement="top" title="مجموع پروژه ها" class="fa fa-briefcase"></i>
                     <p class="green text-shadow">{{ $totalposts }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
-                    <span data-toggle="tooltipfa" data-placement="top" title="مجموع صفحات" class="glyphicon glyphicon-inbox"></span>
+                    <i data-toggle="tooltipfa" data-placement="top" title="مجموع صفحات" class="fa fa-inbox"></i>
                     <p class="cyan text-shadow LastPage">{{ $lastpage }}</p>
                 </div>
                 <div class="PortfolioNav-item text-center">
-                    <span data-toggle="tooltipfa" data-placement="top" title="صفحه در حال مشاهده" class="glyphicon glyphicon-eye-open"></span>
+                    <i data-toggle="tooltipfa" data-placement="top" title="صفحه در حال مشاهده" class="fa fa-eye"></i>
                     <p class="pink text-shadow">{{ $page }}</p>
                 </div>
             </div>
@@ -283,7 +283,7 @@
                     {!! Form::open(array('method' => 'post', 'class' => 'ContactForm')) !!}
                         <div class="form-group shadow">
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                 {{ Form::text('name',null, array('class' => 'form-control transitionslow', 'placeholder' => 'نام و نام خانوادگی')) }}
                             </div>
                         </div>
@@ -291,7 +291,7 @@
 
                         <div class="form-group shadow">
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                 {{ Form::text('mail',null, array('class' => 'form-control transitionslow', 'placeholder' => 'پست الکترونیک')) }}
                                 
                             </div>
@@ -299,19 +299,19 @@
                         </div>
                         <div class="form-group shadow">
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                 {{ Form::text('tel',null, array('class' => 'form-control transitionslow', 'placeholder' => 'شماره تماس')) }}
                             </div>
                         </div>
                     
                         <div class="form-group shadow">
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-align-left"></span></span>
+                                <span class="input-group-addon"><i class="fa fa-align-left"></i></span>
                                 {{ Form::textarea('des',null, array('class' => 'form-control transitionslow', 'placeholder' => 'توضیحات', 'rows' => 7)) }}
                             </div>
                         </div>
                         <div class="btn-group btn-group-lg shadow" role="group" aria-label="...">
-                            {!! Form::button('<span class="glyphicon glyphicon-retweet"></span>', array('class' => 'btn btn-default', 'type' => 'reset')) !!}
+                            {!! Form::button('<i class="fa fa-retweet"></i>', array('class' => 'btn btn-default', 'type' => 'reset')) !!}
                             {!! Form::button('ارســــــــال<span class="Spin"></span><span class="comet-spaceman"></span>', array('class' => 'btn btn-xl HoverAnimation', 'id' => 'submit', 'type' => 'submit')) !!}
                         </div>
                     {!! Form::close() !!}
@@ -324,7 +324,7 @@
                         <div>
                             <img width="180" src='{{ asset('img/logo/logofashadow.png') }}'>
                             <p>به دفتر تلفنت اضافه کن !</p>
-                            <span class="glyphicon glyphicon-qrcode"></span>
+                            <i class="fa fa-qrcode"></i>
                         </div>
                     </div>
                 </div>

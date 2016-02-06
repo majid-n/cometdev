@@ -27,9 +27,9 @@
 	<div>
 		<img src="{{ asset('img/svg/3dots.svg') }}">
 		@if( $isliked === 0 )
-		<span id="{{ $post->id }}" class="glyphicon glyphicon-heart transitionfast enable transitionfast likePost"></span>
+		<i id="{{ $post->id }}" class="fa fa-heart transitionfast enable transitionfast likePost"></i>
 		@else
-		<span id="{{ $post->id }}" class="glyphicon glyphicon-heart disable transitionfast likePost"></span>
+		<i id="{{ $post->id }}" class="fa fa-heart disable transitionfast likePost"></i>
 		@endif
 
 		@if( $totallikes > 0 )
@@ -40,13 +40,13 @@
 
 	</div>
 	<div>
-		<span class="glyphicon glyphicon-calendar"></span>
+		<i class="fa fa-calendar"></i>
 		<time datetime="{{ Time::ChangeFormat($post->time) }}">{{ Time::DateFa($post->time) }}</time>
 	</div>
 
 	@if( Validation::HasValue($post->link) )
 	<div>
-		<span class="glyphicon glyphicon-eye-open"></span>
+		<i class="fa fa-eye-open"></i>
 		<a href="{{ $post->link }}"><span class="hidden-xs">مشاهده پروژه</span><span class="visible-xs">مشاهده</span></a>
 	</div>
 	@endif

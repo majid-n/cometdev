@@ -11,29 +11,40 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 @if( $user = Sentinel::check() )
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $user->first_name . " " . $user->last_name}}<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    @if( Sentinel::inRole('admins') )
-                        <li><a href="{{ route('admin.post.index') }}">مدیریت پست ها</a></li>
-                    @endif
-                    <li><a href="#">ADMIN</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{{ route('logout') }}">خروج</a></li>
-                  </ul>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ $user->first_name . " " . $user->last_name}}
+                            <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            @if( Sentinel::inRole('admins') )
+                                <li><a href="{{ route('admin.post.index') }}">مدیریت پست ها <i class="fa fa-plus"></i></a></li>
+                            @endif
+                            <li><a href="#">Admin <i class="fa fa-user-secret"></i></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('logout') }}">خروج <i class="fa fa-sign-out"></i></a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a class="yellow" href="{{ route('login') }}">ورود <i class="fa fa-sign-in"></i></a></li>
+                    <li><a class="yellow" href="{{ route('register') }}">ثبت نام <i class="fa fa-user-plus"></i></a></li>
                 @endif
-                
+
                 <li><a class="scroll" href="#contact">تماس با ما</a></li>
                 <li>
                     <a class="scroll" href="#portfolio">پروژه ها</a>
                     @if( $totalnewposts > 0 )
-                    <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $totalnewposts }}"></span>
-                    <span class="badge backYellow shadow visible-xs" data-number="{{ $totalnewposts }}"></span>
+                        <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $totalnewposts }}"></span>
+                        <span class="badge backYellow shadow visible-xs" data-number="{{ $totalnewposts }}"></span>
                     @endif
                 </li>
                 <li><a class="scroll" href="#services">سرویس ها</a></li>
                 <li><a class="scroll" href="#about">درباره ما</a></li>
+                <li class="navhome">
+                    <i class="fa fa-fw fa-2x fa-home"></i>
+                    <a href="{{ route('home') }}">خـــانه</a>
+                </li>
             </ul>
         </div>
 

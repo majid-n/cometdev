@@ -72,7 +72,7 @@ function AjaxSetup(){
 // Error Function
 function ShowErr(errtxt,glyph){
 
-    var content  = "<p class=\"errtxt\"><span class=\"glyphicon glyphicon-"+glyph+"\"></span>"+errtxt+"</p>",
+    var content  = "<p class=\"errtxt\"><i class=\"fa fa-"+glyph+"\"></i>"+errtxt+"</p>",
         Modal    = $('.modal'),
         ErrModal = $('#ErrModal');
 
@@ -338,7 +338,7 @@ function PostsLikeSetup(){
 
         if( ModalOpen ) {
 
-            var LikeSpan            = ModalParent.parents('.portfolio-item').find('.portfolio-like span'),
+            var LikeSpan            = ModalParent.parents('.portfolio-item').find('.portfolio-like i'),
                 LikeParagraph       = ModalParent.parents('.portfolio-item').find('.portfolio-like .likecount'),
                 Loader              = target.parent().find('img'),
                 ModalLikeParagraph  = target.parent().find('p'),
@@ -347,7 +347,7 @@ function PostsLikeSetup(){
 
         }else{
 
-            var LikeSpan      = target.parent('.portfolio-like').find('span'),
+            var LikeSpan      = target.parent('.portfolio-like').find('i'),
                 LikeParagraph = target.parent('.portfolio-like').find('.likecount'),
                 Loader        = target.parents('.portfolio-caption').find('.portfolio-ajaxloader'),
                 FadeElement   = target.parent('.portfolio-like');
@@ -481,7 +481,7 @@ function ContactFormSetup(){
             Loader       = target.find('#submit span.Spin'),
             contactForm  = $('.ContactForm'),
             FadedSpan    = target.find('#submit span.comet-spaceman'),
-            hasErrorSpan = contactForm.find('.form-group span.glyphicon'),
+            hasErrorSpan = contactForm.find('.form-group i.fa'),
             FormInput    = contactForm.find('input'),
             FormTextarea = contactForm.find('textarea');
 
@@ -517,7 +517,7 @@ function ContactFormSetup(){
                     var input = contactForm.find( "textarea[name= "+ key +"]" );
                 }
 
-                var span  = input.parent('div').find('.glyphicon');
+                var span  = input.parent('div').find('i.fa');
 
                 span.addClass('hasErr');
                 input.css('background', '#FFE281');
@@ -539,7 +539,7 @@ function ContactFormSetup(){
                 for ( error in errorArray ) {
 
                     for( item in errorArray[error] ) {
-                        ErrorData += "<p class=\"errtxt\"><span class=\"glyphicon glyphicon-ban-circle yellow\"></span>"+errorArray[error][item]+"</p>"
+                        ErrorData += "<p class=\"errtxt\"><i class=\"fa fa-ban-circle yellow\"></i>"+errorArray[error][item]+"</p>"
                     }
                       
                 }

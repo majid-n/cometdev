@@ -164,7 +164,7 @@
         -ms-user-select: none;
         user-select: none;
     }
-    span.glyphicon {
+    i.fa {
         margin-right: 10px;
         margin-left: 10px;
     }
@@ -641,6 +641,19 @@
     .navbar-default .nav li{
         text-align: center;
     }
+
+    .navhome i {
+        color: #fff;
+        position: absolute;
+        top: 12px;
+        right: 6px;
+        cursor: pointer;
+    }
+
+    .navhome a {
+        opacity: 0;
+    }
+
     .navbar-default .nav li a,
     .navbar-default .nav li a:focus {
         color: #fff;
@@ -806,7 +819,7 @@
         font-size: 1.3em;
         line-height: 1.3em;
         color: #444;
-        margin-left: 0 !important;
+        margin-left: 15px !important;
         float: left;
         left: 15px;
         cursor: pointer !important;
@@ -815,7 +828,7 @@
         font-size: 1.3em;
         line-height: 1.3em;
         color: #fec503;
-        margin-left: 0 !important;
+        margin-left: 15px !important;
         float: left;
         left: 15px;
         cursor: pointer !important;
@@ -861,7 +874,7 @@
         padding-left: 15px;
         padding-right: 15px;
     }
-    .PortfolioNav-item span.glyphicon{
+    .PortfolioNav-item i.fa{
         font-size: 2.5em;
         color: #ccc;
     }
@@ -939,12 +952,12 @@
         cursor: default;
         vertical-align: -webkit-baseline-middle;
     }
-    #cometModal .modal-footer div span.glyphicon{
+    #cometModal .modal-footer div i.fa{
         font-size: 1.5em;
         color: #aaa;
     }
     #cometModal .modal-footer div,
-    #cometModal .modal-footer div span.glyphicon,
+    #cometModal .modal-footer div i.fa,
     #cometModal .modal-footer div p,
     #cometModal .modal-footer div a,
     #cometModal .modal-footer div time{
@@ -961,19 +974,19 @@
         color: #555;
         margin-bottom: 0;
     }
-    #cometModal .modal-footer div a span{
+    #cometModal .modal-footer div a i{
         cursor: pointer !important;
     }
-    #cometModal .modal-footer div span.glyphicon-heart.enable {
+    #cometModal .modal-footer div i.fa-heart.enable {
         color: #aaa;
         cursor: pointer !important;
     }
-    #cometModal .modal-footer div span.glyphicon-heart.disable {
+    #cometModal .modal-footer div i.fa-heart.disable {
         color: #fec503;
         cursor: pointer !important;
     }
-    #cometModal .modal-footer div span.glyphicon-heart.enable:hover,
-    #cometModal .modal-footer div span.glyphicon-heart.enable:focus {
+    #cometModal .modal-footer div i.fa-heart.enable:hover,
+    #cometModal .modal-footer div i.fa-heart.enable:focus {
         color: #fec503;
         -webkit-transform: scale(1.1); /* Safari */
         -moz-transform: scale(1.1); /* firefox */
@@ -1174,7 +1187,7 @@
         direction: rtl;
         display: inline-block;
     }
-    .QRCode div span.glyphicon {
+    .QRCode div i.fa {
         position: relative;
         top: 7px;
         margin-top: 5px;
@@ -1364,6 +1377,12 @@
                 -o-box-shadow: 0px 6px 19px -8px rgba(0,0,0,.5);
                 box-shadow: 0px 6px 19px -8px rgba(0,0,0,.5);
             }
+
+            .navbar-default.navbar-shrink .nav li.navhome i {
+                font-size: 1.5em;
+                top: 17px;
+            }
+
             .navbar-default.navbar-shrink .nav li a {
                 font-size: 14px;
             }
@@ -1392,6 +1411,34 @@
                 -ms-transition: all 0.3s ease-in-out;
                 transition: all 0.3s ease-in-out;
             }
+
+            .navbar-default .navbar-nav > .open > a,
+            .navbar-default .navbar-nav > .open > a:focus,
+            .navbar-default .navbar-nav > .open > a:hover {
+                color: #FED136;
+                background-color: #202020;
+                border-radius: 4px;
+            }
+
+            .navbar-nav > li > .dropdown-menu {
+                min-width: 200px;
+            }
+            .navbar-nav > li > .dropdown-menu li a,
+            .navbar-nav > li > .dropdown-menu li a:focus {
+                color: #333;
+                font-size: 15px;
+                padding: 5px 8px 5px 15px;
+                margin: 5px;
+                border-radius: 4px;
+            }
+
+            .navbar-nav > li > .dropdown-menu li a:hover,
+            .navbar-nav > li > .dropdown-menu li a:focus {
+                color: #FED136;
+                background-color: #333;
+            }
+
+
         /*Portfolio Section*/
             #portfolio .portfolio-item {
                 margin: 0 0 30px;
@@ -1573,7 +1620,7 @@
                 padding-left: 10px;
                 padding-right: 10px;
             }
-            .PortfolioNav-item span.glyphicon{
+            .PortfolioNav-item i.fa{
                 font-size: 2em;
             }
             .PortfolioNav-item p{
@@ -1589,7 +1636,7 @@
             #cometModal .modal-footer div{
                 margin-right: 5px;
             }
-            #cometModal .modal-footer div span.glyphicon{
+            #cometModal .modal-footer div i.fa{
                 font-size: 0.9em;
                 margin-right: 5px;
                 margin-left: 5px;

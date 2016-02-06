@@ -21,6 +21,7 @@
         <link rel="icon" href="{{ asset('img/logo/comet.ico') }}" type="image/x-icon">
 
         <link href='{{ asset('css/bootstrap.min.css') }}' rel="stylesheet">
+        <link href='{{ asset('css/font-awesome.min.css') }}' rel="stylesheet">
         <link href='{{ asset('css/animate.css') }}' rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/comet.css') }}" rel="stylesheet">
@@ -86,6 +87,17 @@
             </script>
             <?php session()->forget('fail'); ?>
         @endif
+
+        <!-- Home Button Hover -->
+        <script type="text/javascript">
+            $('.navhome').hover(function() {
+                $('.navhome i').fadeOut();
+                $('.navhome a').css('opacity', 1);
+            }, function() {
+                $('.navhome a').css('opacity', 0);
+                $('.navhome i').fadeIn();
+            });
+        </script>
 
     </body>
 </html>
