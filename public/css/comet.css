@@ -165,8 +165,8 @@
         user-select: none;
     }
     i.fa {
-        margin-right: 10px;
-        margin-left: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
     }
     input, input:before, input:after,textarea ,textarea:before,textarea:after {
         -webkit-user-select: initial;
@@ -646,7 +646,7 @@
         color: #fff;
         position: absolute;
         top: 12px;
-        right: 6px;
+        right: 10px;
         cursor: pointer;
     }
 
@@ -1427,7 +1427,7 @@
             .navbar-nav > li > .dropdown-menu li a:focus {
                 color: #333;
                 font-size: 15px;
-                padding: 5px 8px 5px 15px;
+                padding: 5px;
                 margin: 5px;
                 border-radius: 4px;
             }

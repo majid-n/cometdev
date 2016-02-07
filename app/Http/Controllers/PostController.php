@@ -41,7 +41,7 @@ class PostController extends Controller
             return  response()->json([ 'result' => false ]);
         }
         
-        return view()->make('posts.index', compact('posts') );
+        return view('posts.index', compact('posts') );
     }
 
     # Display the specified resource.
@@ -64,6 +64,6 @@ class PostController extends Controller
             return  response()->json([ 'result' => false ]);
         }
         
-        return view()->make('posts.show', compact('post') );
+        return view('posts.show', compact('post') );
     }
 }

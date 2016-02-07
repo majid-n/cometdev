@@ -73,22 +73,17 @@
 	        </div>
 
 	        <div class="form-group col-md-6">
-	        	{{-- Form::file('image', null, array('class' => 'form-control inputfile inputfile-6')) --}}
-	        	<input type="file" name="image" id="image" class="inputfile inputfile-6" data-multiple-caption="{count} فایل" multiple />
-	        	<label for="image" class="form-control"><span></span> <strong>انتخاب عکس</strong></label>
-	        	
-	        	<!-- <input type="file" name="file-7" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} فایل" multiple /> -->
-	        	<!-- <label for="image"><span></span> <strong>انتخاب عکس</strong></label> -->
-	        	
+	        	<input type="file" name="image" id="image" class="inputfile inputfile-6"/>
+	        	<label for="image" class="form-control"><span></span> <strong><i class="fa fa-2x fa-picture-o"></i></strong></label>
 	        </div>
         	<div class="form-group col-md-6">
         		{!! Form::text('link', null, array('class' => 'form-control','placeholder' => ' لینک ...')) !!}
         	</div>
 
-	        <div class="form-group btn-group btn-group-lg shadow" role="group" aria-label="...">
-	            {!! Form::button('<span class="glyphicon glyphicon-retweet"></span>', array('class' => 'btn btn-default', 'type' => 'reset')) !!}
-	            {!! Form::button('ارســــــــال<span class="Spin"></span><span class="comet-spaceman"></span>', array('class' => 'btn btn-xl HoverAnimation', 'id' => 'submit', 'type' => 'submit')) !!}
-	        </div>
+	        <div class="form-group col-md-12 btn-group btn-group-lg" role="group" aria-label="...">
+             	{!! Form::button('<i class="fa fa-retweet"></i>', array('class' => 'btn btn-default', 'type' => 'reset')) !!}
+  	            {!! Form::button('ارســــــــال<span class="Spin"></span><span class="comet-spaceman"></span>', array('class' => 'btn btn-xl HoverAnimation', 'id' => 'submit', 'type' => 'submit')) !!}
+  	        </div>
 	    {!! Form::close() !!}
 
 	</div>

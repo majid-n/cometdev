@@ -22,13 +22,13 @@ class PostController extends Controller
     # Show All resources.
     public function index( Request $request ) {
         $posts = Post::with('likes','cat')->paginate(config('app.posts_per_page'));
-        return view()->make('posts.index', compact('posts') );
+        return view('posts.index', compact('posts') );
     }
 
     # Show Create Form.
     public function create() {
         $cats = Cat::orderBy('parent','asc')->get();
-        return view()->make('posts.create', compact('cats'));
+        return view('posts.create', compact('cats'));
     }
 
     # Store the New resource in DB.
@@ -83,7 +83,7 @@ class PostController extends Controller
 
                 # Redirect on Success
                 if ( $post->save() ) {
-                    return Redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت ثبت شد.');
+                    return redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت ثبت شد.');
                 }
             } 
         }
@@ -94,17 +94,17 @@ class PostController extends Controller
 
     # Display the specified resource.
     public function show( Request $request, Post $post ) {
-        return view()->make('posts.show', compact('post') );
+        return view('posts.show', compact('post') );
     }
 
     # Show the form for editing the specified resource.
-    public function edit(Post $post) {
+    public function edit( Post $post ) {
         $cats = collect(Cat::lists('title', 'id')->toArray())->prepend('دســـته را انتخاب کنید','')->all();
-        return view()->make('posts.edit', compact('post','cats') );
+        return view('posts.edit', compact('post','cats') );
     }
 
     # Update the specified resource in storage.
-    public function update(Request $request, Post $post) {
+    public function update( Request $request, Post $post ) {
 
         $rules = [
             'title'             => 'required|farsi|min:5|max:80',
@@ -140,7 +140,7 @@ class PostController extends Controller
 
                 # Redirect on Success
                 if ( $post->save() ) {
-                    return Redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت ثبت شد.');
+                    return redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت ثبت شد.');
                 }
         }
 
@@ -149,7 +149,7 @@ class PostController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy(Post $post) {
+    public function destroy( Post $post ) {
         Storage::disk('portfolio')->delete( $post->image );
         Storage::disk('portfolioThumb')->delete( $post->thumb );
         $post->delete();

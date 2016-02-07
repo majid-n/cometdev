@@ -1,29 +1,27 @@
 <?php
-
-namespace App\Http\Controllers;
-
-use App\Http\Requests;
-use Illuminate\Http\Request;
-
+ 
+ namespace App\Http\Controllers;
+  
+ use App\Http\Controllers\Controller;
+ use Illuminate\Http\Response;
+ use Illuminate\Http\Request;
+ use App\Http\Requests;
+ use App\Classes\BackGround;
+ use App\Like;
+ use App\Post;
+  
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    # Create Index Page
+	public function index() {
+ 
+		$background    = Background::Random(2);
+		$totallikes    = Like::count();
+		$totalposts    = Post::count();
+		$posts         = Post::with('cat','likes')->paginate(config('app.posts_per_page'));
+		$page          = $posts->currentPage();
+		$lastpage      = $posts->lastPage();
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('home');
-    }
+		return view('index',compact('totallikes','totalposts','posts','page','lastpage','title','background'));
+	}
 }
