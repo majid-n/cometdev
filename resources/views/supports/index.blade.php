@@ -16,7 +16,10 @@
 			@if( $support->seen === 1 )
 				<p>cat : {{ $support->replymsg }}</p>
 				<p>updated at : {{ $support->updated_at }}</p>
-				<a href="{{ route('admin.support.destroy', ['support' => $support->id]) }}">delete</a>
+				{!! Form::open(array('method' => 'post', 'route' => array('admin.support.destroy', $support->id))) !!}
+				    {!! method_field('DELETE') !!}
+				    {!! Form::button('delete', array('type' => 'submit')) !!}
+				{!! Form::close() !!}
 			@else
 				<a href="{{ route('admin.support.edit', ['support' => $support->id]) }}">reply</a>
 			@endif

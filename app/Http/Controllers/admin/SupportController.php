@@ -84,6 +84,6 @@ class SupportController extends Controller
     # Remove the specified resource from storage
     public function destroy( Support $support ) {
         $support->delete();
-        return redirect()->route('admin.post.index')->with('success', 'تیکت ساپورت با موفقیت حذف شد.');
+        return redirect()->route('admin.support.index')->with('success', 'تیکت ساپورت با موفقیت حذف شد.');
     }
 }
