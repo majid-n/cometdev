@@ -284,7 +284,7 @@
                         <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                {{ Form::text('name',null, array('class' => 'form-control transitionslow', 'placeholder' => 'نام و نام خانوادگی')) }}
+                                {{ Form::text('fullname',null, array('class' => 'form-control transitionslow', 'placeholder' => 'نام و نام خانوادگی')) }}
                             </div>
                         </div>
 
@@ -292,7 +292,7 @@
                         <div class="form-group shadow">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                {{ Form::text('mail',null, array('class' => 'form-control transitionslow', 'placeholder' => 'پست الکترونیک')) }}
+                                {{ Form::text('email',null, array('class' => 'form-control transitionslow', 'placeholder' => 'پست الکترونیک')) }}
                                 
                             </div>
 
@@ -315,6 +315,7 @@
                             {!! Form::button('ارســــــــال<span class="Spin"></span><span class="comet-spaceman"></span>', array('class' => 'btn btn-xl HoverAnimation', 'id' => 'submit', 'type' => 'submit')) !!}
                         </div>
                     {!! Form::close() !!}
+
                 </div>
 
                 <!-- Qr Section -->
@@ -328,6 +329,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

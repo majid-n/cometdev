@@ -27,6 +27,9 @@ Route::get('images/{disk}/{width}/{height}/{watemark}/{filename}', 'ImageControl
 Route::get('post', 'PostController@index')->name('post.index');
 Route::get('post/{post}', 'PostController@show')->name('post.show');
 
+# Supports Routes for all
+Route::post('support', 'SupportController@store')->name('support.store');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -73,6 +76,8 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 	Route::group([ 'middleware' => ['role:admins'], 'prefix' => 'admin' , 'namespace' => 'admin'], function () {
 		# Post Model RESTful Resource Routes
 		Route::resource('post', 'PostController');
+		Route::resource('cat', 'CatController');
+		Route::resource('support', 'SupportController');
 	});
 
 	# User Folder Routes

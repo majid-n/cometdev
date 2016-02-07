@@ -11,8 +11,13 @@ return [
     'twitter'  => 'CometDevIr',
     'facebook' => 'cometdevir',
 
-    # Total Posts per Pagination
+    # Total items per Pagination
     'posts_per_page' => 6,
+    'cats_per_page' => 10,
+    'supports_per_page' => 10,
+
+    # Support Throttle
+    'support_throttle' => '30 MINUTE',
 
     /*
     |--------------------------------------------------------------------------

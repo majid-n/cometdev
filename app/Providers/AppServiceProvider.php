@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Schema;
 use Validator;
 use App\Post;
 
@@ -16,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         # Share variable cross views
-        $totalnewposts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
+        if( Schema::hasTable('posts') ) {
+            $totalnewposts = Post::whereRaw('DATE(created_at) >= DATE_SUB(NOW(),INTERVAL 30 DAY)')->count();
+        } else {
+            $totalnewposts = 0;
+        }
         view()->share('totalnewposts', $totalnewposts);
 
         Validator::extend('farsi', function($attribute,$value,$parameters){

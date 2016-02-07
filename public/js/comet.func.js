@@ -502,7 +502,7 @@ function ContactFormSetup(){
        //Ajax
        $.ajax({
             type: 'POST',
-            url: 'contactform',
+            url: 'support',
             data: {data: data}
        })
        .done(function(data) {
@@ -517,7 +517,7 @@ function ContactFormSetup(){
                     var input = contactForm.find( "textarea[name= "+ key +"]" );
                 }
 
-                var span  = input.parent('div').find('i.fa');
+                var span  = input.parent('div').find('span i.fa');
 
                 span.addClass('hasErr');
                 input.css('background', '#FFE281');
@@ -539,7 +539,7 @@ function ContactFormSetup(){
                 for ( error in errorArray ) {
 
                     for( item in errorArray[error] ) {
-                        ErrorData += "<p class=\"errtxt\"><i class=\"fa fa-ban-circle yellow\"></i>"+errorArray[error][item]+"</p>"
+                        ErrorData += "<p class=\"errtxt\"><i class=\"fa fa-exclamation yellow\"></i>"+errorArray[error][item]+"</p>"
                     }
                       
                 }
@@ -549,7 +549,7 @@ function ContactFormSetup(){
                 $('#ErrModal').modal('show');
             }
        })
-       .fail(function(data) {
+       .fail(function() {
             ShowErr("خطا در اتصال به پایگاه داده ، لطفا دوباره امتحان کنید !","ban-circle yellow");
        })
        .always(function() {

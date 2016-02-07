@@ -99,7 +99,7 @@ class PostController extends Controller
 
     # Show the form for editing the specified resource.
     public function edit( Post $post ) {
-        $cats = collect(Cat::lists('title', 'id')->toArray())->prepend('دســـته را انتخاب کنید','')->all();
+        $cats = Cat::orderBy('parent','asc')->get();
         return view('posts.edit', compact('post','cats') );
     }
 

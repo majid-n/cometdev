@@ -21,7 +21,7 @@ class PostController extends Controller
 
         $posts = Post::with('likes','cat')->paginate(config('app.posts_per_page'));
 
-        if ( $request->ajax() && $request->isMethod('get')) {
+        if ( $request->ajax() && $request->isMethod('get') ) {
 
             if( $posts ) {
 
