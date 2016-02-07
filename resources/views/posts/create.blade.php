@@ -29,9 +29,37 @@
         </ul>
 
 	    {!! Form::open(array('method' => 'post', 'class' => 'ContactForm', 'route' => 'admin.post.store', 'files' => true)) !!}
+
         	<div class="form-group col-md-6">
-        		{!! Form::select('cat_id', $cats, null, array('class' => 'form-control', 'dir' => 'rtl', 'style' => 'height:57px;')) !!}
+
+        		<select class="form-control" dir="rtl" style="height:57px;" name="cat_id">
+
+        			<option>دســـته را انتخاب کنید</option>
+
+        			@foreach( $cats as $cat )
+
+        				@if( $cat->parent === 0 )
+
+        					<optgroup label="{{ $cat->title }}">
+
+	        					@foreach( $cats as $subcat )
+
+	        						@if( $subcat->parent === $cat->id )
+	        							<option value="{{ $subcat->id }}" data-posts="{{ $subcat->posts()->count() }}">{{ $subcat->title }}</option>
+	        						@endif
+
+	        					@endforeach
+
+        					</optgroup>
+
+        				@endif
+        					
+        			@endforeach
+
+        		</select>
+
         	</div>
+
             <div class="form-group col-md-6">
             	{!! Form::text('title', null, array('class' => 'form-control','placeholder' => ' نـــام پست ...')) !!}
             </div>

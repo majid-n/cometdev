@@ -27,7 +27,7 @@ class PostController extends Controller
 
     # Show Create Form.
     public function create() {
-        $cats = collect(Cat::lists('title', 'id')->toArray())->prepend('دســـته را انتخاب کنید','')->all();
+        $cats = Cat::orderBy('parent','asc')->get();
         return view()->make('posts.create', compact('cats'));
     }
 
