@@ -12,7 +12,7 @@
                 </ul>
 
 
-            {!! Form::open(array('autocomplete' => 'off')) !!}
+            {!! Form::open() !!}
                 <div class="form-group">
                     {!! Form::email('email', null, array('placeholder' => ' آدرس ایمیــل ...', 'class' => 'form-control')) !!}
                     

@@ -72,7 +72,7 @@ class AuthController extends Controller
         }
 
         catch (ThrottlingException $e) {
-            return back()->with('fail', 'اکانت شما بلاک شد برای مدت '.$e->getDelay().' ثانیه.');
+            return back()->with('fail', 'اکانت شما بلاک شده است. لطفا '.round($e->getDelay()/60).' دقیقه دیگر مجددا تلاش کنید.');
         }
     }
 
