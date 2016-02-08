@@ -1,14 +1,14 @@
 <?php
  
- namespace App\Http\Controllers;
-  
- use App\Http\Controllers\Controller;
- use Illuminate\Http\Response;
- use Illuminate\Http\Request;
- use App\Http\Requests;
- use App\Classes\BackGround;
- use App\Like;
- use App\Post;
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Classes\BackGround;
+use App\Like;
+use App\Post;
   
 class HomeController extends Controller
 {

@@ -54,14 +54,17 @@ class AuthController extends Controller
             }
 
             if ( $user = Sentinel::authenticate($credentials, $remember) ) {
-                if     ( Sentinel::inRole( 'admins' ) ) return redirect()->route('admin.post.index');
-                elseif ( Sentinel::inRole( 'users'  ) )  return redirect()->route('home');
+                if     ( Sentinel::inRole( 'admins' ) ) return redirect()->intended('admin/post');
+                elseif ( Sentinel::inRole( 'users'  ) ) return redirect()->intended('/');
             }
 
-            return redirect()->route('login')->withInput()->with('fail', 'آدرس ایمیل یا رمز عبور شما اشتباه است.');
+            return redirect()->route('login')
+                             ->withInput()
+                             ->with('fail', 'آدرس ایمیل یا رمز عبور شما اشتباه است.');
         }
 
         catch (NotActivatedException $e) {
+
             return redirect()->route('reactivate')->with([
                 'fail'      => 'اکانت شما فعال نمی باشد.',
                 'user'      => $e->getUser()
@@ -117,7 +120,7 @@ class AuthController extends Controller
 
             return Redirect()->route('login')->with([
                 'success'   => 'اکانت شما با موفق ساخته شد.',
-                'userid'    => $user->id
+                'user'      => $user
             ]);
         }
 
@@ -128,12 +131,13 @@ class AuthController extends Controller
     # Logout User from this device
     public function logout() {
         Sentinel::logout();
-        return redirect()->route('home');
+        return redirect()->home();
     }
 
     # Logout User from all Devices
     public function logoutEverywhere(){
         Sentinel::logout( null, true );
-        return redirect()->route('home');
+        return redirect()->home();
     }
+
 }

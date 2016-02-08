@@ -54,7 +54,7 @@ class SupportController extends Controller
                 if(  $request->ajax() )
                     return response()->json([ 'result' => 'wait' ]);
                 else
-                    return redirect()->route('home')->with('fail', 'شما لحظاتی پیش یک پیام با موفقیت ارسال کرده اید، لطفا بعدا تلاش کنید.');                    
+                    return redirect()->home()->with('fail', 'شما لحظاتی پیش یک پیام با موفقیت ارسال کرده اید، لطفا بعدا تلاش کنید.');                    
             } else {
 
                 # Create Support
@@ -78,7 +78,7 @@ class SupportController extends Controller
                     if(  $request->ajax() )
                         return response()->json([ 'result' => 'success' ]);
                     else
-                        return redirect()->route('home')->with('success', 'پیام شما با موفقیت ثبت شد.');
+                        return redirect()->home()->with('success', 'پیام شما با موفقیت ثبت شد.');
                 }
             }
         }

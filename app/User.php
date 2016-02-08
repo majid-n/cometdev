@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Cartalyst\Sentinel\Users\EloquentUser;
 
-class User extends \Cartalyst\Sentinel\Users\EloquentUser
+class User extends EloquentUser
 {
     protected $hidden = ['password', 'remember_token'];
 }

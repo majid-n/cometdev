@@ -48,16 +48,25 @@ class PasswordController extends Controller
 
 	    if ( $user = Sentinel::findByCredentials($credentials) ) {
 
-	        if ( !$reminder = Reminder::exists($user) ) $reminder = Reminder::create($user);
+	    	if( !$user->inRole('admins') ) {
 
-	        Mail::send('emails.forgot', ['reminder' => $reminder, 'user' => $user], function ($message) use ($user) {
-	            $message->from(config('app.info_email'), 'کامت');
-	            $message->sender(config('app.info_email'), 'کامت');
-	            $message->to($user->email, $user->first_name." ".$user->last_name)->subject('تغییر رمز عبور');
-	            $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
-	        });
+	    		if ( !$reminder = Reminder::exists($user) ) $reminder = Reminder::create($user);
 
-	        return redirect()->route('login')->with('success', 'ایمیل تغییر و ریست رمز عبور ارسال شد.');
+	    		Mail::send('emails.forgot', ['reminder' => $reminder, 'user' => $user], function ($message) use ($user) {
+	    		    $message->from(config('app.info_email'), 'کامت');
+	    		    $message->sender(config('app.info_email'), 'کامت');
+	    		    $message->to($user->email, $user->first_name." ".$user->last_name)->subject('تغییر رمز عبور');
+	    		    $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
+	    		});
+
+	    		return redirect()->route('login')
+	    						 ->with('success', 'ایمیل تغییر و ریست رمز عبور ارسال شد.');
+
+	    	}else{
+
+	    		return back()->withInput()
+	    		             ->with('fail', 'بازیابی کلمه عبور برای این حساب کاربری مقدور نمی باشد.');
+	    	}
 	    }
 
 	    return back()->withInput()
@@ -66,8 +75,16 @@ class PasswordController extends Controller
 
 	# Make Reset Password Page
 	public function reset( User $user, $code ) {
-		if( !empty( $code ) ) return view('auth.reset',compact('code','user'));
-		return redirect()->route('forgot')->with('fail', 'کد امنیتی جهت ریست رمز عبور صحیح نمی باشد.');
+
+		if( !$user->inRole('admins') ) {
+
+			if( !empty( $code ) ) return view('auth.reset',compact('code','user'));
+			return redirect()->route('forgot')
+							 ->with('fail', 'کد امنیتی جهت بازیابی کلمه عبور صحیح نمی باشد.');
+		}
+
+		return redirect()->route('forgot')
+					     ->with('fail', 'بازیابی کلمه عبور برای این حساب کاربری مقدور نمی باشد.');
 	}
 
 	# Reset Password
@@ -99,17 +116,26 @@ class PasswordController extends Controller
 
 	    if ( $user = Sentinel::findByCredentials($credentials) ) {
 
-	        if ( Reminder::complete($user, $request->code, $request->password) ) {
+	    	if( !$user->inRole('admins') ) {
 
-	        	Mail::send('emails.reset', ['password' => $request->password, 'user' => $user], function ($message) use ($user) {
-	        	    $message->from(config('app.info_email'), 'کامت');
-	        	    $message->sender(config('app.info_email'), 'کامت');
-	        	    $message->to($user->email, $user->first_name." ".$user->last_name)->subject('رمز عبور با موفقیت تغییر یافت');
-	        	    $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
-	        	});
+		        if ( Reminder::complete($user, $request->code, $request->password) ) {
 
-	        	return redirect()->route('login')->with('success', 'عملیات تغییر رمز عبور با موفقیت انجام شد.');
-	        }
+		        	Mail::send('emails.reset', ['password' => $request->password, 'user' => $user], function ($message) use ($user) {
+		        	    $message->from(config('app.info_email'), 'کامت');
+		        	    $message->sender(config('app.info_email'), 'کامت');
+		        	    $message->to($user->email, $user->first_name." ".$user->last_name)->subject('رمز عبور با موفقیت تغییر یافت');
+		        	    $message->replyTo(config('app.security_email'), 'تیم امنیتی کامت');
+		        	});
+
+		        	return redirect()->route('login')
+		        					 ->with('success', 'عملیات تغییر رمز عبور با موفقیت انجام شد.');
+		        }
+
+	    	} else {
+
+	    		return redirect()->route('forgot')
+					     		 ->with('fail', 'بازیابی کلمه عبور برای این حساب کاربری مقدور نمی باشد.');
+	    	}
 	    }
 
 	    return back()->withInput()

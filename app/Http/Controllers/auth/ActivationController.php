@@ -69,7 +69,7 @@ class ActivationController extends Controller
         if ( Activation::complete($user, $code ) ) {
 
             Sentinel::login($user);
-            return redirect()->route('home')->with('success', 'حساب کاربری شما فعال شد.');
+            return redirect()->home()->with('success', 'حساب کاربری شما فعال شد.');
         }
 
         return Redirect()->route('reactivate')->with('fail', 'حساب کاربری شما غیر فعال است. جهت ارسال کد فعال سازی ایمیل خود را وارد کنید.');

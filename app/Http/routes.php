@@ -74,14 +74,9 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 
 	# Admins Folder Routes
 	Route::group([ 'middleware' => ['role:admins'], 'prefix' => 'admin' , 'namespace' => 'admin'], function () {
-		# Post Model RESTful Resource Routes
+		# Model RESTful Resource Routes
 		Route::resource('post', 'PostController');
 		Route::resource('cat', 'CatController');
 		Route::resource('support', 'SupportController');
-	});
-
-	# User Folder Routes
-	Route::group([ 'middleware' => ['role:users'], 'namespace' => 'user'], function () {
-
 	});
 });
