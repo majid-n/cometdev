@@ -23,15 +23,14 @@ class PostController extends Controller
         if( $user = Sentinel::getUser() ){
 
             if( $post->isLiked( $user ) > 0 ) {
+                
                 # When User Liked this Post
-                $isdeleted = $post->likes()->where([
-                                ['post_id', $post->id],
-                                ['user_id', $user->id],
-                            ])->delete();
+                $isdeleted = $post->likes()->where('user_id', $user->id)
+                                           ->delete();
 
                 if( $isdeleted ) {
 
-                    $totalpostlikes = $post->likes()->where('post_id', $post->id)->count();
+                    $totalpostlikes = $post->likes()->count();
                     $totallikes     = Like::count();
 
                     if(  $request->ajax() )
@@ -50,11 +49,10 @@ class PostController extends Controller
                 # When User didn't Like this Post before
                 $like           = new Like;
                 $like->user_id  = $user->id;
-                $like->post_id  = $post->id;
 
                 if( $post->likes()->save($like) ) {
 
-                    $totalpostlikes = $post->likes()->where('post_id', $post->id)->count();
+                    $totalpostlikes = $post->likes()->count();
                     $totallikes     = Like::count();
 
                     if(  $request->ajax() )
