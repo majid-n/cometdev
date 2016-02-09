@@ -25,17 +25,17 @@ class SupportController extends Controller
 
     # Show Create Form.
     public function create() {
-        //
+        abort(404);
     }
 
     # Store the New resource in DB.
     public function store( Request $request ) {
-        //
+        abort(404);
     }
 
     # Display the specified resource.
     public function show( Request $request, Support $support ) {
-        //
+        abort(404);
     }
 
     # Show the form for reply to the specified resource.

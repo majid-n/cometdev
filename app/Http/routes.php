@@ -13,12 +13,6 @@
 # Home page Routes
 Route::get('/', 'HomeController@index')->name('home');
 
-# Ajax Routes
-Route::post('likepost', 'AjaxController@likePost');
-Route::get('paginatepost', 'AjaxController@paginatePost');
-Route::post('modalpost', 'AjaxController@modalPost');
-Route::post('contactform', 'AjaxController@contactForm');
-
 # Images Routes
 Route::get('images/{disk}/{filename}', 'ImageController@retriveImages');
 Route::get('images/{disk}/{width}/{height}/{watemark}/{filename}', 'ImageController@retriveImagesAdvanced');
@@ -70,6 +64,12 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 		# Logout Routes
 		Route::get('logout', 'AuthController@logout')->name('logout');
 		Route::get('logout/everywhere', 'AuthController@logoutEverywhere')->name('logout.all');
+	});
+
+	# user Folder Routes
+	Route::group([ 'namespace' => 'user' ], function () {
+		# Post Routes
+		Route::get('post/{post}/like', 'PostController@like')->name('post.like');
 	});
 
 	# Admins Folder Routes

@@ -65,7 +65,7 @@ class CatController extends Controller
 
     # Display the specified resource.
     public function show( Request $request, Cat $cat ) {
-        //
+        abort(404);
     }
 
     # Show the form for editing the specified resource.

@@ -195,7 +195,6 @@
                 </div>
             </div>
             <div class="row masonry">
-
                 @foreach($posts as $post)
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 portfolio-item">
                     <div class="shadow">
@@ -211,16 +210,23 @@
                             </div>
                             <div class="portfolio-like">
                                 <h4>{{ $post->title }}</h4>
-                                    @if( $post->isLiked() === 0 )
-                                    <i id="{{ $post->id }}" class="fa fa-heart enable transitionfast likePost"></i>
+
+                                @if( $user = Sentinel::check() )
+
+                                    @if( $post->isLiked( $user ) === 0 )
+                                        <i id="{{ $post->id }}" class="fa fa-heart enable transitionfast likePost"></i>
                                     @else
-                                    <i id="{{ $post->id }}" class="fa fa-heart disable transitionfast likePost"></i>
+                                        <i id="{{ $post->id }}" class="fa fa-heart disable transitionfast likePost"></i>
                                     @endif
-                                @if( $post->likes()->count() > 0 )
-                                    <p class="likecount">{{ $post->likes()->count() }}</p>
-                                @else
-                                    <p class="likecount"></p>
+
+                                    @if( $post->likes()->count() > 0 )
+                                        <p class="likecount">{{ $post->likes()->count() }}</p>
+                                    @else
+                                        <p class="likecount"></p>
+                                    @endif
+
                                 @endif
+
                             </div>
                         </div>
                     </div>

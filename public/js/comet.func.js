@@ -360,9 +360,8 @@ function PostsLikeSetup(){
        
 
         $.ajax({
-            url  : 'likepost',
-            type : 'POST',
-            data : {pid: PID}
+            url  : 'post/'+PID+'/like',
+            type : 'GET',
         })
         .done(function(data) {
             if(data.result === true ){

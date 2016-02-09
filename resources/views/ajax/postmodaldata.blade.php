@@ -4,7 +4,6 @@
 	use App\Classes\Validation;
 
 	$totallikes = $post->likes()->count();    # Total this Post Likes
-	$isliked    = $post->isLiked();			  # Does this user Liked it before?
 ?>
 
 <div class="modal-body">
@@ -25,17 +24,21 @@
 <div class="modal-footer" style="display:none;">
 	<!-- Modal Footer -->
 	<div>
-		<img src="{{ asset('img/svg/3dots.svg') }}">
-		@if( $isliked === 0 )
-		<i id="{{ $post->id }}" class="fa fa-heart transitionfast enable transitionfast likePost"></i>
-		@else
-		<i id="{{ $post->id }}" class="fa fa-heart disable transitionfast likePost"></i>
-		@endif
+		@if( $user = Sentinel::check() )
 
-		@if( $totallikes > 0 )
-		<p>{{ $totallikes }}</p>
-		@else
-		<p><b class="hidden-xs">لایک کنید!</b><b class="visible-xs">0</b></p>
+			<img src="{{ asset('img/svg/3dots.svg') }}">
+		    @if( $post->isLiked( $user ) === 0 )
+		        <i id="{{ $post->id }}" class="fa fa-heart enable transitionfast likePost"></i>
+		    @else
+		        <i id="{{ $post->id }}" class="fa fa-heart disable transitionfast likePost"></i>
+		    @endif
+
+		    @if( $totallikes > 0 )
+		        <p>{{ $totallikes }}</p>
+		    @else
+		        <p><b class="hidden-xs">لایک کنید!</b><b class="visible-xs">0</b></p>
+		    @endif
+
 		@endif
 
 	</div>
@@ -46,7 +49,7 @@
 
 	@if( Validation::HasValue($post->link) )
 	<div>
-		<i class="fa fa-eye-open"></i>
+		<i class="fa fa-eye"></i>
 		<a href="{{ $post->link }}"><span class="hidden-xs">مشاهده پروژه</span><span class="visible-xs">مشاهده</span></a>
 	</div>
 	@endif

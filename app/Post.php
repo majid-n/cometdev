@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cartalyst\Sentinel\Users\EloquentUser as User;
 use App\Like;
 
 class Post extends Model
@@ -15,12 +16,13 @@ class Post extends Model
     protected $fillable = ['title','description','cat_id','smalldescription','link','thumb','image'];
     
     
-    public function isLiked(){
-    	return Like::where([
+    public function isLiked( User $user ){
+
+        return Like::where([
                         ['post_id', $this->id],
-                        ['ip' , request()->ip()],
+                        ['user_id', $user->id],
                     ])
-    				->count();
+                    ->count();
     }
 
     public function cat() {
