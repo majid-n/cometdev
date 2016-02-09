@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Cartalyst\Sentinel\Users\EloquentUser as User;
 use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model

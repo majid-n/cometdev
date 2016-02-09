@@ -1,0 +1,38 @@
+    public function likes() {
+        return $this->hasMany('App\Like','user_id');
+    }
+
+
+    public function xps() {
+        return $this->hasMany('App\Xp');
+    }
+
+
+    public function skills() {
+        return $this->hasMany('App\Skill');
+    }
+
+
+    public function rates() {
+        return $this->hasMany('App\Rate');
+    }
+
+
+    public function langs() {
+        return $this->hasMany('App\Lang');
+    }
+
+
+    public function edus() {
+        return $this->hasMany('App\Edu');
+    }
+
+
+    public function comment() {
+        return $this->hasMany('App\Comment');
+    }
+
+
+    public function resume() {
+        return $this->hasOne('App\Resume');
+    }

@@ -10,8 +10,18 @@ class CreatePostsTable extends Migration
      *
      * @return void
      */
-    public function up() 
+    public function up()
     {
+        Schema::create('cats', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title', 80);
+            $table->integer('parent')->unsigned()->index();
+            $table->timestamps();
+            $table->softDeletes();
+            
+            $table->engine = 'InnoDB';
+        });
+
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 80);
@@ -32,6 +42,23 @@ class CreatePostsTable extends Migration
 
             $table->engine = 'InnoDB';
         });
+
+        Schema::create('likes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('post_id')->unsigned();
+            $table->timestamps();
+            $table->foreign('post_id')
+                  ->references('id')->on('posts')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+
+            $table->engine = 'InnoDB';
+        });
     }
 
     /**
@@ -41,6 +68,8 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
+        Schema::drop('likes');
         Schema::drop('posts');
+        Schema::drop('cats');
     }
 }
