@@ -26,8 +26,8 @@
 
                 <div class="form-group">
                     <label for="remember">
-                      <input type="checkbox" id="remember"/>
-                      <i></i> <span>{{trans('general.rememberme')}}</span>
+                      <input name="remember" type="checkbox" id="remember"/>
+                      <span>{{trans('general.rememberme')}}</span>
                     </label>                    
                 </div>
                 <br>

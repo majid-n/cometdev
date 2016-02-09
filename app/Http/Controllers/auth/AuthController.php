@@ -34,7 +34,7 @@ class AuthController extends Controller
             $input      = $request->all();
             $password   = $request->password;
             $email      = $request->email;
-            $remember   = (boolean) $request->remember;
+            $remember   = (boolean) $request->get('remember',false);
 
             $credentials = [
                 'email'     => $email,
