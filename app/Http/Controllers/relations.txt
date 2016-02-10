@@ -1,38 +1,47 @@
-    public function likes() {
-        return $this->hasMany('App\Like','user_id');
-    }
+public function likes() {
+    return $this->hasMany('App\Like','user_id');
+}
 
 
-    public function xps() {
-        return $this->hasMany('App\Xp');
-    }
+public function resume() {
+    return $this->hasOne('App\Resume','user_id');
+}
 
 
-    public function skills() {
-        return $this->hasMany('App\Skill');
-    }
+public function xps() {
+    return $this->hasMany('App\Xp','user_id');
+}
 
 
-    public function rates() {
-        return $this->hasMany('App\Rate');
-    }
+public function skills() {
+    return $this->hasMany('App\Skill','user_id');
+}
 
 
-    public function langs() {
-        return $this->hasMany('App\Lang');
-    }
+public function langs() {
+    return $this->hasMany('App\Lang','user_id');
+}
 
 
-    public function edus() {
-        return $this->hasMany('App\Edu');
-    }
+public function edus() {
+    return $this->hasMany('App\Edu','user_id');
+}
 
 
-    public function comment() {
-        return $this->hasMany('App\Comment');
-    }
+public function comments() {
+    return $this->hasMany('App\Comment','from_user_id');
+}
+
+public function profileComments() {
+    return $this->hasMany('App\Comment','to_user_id');
+}
 
 
-    public function resume() {
-        return $this->hasOne('App\Resume');
-    }
+public function rates() {
+    return $this->hasMany('App\Rate','from_user_id');
+}
+
+
+public function profileRates() {
+    return $this->hasMany('App\Rate','to_user_id');
+}

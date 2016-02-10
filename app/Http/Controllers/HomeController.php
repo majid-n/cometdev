@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Classes\BackGround;
 use App\Like;
 use App\Post;
-  
+
 class HomeController extends Controller
 {
     # Create Index Page

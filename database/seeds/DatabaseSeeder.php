@@ -161,5 +161,34 @@ class DatabaseSeeder extends Seeder
         $adminRole->users()->attach($adminUser);
         $this->command->info('Users assigned to roles seeded!');
 
+    # Xps Seeder
+        DB::table('xps')->delete();
+        DB::table('xps')->insert([
+                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2001', 'company' => 'company user 1' ],
+                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2003', 'company' => 'company user 1 dovomi' ],
+                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2004', 'company' => 'company user 1 sevomi' ],
+                [ 'user_id' => 2, 'startyear' => '1998', 'endyear' => '2001', 'company' => 'company user 2' ],
+                [ 'user_id' => 2, 'startyear' => '1998', 'endyear' => '2003', 'company' => 'company user 2 dovomi' ],
+                [ 'user_id' => 2, 'startyear' => '1998', 'endyear' => '2004', 'company' => 'company user 2 sevomi' ],
+            ]);
+        $this->command->info('Xps seeded!');
+
+    # Edus Seeder
+        DB::table('edus')->delete();
+        DB::table('edus')->insert([
+                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2001', 'degree' => 'diplom', 'uni' => 'madrese 1', 'score' => 17.8 ],
+                [ 'user_id' => 2, 'startyear' => '1930', 'endyear' => '2001', 'degree' => 'lisance', 'uni' => 'madrese 2', 'score' => 19.8 ],
+            ]);
+        $this->command->info('Edus seeded!');
+
+    # Comments Seeder
+        DB::table('comments')->delete();
+        DB::table('comments')->insert([
+                [ 'from_user_id' => 1, 'to_user_id' => 2, 'comment' => 'az tarafe user 1' ],
+                [ 'from_user_id' => 1, 'to_user_id' => 2, 'comment' => 'az tarafe user 1 bare dovom' ],
+                [ 'from_user_id' => 2, 'to_user_id' => 1, 'comment' => 'az tarafe user 2' ],
+                [ 'from_user_id' => 2, 'to_user_id' => 1, 'comment' => 'az tarafe user 2 bare dovom' ],
+            ]);
+        $this->command->info('Comments seeded!');
     }
 }

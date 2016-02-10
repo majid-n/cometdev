@@ -95,16 +95,16 @@ class CreateProfilesTable extends Migration
 
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('resume_id')->unsigned();
-            $table->text('comment');
+            $table->integer('from_user_id')->unsigned();
+            $table->integer('to_user_id')->unsigned();
+            $table->text('text');
             $table->timestamps();
-            $table->foreign('user_id')
+            $table->foreign('from_user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-            $table->foreign('resume_id')
-                  ->references('id')->on('resumes')
+            $table->foreign('to_user_id')
+                  ->references('id')->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
@@ -113,16 +113,16 @@ class CreateProfilesTable extends Migration
 
         Schema::create('rates', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('resume_id')->unsigned();
-            $table->integer('rate')->unsigned();
+            $table->integer('from_user_id')->unsigned();
+            $table->integer('to_user_id')->unsigned();
+            $table->integer('score')->unsigned();
             $table->timestamps();
-            $table->foreign('user_id')
+            $table->foreign('from_user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-            $table->foreign('resume_id')
-                  ->references('id')->on('resumes')
+            $table->foreign('to_user_id')
+                  ->references('id')->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
