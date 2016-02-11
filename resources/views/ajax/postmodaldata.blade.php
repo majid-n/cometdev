@@ -2,8 +2,6 @@
 	# Add Usefull Classes
 	use App\Classes\Time;
 	use App\Classes\Validation;
-
-	$totallikes = $post->likes()->count();    # Total this Post Likes
 ?>
 
 <div class="modal-body">
@@ -26,6 +24,8 @@
 	<div>
 		@if( $user = Sentinel::check() )
 
+			<?php $totallikes = $post->likes()->count(); # Total this Post Likes ?>
+			
 			<img src="{{ asset('img/svg/3dots.svg') }}">
 		    @if( $post->isLiked( $user ) === 0 )
 		        <i id="{{ $post->id }}" class="fa fa-heart enable transitionfast likePost"></i>

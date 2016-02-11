@@ -354,8 +354,8 @@ function PostsLikeSetup(){
 
         }
 
-        FadeElement.fadeTo(400,0,function(){
-            Loader.fadeTo(400,1);     
+        FadeElement.fadeOut(400,function(){
+            Loader.fadeIn(400);     
         });
        
 
@@ -397,8 +397,8 @@ function PostsLikeSetup(){
         })
         .always(function() {
 
-            Loader.fadeTo(400,0,function(){
-                FadeElement.fadeTo(400,1);
+            Loader.fadeOut(400,function(){
+                FadeElement.fadeIn(400);
             });
         });
     });

@@ -1,7 +1,4 @@
 @foreach ($posts as $post)
-    <?php 
-        $totallikes = $post->likes()->count();    # Total this Post Likes
-    ?>
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 portfolio-item">
         <div class="shadow">
             <a class="portfolio-link" id="{{ $post->id }}">
@@ -18,6 +15,8 @@
                     <h4>{{ $post->title }}</h4>
 
                     @if( $user = Sentinel::check() )
+
+                        <?php $totallikes = $post->likes()->count(); # Total this Post Likes ?>
 
                         @if( $post->isLiked( $user ) === 0 )
                             <i id="{{ $post->id }}" class="fa fa-heart enable transitionfast likePost"></i>
