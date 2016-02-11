@@ -166,7 +166,7 @@ class DatabaseSeeder extends Seeder
         DB::table('resumes')->insert([
                 [ 
                     'user_id'   => 1, 
-                    'tel'       => 09128303586, 
+                    'tel'       => '09128303586', 
                     'duty'      => 'معافیت پزشکی', 
                     'rel'       => false, 
                     'jobtitle'  => 'طراح و برنامه نویس وب', 
@@ -176,7 +176,7 @@ class DatabaseSeeder extends Seeder
                 ],
                 [ 
                     'user_id'   => 2, 
-                    'tel'       => 09362859493, 
+                    'tel'       => '09362859493', 
                     'duty'      => 'پایان خدمت', 
                     'rel'       => false, 
                     'jobtitle'  => 'طراح و برنامه نویس وب', 
