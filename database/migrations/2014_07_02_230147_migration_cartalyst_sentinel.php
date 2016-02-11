@@ -23,7 +23,6 @@ class MigrationCartalystSentinel extends Migration
             $table->string('last_name')->nullable();
             $table->string('photo')->default('noprofile.png');
             $table->string('cover')->default('nocover.png');
-            $table->rememberToken();
             $table->timestamps();
             $table->unique('email');
 
