@@ -16,12 +16,12 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('tel',15);
-            $table->string('duty',30);
+            $table->string('duty',20);
             $table->boolean('rel');
-            $table->string('jobtitle',100);
+            $table->string('jobtitle',70);
             $table->text('address');
             $table->text('bio');
-            $table->timestamp('birth')->nullable();
+            $table->date('birth');
             $table->timestamps();
             $table->unique('tel');
             $table->foreign('user_id')
@@ -35,8 +35,8 @@ class CreateProfilesTable extends Migration
         Schema::create('langs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('title',40);
-            $table->integer('rate')->unsigned();
+            $table->string('title',20);
+            $table->float('score');
             $table->timestamps();
             $table->foreign('user_id')
                   ->references('id')->on('users')
@@ -51,8 +51,8 @@ class CreateProfilesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->date('startyear');
             $table->date('endyear');
-            $table->string('degree',200);
-            $table->string('uni',100);
+            $table->string('degree',100);
+            $table->string('uni',70);
             $table->float('score');
             $table->timestamps();
             $table->foreign('user_id')
@@ -68,7 +68,7 @@ class CreateProfilesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->date('startyear');
             $table->date('endyear');
-            $table->string('company',200);
+            $table->string('company',70);
             $table->timestamps();
             $table->foreign('user_id')
                   ->references('id')->on('users')
@@ -81,9 +81,9 @@ class CreateProfilesTable extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('title',40);
-            $table->integer('rate')->unsigned();
-            $table->string('des',255);
+            $table->string('title',20);
+            $table->float('score');
+            $table->string('description',255)->nullable();
             $table->timestamps();
             $table->foreign('user_id')
                   ->references('id')->on('users')
@@ -115,7 +115,7 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('from_user_id')->unsigned();
             $table->integer('to_user_id')->unsigned();
-            $table->integer('score')->unsigned();
+            $table->float('score');
             $table->timestamps();
             $table->foreign('from_user_id')
                   ->references('id')->on('users')

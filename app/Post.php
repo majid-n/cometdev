@@ -14,15 +14,17 @@ class Post extends Model
 
     protected $fillable = ['title','description','cat_id','smalldescription','link','thumb','image'];
     
-    
+    # Check if the specific User Like the Post or not?
     public function isLiked( User $user ){
         return $this->likes()->where('user_id', $user->id)->count();
     }
 
+    # Relationship for Cat Model
     public function cat() {
         return $this->belongsTo('App\Cat');
     }
 
+    # Relationship for Like Model
     public function likes(){
         return $this->hasMany('App\Like');
     }

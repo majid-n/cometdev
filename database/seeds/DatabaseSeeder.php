@@ -161,34 +161,97 @@ class DatabaseSeeder extends Seeder
         $adminRole->users()->attach($adminUser);
         $this->command->info('Users assigned to roles seeded!');
 
-    # Xps Seeder
+    # Resume Seeder
+        DB::table('resumes')->delete();
+        DB::table('resumes')->insert([
+                [ 
+                    'user_id'   => 1, 
+                    'tel'       => 09128303586, 
+                    'duty'      => 'معافیت پزشکی', 
+                    'rel'       => false, 
+                    'jobtitle'  => 'طراح و برنامه نویس وب', 
+                    'bio'       => 'کـامـت از افرادی با تجــربه و علاقــه مــند به طراحــی تـشـکیل شده است کـه هدف اصـلی این گــروه طراحـی و توسعه وب با بـهره گـیری از بـروزتــرین نـرم افزارها و کــدها می باشد، هـمچنین این گـروه تمام تمرکز خود را صرف طراحی و توسـعه وب مـتناسب با نیاز مشــتری کرده است. ما معتـقدیم که ایــده ها مــی توانند از هر جـایی یا هر شـخصی بوجود بیایند واین اصل به ما کمک می کند تا تعریف دیگری از قدرت طراحی و توسعه وب بوجود بیاوریم !', 
+                    'address'   => 'رسالت، مجیدیه شمالی، 16 متری دوم، کوچه شاکری',
+                    'birth'     => '1989-02-18' 
+                ],
+                [ 
+                    'user_id'   => 2, 
+                    'tel'       => 09362859493, 
+                    'duty'      => 'پایان خدمت', 
+                    'rel'       => false, 
+                    'jobtitle'  => 'طراح و برنامه نویس وب', 
+                    'bio'       => 'کـامـت از افرادی با تجــربه و علاقــه مــند به طراحــی تـشـکیل شده است کـه هدف اصـلی این گــروه طراحـی و توسعه وب با بـهره گـیری از بـروزتــرین نـرم افزارها و کــدها می باشد، هـمچنین این گـروه تمام تمرکز خود را صرف طراحی و توسـعه وب مـتناسب با نیاز مشــتری کرده است. ما معتـقدیم که ایــده ها مــی توانند از هر جـایی یا هر شـخصی بوجود بیایند واین اصل به ما کمک می کند تا تعریف دیگری از قدرت طراحی و توسعه وب بوجود بیاوریم !', 
+                    'address'   => 'رسالت، مجیدیه شمالی، 16 متری دوم، کوچه علی بخشی',
+                    'birth'     => '1986-05-10' 
+                ]
+            ]);
+        $this->command->info('Resumes seeded!');
+
+    # Lang Seeder
+        DB::table('langs')->delete();
+        DB::table('langs')->insert([
+                [ 'user_id' => 1, 'title' => 'انگلیسی', 'score' => 7 ],
+                [ 'user_id' => 1, 'title' => 'آلمانی', 'score' => 5 ],
+                [ 'user_id' => 2, 'title' => 'انگلیسی', 'score' => 7.5 ],
+            ]);
+        $this->command->info('Langs seeded!');
+
+    # Xp Seeder
         DB::table('xps')->delete();
         DB::table('xps')->insert([
-                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2001', 'company' => 'company user 1' ],
-                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2003', 'company' => 'company user 1 dovomi' ],
-                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2004', 'company' => 'company user 1 sevomi' ],
-                [ 'user_id' => 2, 'startyear' => '1998', 'endyear' => '2001', 'company' => 'company user 2' ],
-                [ 'user_id' => 2, 'startyear' => '1998', 'endyear' => '2003', 'company' => 'company user 2 dovomi' ],
-                [ 'user_id' => 2, 'startyear' => '1998', 'endyear' => '2004', 'company' => 'company user 2 sevomi' ],
+                [ 'user_id' => 1, 'startyear' => '1998-01-01', 'endyear' => '2001-01-01', 'company' => 'ایرانیان گرافیک' ],
+                [ 'user_id' => 1, 'startyear' => '2010-01-01', 'endyear' => '2011-01-01', 'company' => 'گروه طراحی و توسعه کامت' ],
+                [ 'user_id' => 1, 'startyear' => '2012-01-01', 'endyear' => '2013-01-01', 'company' => 'خانه عکس ایران' ],
+                [ 'user_id' => 2, 'startyear' => '2014-01-01', 'endyear' => '2015-01-01', 'company' => 'خانه تبلیغات مرکزی' ],
+                [ 'user_id' => 2, 'startyear' => '2006-01-01', 'endyear' => '2008-01-01', 'company' => 'ایرانیان گرافیک' ],
+                [ 'user_id' => 2, 'startyear' => '2008-01-01', 'endyear' => '2011-01-01', 'company' => 'گروه کافل' ],
             ]);
         $this->command->info('Xps seeded!');
 
-    # Edus Seeder
+    # Edu Seeder
         DB::table('edus')->delete();
         DB::table('edus')->insert([
-                [ 'user_id' => 1, 'startyear' => '1998', 'endyear' => '2001', 'degree' => 'diplom', 'uni' => 'madrese 1', 'score' => 17.8 ],
-                [ 'user_id' => 2, 'startyear' => '1930', 'endyear' => '2001', 'degree' => 'lisance', 'uni' => 'madrese 2', 'score' => 19.8 ],
+                [ 'user_id' => 1, 'startyear' => '1998-01-01', 'endyear' => '2001-01-01', 'degree' => 'دیپلم', 'uni' => 'مدرسه فاتح', 'score' => 17.8 ],
+                [ 'user_id' => 1, 'startyear' => '2010-01-01', 'endyear' => '2014-01-01', 'degree' => 'دکترای صنایع', 'uni' => 'صنعتی شریف', 'score' => 14.72 ],
+                [ 'user_id' => 2, 'startyear' => '1990-01-01', 'endyear' => '2001-01-01', 'degree' => 'فوق لیسانس', 'uni' => 'دانشپگاه شمال آمل', 'score' => 19.8 ],
+                [ 'user_id' => 2, 'startyear' => '2014-01-01', 'endyear' => '2015-01-01', 'degree' => 'دکترای نرم افزار', 'uni' => 'دانشپگاه آزاد سالامی واحد تهران جنوب', 'score' => 12.5 ],
             ]);
         $this->command->info('Edus seeded!');
 
-    # Comments Seeder
+    # Skill Seeder
+        DB::table('skills')->delete();
+        DB::table('skills')->insert([
+                [ 'user_id' => 1, 'title' => 'PHP', 'score' => 7.5, 'description' => 'در حد حرفه ای' ],
+                [ 'user_id' => 1, 'title' => 'CSS', 'score' => 9, 'description' => null ],
+                [ 'user_id' => 1, 'title' => 'HTML', 'score' => 6, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 1, 'title' => 'Ps', 'score' => 5.5, 'description' => null ],
+                [ 'user_id' => 1, 'title' => 'Ai', 'score' => 8.7, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 1, 'title' => 'MySQL', 'score' => 10, 'description' => 'در حد حرفه ای' ],
+                [ 'user_id' => 2, 'title' => 'PHP', 'score' => 9.5, 'description' => 'در حد حرفه ای' ],
+                [ 'user_id' => 2, 'title' => 'CSS', 'score' => 9.2, 'description' => null ],
+                [ 'user_id' => 2, 'title' => 'HTML', 'score' => 5.6, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 2, 'title' => 'Ps', 'score' => 4.5, 'description' => null ],
+                [ 'user_id' => 2, 'title' => 'Ai', 'score' => 6.7, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 2, 'title' => 'MySQL', 'score' => 10, 'description' => 'در حد حرفه ای' ],
+            ]);
+        $this->command->info('Skills seeded!');
+
+    # Comment Seeder
         DB::table('comments')->delete();
         DB::table('comments')->insert([
-                [ 'from_user_id' => 1, 'to_user_id' => 2, 'comment' => 'az tarafe user 1' ],
-                [ 'from_user_id' => 1, 'to_user_id' => 2, 'comment' => 'az tarafe user 1 bare dovom' ],
-                [ 'from_user_id' => 2, 'to_user_id' => 1, 'comment' => 'az tarafe user 2' ],
-                [ 'from_user_id' => 2, 'to_user_id' => 1, 'comment' => 'az tarafe user 2 bare dovom' ],
+                [ 'from_user_id' => 1, 'to_user_id' => 2, 'text' => 'این یک کامنت تست از طرف کاربر شماره 1 است.' ],
+                [ 'from_user_id' => 1, 'to_user_id' => 2, 'text' => 'مجددا یک کامنت تست از طرف کاربر شماره 1 است.' ],
+                [ 'from_user_id' => 2, 'to_user_id' => 1, 'text' => 'این کامنت تست از طرف کاربر شماره 2 هست.' ],
+                [ 'from_user_id' => 2, 'to_user_id' => 1, 'text' => 'مجددا یک کامنت تست از طرف کاربر شماره 2 است.' ],
             ]);
         $this->command->info('Comments seeded!');
+
+    # Rate Seeder
+        DB::table('rates')->delete();
+        DB::table('rates')->insert([
+                [ 'from_user_id' => 1, 'to_user_id' => 2, 'score' => 8 ],
+                [ 'from_user_id' => 2, 'to_user_id' => 1, 'score' => 5 ],
+            ]);
+        $this->command->info('Rates seeded!');
     }
 }

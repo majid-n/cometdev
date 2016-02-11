@@ -58,6 +58,16 @@ return [
             'root'   => storage_path('app/portfolioThumb'),
         ],
 
+        'profile' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/profile'),
+        ],
+
+        'cover' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/cover'),
+        ],
+
         'backgrounds' => [
             'driver' => 'local',
             'root'   => public_path('img/backgrounds'),

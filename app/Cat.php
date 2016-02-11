@@ -13,6 +13,7 @@ class Cat extends Model
 
     protected $fillable = ['title','parent'];
 
+    # Relationship for Post Model
     public function posts() {
         return $this->hasMany('App\Post');
     }
