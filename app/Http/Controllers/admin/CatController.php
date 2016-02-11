@@ -96,7 +96,6 @@ class CatController extends Controller
         } else {
 
             # Create Category
-            $cat = new Cat;
             $cat->title            = $request->title;
             $cat->parent           = $request->cat_id;
 
