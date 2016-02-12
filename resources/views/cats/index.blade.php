@@ -11,8 +11,10 @@
 			<p>id : {{ $cat->id }}</p>
 			<p>parent : {{ $cat->parent }}</p>
 			<a href="{{ route('admin.cat.edit',    ['cat' => $cat->id]) }}">edit</a>
-			<a href="{{ route('admin.cat.destroy', ['cat' => $cat->id]) }}">delete</a>
-
+			{!! Form::open(array('method' => 'post', 'route' => array('admin.cat.destroy', $cat->id))) !!}
+			    {!! method_field('DELETE') !!}
+			    {!! Form::button('delete', array('type' => 'submit')) !!}
+			{!! Form::close() !!}
 		</div>
 
 		<br>

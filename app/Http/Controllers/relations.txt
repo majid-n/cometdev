@@ -47,3 +47,27 @@
     public function profileRates() {
         return $this->hasMany('App\Rate','to_user_id');
     }
+
+    #change this function in elequentuser
+    public function delete()
+    {
+        if ($this->exists) {
+            $this->activations()->delete();
+            $this->persistences()->delete();
+            $this->reminders()->delete();
+            $this->roles()->detach();
+            $this->throttle()->delete();
+            $this->resume()->delete();
+            $this->likes()->delete();
+            $this->comments()->delete();
+            $this->profileComments()->delete();
+            $this->profileRates()->delete();
+            $this->rates()->delete();
+            $this->xps()->delete();
+            $this->edus()->delete();
+            $this->skills()->delete();
+            $this->langs()->delete();
+        }
+
+        parent::delete();
+    }

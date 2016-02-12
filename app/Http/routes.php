@@ -78,5 +78,6 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 		Route::resource('post', 'PostController');
 		Route::resource('cat', 'CatController');
 		Route::resource('support', 'SupportController');
+		Route::resource('user', 'UserController');
 	});
 });

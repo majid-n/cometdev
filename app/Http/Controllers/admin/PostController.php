@@ -150,8 +150,12 @@ class PostController extends Controller
 
     # Remove the specified resource from storage
     public function destroy( Post $post ) {
-        Storage::disk('portfolio')->delete( $post->image );
-        Storage::disk('portfolioThumb')->delete( $post->thumb );
+
+        if( Storage::disk('portfolio')->exists( $post->image ) && Storage::disk('portfolioThumb')->exists( $post->thumb ) ) {
+            Storage::disk('portfolio')->delete( $post->image );
+            Storage::disk('portfolioThumb')->delete( $post->thumb );
+        }
+
         $post->delete();
         return redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت حذف شد.');
     }

@@ -16,7 +16,12 @@
 			<p>likes : {{ $post->likes()->count() }}</p>
 			<p>cat : {{ $post->cat->title }}</p>
 			<a href="{{ route('admin.post.edit', ['post' => $post->id]) }}">edit</a>
-			<a href="{{ route('admin.post.destroy', ['post' => $post->id]) }}">delete</a>
+			{!! Form::open(array('method' => 'post', 'route' => array('admin.post.destroy', $post->id))) !!}
+			            
+	            {!! method_field('DELETE') !!}
+	            
+	            {!! Form::button('delete', array('type' => 'submit')) !!}
+	        {!! Form::close() !!}
 
 		</div>
 

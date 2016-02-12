@@ -15,6 +15,7 @@ return [
     'posts_per_page' => 6,
     'cats_per_page' => 10,
     'supports_per_page' => 10,
+    'users_per_page' => 10,
 
     # Support Throttle
     'support_throttle' => '30 MINUTE',
