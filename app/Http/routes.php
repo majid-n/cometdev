@@ -24,6 +24,9 @@ Route::get('post/{post}', 'PostController@show')->name('post.show');
 # Supports Routes for all
 Route::post('support', 'SupportController@store')->name('support.store');
 
+# Posts Routes for all
+Route::get('profile/{user}', 'user\UserController@show')->name('profile.show');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -70,6 +73,7 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 	Route::group([ 'namespace' => 'user' ], function () {
 		# Post Routes
 		Route::get('post/{post}/like', 'PostController@like')->name('post.like');
+		Route::resource('user', 'UserController');
 	});
 
 	# Admins Folder Routes
@@ -78,6 +82,11 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 		Route::resource('post', 'PostController');
 		Route::resource('cat', 'CatController');
 		Route::resource('support', 'SupportController');
-		Route::resource('user', 'UserController');
+		Route::delete('user/{user}','UserController@destroy')->name('admin.user.destroy');
+		Route::delete('comment/{comment}','CommentController@destroy')->name('admin.comment.destroy');
+		Route::delete('edu/{edu}','EduController@destroy')->name('admin.edu.destroy');
+		Route::delete('lang/{lang}','LangController@destroy')->name('admin.lang.destroy');
+		Route::delete('skill/{skill}','SkillController@destroy')->name('admin.skill.destroy');
+		Route::delete('xp/{xp}','XpController@destroy')->name('admin.xp.destroy');
 	});
 });

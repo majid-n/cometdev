@@ -26,7 +26,6 @@
 
 		@endforeach
 
-		<a href="{{ route('admin.user.edit', ['user' => $user->id]) }}">edit</a>
 		{!! Form::open(array('method' => 'post', 'route' => array('admin.user.destroy', $user->id))) !!}
 		    
 		    {!! method_field('DELETE') !!}

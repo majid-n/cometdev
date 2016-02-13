@@ -25,6 +25,7 @@
         <link href='{{ asset('css/animate.css') }}' rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/comet.css') }}" rel="stylesheet">
+
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -37,7 +38,7 @@
 
     <body id="home">
         <!-- Navigation -->
-        @include('layouts.nav')
+        @yield('nav')
 
         <!-- Page Content -->
         @yield('content')
@@ -86,16 +87,14 @@
             <?php session()->forget('fail'); ?>
         @endif
 
-        <!-- Home Button Hover -->
         <script type="text/javascript">
-            $('.navhome').hover(function() {
-                $('.navhome i').fadeOut();
-                $('.navhome a').css('opacity', 1);
-            }, function() {
-                $('.navhome a').css('opacity', 0);
-                $('.navhome i').fadeIn();
-            });
+           $(function() {
+              $('.navrate').barrating({
+                theme: 'fontawesome-stars',
+                readonly: true
+              });
+              $('.navrate').barrating('set', Math.floor( $('.navrate').data('rate')) );
+           });
         </script>
-
     </body>
 </html>

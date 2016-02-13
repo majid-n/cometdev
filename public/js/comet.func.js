@@ -111,7 +111,7 @@ function NavigationSetup() {
                         },
         CloseOnClick =  function() {
 
-                            $('.navbar-collapse ul li a').click(function() {
+                            $('.closeonclick').click(function() {
                                 $('.navbar-toggle:visible').click();
                             });
                         };

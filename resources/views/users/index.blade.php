@@ -1,6 +1,8 @@
 
 @extends('layouts.template')
-
+@section('nav')
+	@include('layouts.smallnav')
+@stop
 @section('content')
 
 	@foreach( $users as $user )
@@ -21,7 +23,6 @@
 			<p>total rates : {{ $user->rates()->count() }}</p>
 			<p>Role : {{ $user->roles()->first()->name }}</p>
 
-			<a href="{{ route('admin.user.edit', ['user' => $user->id]) }}">edit</a>
 			{!! Form::open(array('method' => 'post', 'route' => array('admin.user.destroy', $user->id))) !!}
 			    
 			    {!! method_field('DELETE') !!}

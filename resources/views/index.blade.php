@@ -56,6 +56,10 @@
     {{ 'گروه طراحی و توسعه کامت' }}
 @endsection
 
+@section('nav')
+    @include('layouts.nav')
+@stop
+
 @section('content')
     <!-- Header Section -->
     <header style="background-image:url({{ asset('img/backgrounds/'.array_shift($background)) }});">

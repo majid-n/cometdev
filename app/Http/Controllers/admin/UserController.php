@@ -19,38 +19,6 @@ class UserController extends Controller
         # Define Middleware
     }
 
-    # Show All resources.
-    public function index( Request $request ) {
-        $users = User::with('resume','comments','profileComments','rates','profileRates','likes','roles')->paginate(config('app.users_per_page'));
-        return view('users.index', compact('users') );
-    }
-
-    # Show Create Form.
-    public function create() {
-        abort(404);
-    }
-
-    # Store the New resource in DB.
-    public function store( Request $request ) {
-        abort(404);
-    }
-
-    # Display the specified resource.
-    public function show( Request $request, User $user ) {
-        $comments = Comment::with('fromUser')->where('to_user_id',$user->id)->paginate(5);
-        return view('users.show', compact('user','comments') );
-    }
-
-    # Show the form for editing the specified resource.
-    public function edit( User $user ) {
-        //
-    }
-
-    # Update the specified resource in storage.
-    public function update( Request $request, User $user ) {
-        //
-    }
-
     # Remove the specified resource from storage
     public function destroy( User $user ) {
 
