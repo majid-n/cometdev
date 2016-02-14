@@ -62,7 +62,7 @@
 
 @section('content')
     <!-- Header Section -->
-    <header style="background-image:url({{ asset('img/backgrounds/'.array_shift($background)) }});">
+    <header style="background-image:url({{ asset('img/backgrounds/'.$backgrounds->random()) }});">
         <div class="container">
             <div class="intro-text">
                 <div class="intro-heading text-shadow">طـــراحی <b class="yellow">خاص</b> و منحصــر بـه فرد</div>
@@ -280,7 +280,7 @@
     @endif
 
     <!-- Contact Section -->
-    <section id="contact" style="background-image:url({{ asset('img/backgrounds/'.array_shift($background)) }});">
+    <section id="contact" style="background-image:url({{ asset('img/backgrounds/'.$backgrounds->random()) }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
