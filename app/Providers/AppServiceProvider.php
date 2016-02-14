@@ -7,6 +7,7 @@ use Schema;
 use Validator;
 use App\Post;
 use Storage;
+use Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::extend('farsi', function($attribute,$value,$parameters){
             return preg_match('/[اآإأبپتثجچحخدذرزژسشصضظطعغفقکگلمنوؤهةۀیئيءـًٌٍَُِِّ\s]+/', $value);
+        });
+
+        Blade::extend(function($value) {
+            return preg_replace('/\@define(.+)/', '<?php ${1}; ?>', $value);
         });
     }
 

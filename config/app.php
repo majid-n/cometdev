@@ -10,6 +10,7 @@ return [
     # Social Network
     'twitter'  => 'CometDevIr',
     'facebook' => 'cometdevir',
+    'instagram' => 'instagram',
 
     # Total items per Pagination
     'posts_per_page' => 6,

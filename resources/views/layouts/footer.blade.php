@@ -3,9 +3,9 @@
         <div class="row">
 
             <div class="col-sm-6 social">
-                <i class="fa fa-lg fa-facebook transition"></i>
-                <i class="fa fa-lg fa-twitter transition"></i>
-                <i class="fa fa-lg fa-instagram transition"></i>
+                <a href="https://facebook.com/{{ config('app.facebook') }}"><i class="fa fa-2x fa-facebook transition"></i></a>
+                <a href="https://twitter.com/{{ config('app.twitter') }}"><i class="fa fa-2x fa-twitter transition"></i></a>
+                <a href="https://instagram.com/{{ config('app.instagram') }}"><i class="fa fa-2x fa-instagram transition"></i></a>
             </div>
 
             <div class="col-sm-6 copyright">

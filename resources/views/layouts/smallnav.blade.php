@@ -13,12 +13,15 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if( $user = Sentinel::check() )
+                     @define $avgrates = $user->rates()->avg('score')
                     <!-- user small-->
                     <li class="dropdown userdropdown visible-xs">
 
                         <a href="{{ route('user.show', ['user' => $user->id]) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img class="transitionfast shadow pull-left" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
+                            @if( isset($avgrates) )
                             <p class="transitionfast pull-left"><i class="fa fa-star yellow"></i>{{ $user->rates()->avg('score') }}</p>
+                            @endif
                             <p class="username">{{ $user->fullName() }}<span class="caret"></span></p>
                         </a>
 
@@ -64,25 +67,33 @@
                 @if( $user = Sentinel::check() )
                     <!-- user big -->
                     <li class="dropdown userdropdown hidden-xs">
-
-                        <!-- rates -->
-                        <select class="navrate" data-rate="{{ $user->rates()->avg('score') }}">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <span class="navratenum transitionfast">{{ $user->rates()->avg('score') }}</span>
-
+                        @if( isset($avgrates) )
+                            <!-- rates -->
+                            <select class="navrate" data-rate="{{ $avgrates }}">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <span class="navratenum transitionfast">{{ $user->rates()->avg('score') }}</span>
+                        @endif
                         <!-- Toggle -->
                         <a data-toggle="dropdown" class="transitionfast dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
                             <img class="transitionfast shadow" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
                       
                             <div class="transitionfast userinfo">
                                 <p class="transitionfast text-shadow">{{ $user->fullName() }}</p>
+
+                                @if( isset($avgrates) )
                                 <p class="transitionfast navratenum"><i class="fa fa-star yellow"></i>{{ $user->rates()->avg('score') }}</p>
-                                <small class="transitionfast text-shadow">{{ $user->resume->jobtitle }}</small>
+                                @endif
+
+                                @if( isset( $user->resume->jobtitle ) )
+                                    <small class="transitionfast text-shadow">{{ $user->resume->jobtitle }}</small>
+                                @else
+                                    <small class="transitionfast text-shadow lato">{{ $user->email }}</small>
+                                @endif
                             </div>
                         </a>
 
@@ -120,7 +131,6 @@
                             <i class="fa fa-caret-up fa-2x transitionfast"></i>
                             <div class="col-md-12">
                                 <div class="row">
-                                    <ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
                                     {!! Form::open(array('route' => 'login')) !!}
                                         <div class="form-group">
                                             <div class="input-group">

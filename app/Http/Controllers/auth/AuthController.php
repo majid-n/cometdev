@@ -49,8 +49,9 @@ class AuthController extends Controller
             $validator = Validator::make($input, $rules );
 
             if ( $validator->fails() ) {
-                return back()->withInput()
-                             ->withErrors($validator);
+                return redirect()->route('login')
+                                 ->withInput()
+                                 ->withErrors($validator);
             }
 
             if ( $user = Sentinel::authenticate($credentials, $remember) ) {
@@ -72,7 +73,8 @@ class AuthController extends Controller
         }
 
         catch (ThrottlingException $e) {
-            return back()->with('fail', 'اکانت شما بلاک شده است. لطفا '.round($e->getDelay()/60).' دقیقه دیگر مجددا تلاش کنید.');
+            return redirect()->route('login')
+                            ->with('fail', 'اکانت شما بلاک شده است. لطفا '.round($e->getDelay()/60).' دقیقه دیگر مجددا تلاش کنید.');
         }
     }
 
@@ -97,8 +99,9 @@ class AuthController extends Controller
         $validator = Validator::make($input, $rules );
 
         if ( $validator->fails() ) {
-            return back()->withInput()
-                         ->withErrors($validator);
+            return redirect()->route('register')
+                             ->withInput()
+                             ->withErrors($validator);
         }
 
         if ( $user = Sentinel::register($input) ) {
@@ -124,8 +127,9 @@ class AuthController extends Controller
             ]);
         }
 
-        return back()->withInput()
-                     ->with('fail', 'خطا در اتصال به سرور، لطفا بعدا امتحان کنید.');
+        return redirect()->route('register')
+                         ->withInput()
+                         ->with('fail', 'خطا در اتصال به سرور، لطفا بعدا امتحان کنید.');
     }
 
     # Logout User from this device

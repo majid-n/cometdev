@@ -196,10 +196,79 @@
     .modal{
         background-color: rgba(254, 197, 3, 0.4) !important;
     }
+/*Forms*/
+    section.formSection{
+        background-color: #888;
+        background-position: center;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    section.formSection .formContent{
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 4px;
+        padding-top: 25px;
+        padding-bottom: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    section.formSection div h3 {
+        color: #fff;
+    }
+    section.formSection div h3 i{
+        vertical-align: sub;
+    }
+    .form-group {
+        margin-bottom: 25px;
+    }
     .form-control:focus {
         border-color: #fed136;
         -webkit-box-shadow: 0 0 5px 1px rgba(254,197,3,0.5);
         box-shadow: 0 0 5px 1px rgba(254,197,3,0.5);
+    }
+    .text-danger {
+        color: #e74c3c;
+    }
+    input,
+    textarea,
+    select {
+        direction: rtl;
+        font-size: 1.2em;
+        line-height: normal !important;
+        padding: 7px 10px !important;
+        height: auto !important;
+    }
+    select{
+        padding: 6px 10px !important;
+    }
+    select optgroup {
+        padding: 5px;
+    }
+    button[type=submit],
+    button[type=reset]{
+        font-size: 1.1em !important;
+    }
+    input[type=file] {
+        overflow: hidden;
+        position: absolute;
+        opacity: 0;
+        width: 53px;
+        left: 0;
+        top: 0;
+        cursor: pointer;
+    }
+    input[type=text].fileInputText {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .fileInput .input-group-addon{
+        color: #fff;
+        border-color: #f6bf01;
+        background-color: #fed136;
     }
 /*Font Setup*/
     @font-face {
@@ -446,11 +515,11 @@
         box-shadow: 0px 6px 19px -8px rgba(0,0,0,0.5) inset;
     }
     .text-shadow{
-        -webkit-text-shadow:0 6px 12px rgba(0,0,0,.175);
-        -moz-text-shadow:0 6px 12px rgba(0,0,0,.175);
-        -ms-text-shadow:0 6px 12px rgba(0,0,0,.175);
-        -o-text-shadow:0 6px 12px rgba(0,0,0,.175);
-        text-shadow: 0 6px 12px rgba(0,0,0,.175);
+        -webkit-text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+        -moz-text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+        -ms-text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+        -o-text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+        text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
     }
     .btn-noback,
     .btn-noback:focus,
@@ -480,6 +549,9 @@
         right: 7px;
         top: 7px;
         cursor: inherit;
+    }
+    .hasErr {
+        color: #fec503 !important;
     }
 /*Animation*/
     .transition {
@@ -1529,26 +1601,6 @@
     section#contact .section-heading {
         color: #fff;
     }
-    section#contact .form-group {
-        margin-bottom: 25px;
-    }
-    section#contact .form-group input,
-    section#contact .form-group textarea {
-        padding: 10px;
-    }
-    section#contact .form-group input.form-control {
-        height: auto;
-    }
-    section#contact .text-danger {
-        color: #e74c3c;
-    }
-    /*Edited Css*/
-    .ContactForm input,
-    .ContactForm textarea {
-        direction: rtl;
-        font-size: 1.2em;
-        line-height: normal;
-    }
     .ContactForm #submit{
         position: relative;
     }
@@ -1560,9 +1612,9 @@
     }
     .QRCode div {
         display: block;
-        margin: 20px auto;
+        margin: 0 auto;
         padding-top: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 12px;
         text-align: center;
     }
     .QRCode img.radius5 {
@@ -1590,9 +1642,6 @@
         color: #fec503;
         text-shadow: 0 0 5px #333;
         font-size: 1.5em;
-    }
-    .hasErr {
-        color: #fec503 !important;
     }
 /*Team Section*/
     .team-admin {
@@ -1670,38 +1719,24 @@
         margin-bottom: 0;
     }
     footer .social{
-        margin-bottom: 0;
         text-align: left;
         padding-top: 5px;
     }
 
-    footer .social i {
-        border: 2px solid rgb(51, 51, 51);
-        padding: 5px;
-        border-radius: 4px;
-        width: 30px;
-        margin: 0px !important;
-        height: 30px;
-        cursor: default;
+    footer .social a {
+        margin-right: 15px;
+        cursor: pointer;
+        color: #333;
     }
-
-    footer .social i:hover {
-        color: #fff;
-        border: 2px solid #fff;
+    footer .social a i.fa-facebook:hover {
+        color: #3C5899;
     }
-
-    footer .social i.fa-facebook:hover {
-        background-color: #3C5899;
+    footer .social a i.fa-twitter:hover {
+        color: #2CAAE1;
     }
-
-    footer .social i.fa-twitter:hover {
-        background-color: #2CAAE1;
+    footer .social a i.fa-instagram:hover {
+        color: #8A5A4E;
     }
-
-    footer .social i.fa-instagram:hover {
-        background-color: #8A5A4E;
-    }
-    
 /*Media Queries For Large Devices*/
     @media(min-width:1200px) {
         /*Navigation*/
@@ -1883,6 +1918,10 @@
         /*CSS reset*/
             p,.btn{
                 font-weight: normal;
+            }
+        /*Forms*/
+            input[type=file] + label strong {
+                display: block;
             }
         /*Contact Section*/
             .QRCode{
