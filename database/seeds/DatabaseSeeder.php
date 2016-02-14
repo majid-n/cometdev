@@ -136,16 +136,17 @@ class DatabaseSeeder extends Seeder
     # User Seeder
         DB::table('users')->delete();
         Sentinel::registerAndActivate([
-            'email'    => 'user@user.com',
-            'password' => 'user123',
-            'first_name' => 'علی',
-            'last_name' => 'شفاعت',
+            'email'         => 'user@user.com',
+            'password'      => 'user123',
+            'first_name'    => 'علی',
+            'last_name'     => 'شفاعت',
         ]);
         Sentinel::registerAndActivate([
-            'email'    => 'admin@admin.com',
-            'password' => 'admin123',
-            'first_name' => 'مجید',
-            'last_name' => 'نورعلی',
+            'email'         => 'admin@admin.com',
+            'password'      => 'admin123',
+            'first_name'    => 'مجید',
+            'last_name'     => 'نورعلی',
+            'photo'         => 'majid.jpg'
         ]);
         $this->command->info('Users seeded!');
 
@@ -221,18 +222,18 @@ class DatabaseSeeder extends Seeder
     # Skill Seeder
         DB::table('skills')->delete();
         DB::table('skills')->insert([
-                [ 'user_id' => 1, 'title' => 'PHP', 'score' => 7.5, 'description' => 'در حد حرفه ای' ],
-                [ 'user_id' => 1, 'title' => 'CSS', 'score' => 9, 'description' => null ],
-                [ 'user_id' => 1, 'title' => 'HTML', 'score' => 6, 'description' => 'در حد متوسط ای' ],
-                [ 'user_id' => 1, 'title' => 'Ps', 'score' => 5.5, 'description' => null ],
-                [ 'user_id' => 1, 'title' => 'Ai', 'score' => 8.7, 'description' => 'در حد متوسط ای' ],
-                [ 'user_id' => 1, 'title' => 'MySQL', 'score' => 10, 'description' => 'در حد حرفه ای' ],
-                [ 'user_id' => 2, 'title' => 'PHP', 'score' => 9.5, 'description' => 'در حد حرفه ای' ],
-                [ 'user_id' => 2, 'title' => 'CSS', 'score' => 9.2, 'description' => null ],
-                [ 'user_id' => 2, 'title' => 'HTML', 'score' => 5.6, 'description' => 'در حد متوسط ای' ],
-                [ 'user_id' => 2, 'title' => 'Ps', 'score' => 4.5, 'description' => null ],
-                [ 'user_id' => 2, 'title' => 'Ai', 'score' => 6.7, 'description' => 'در حد متوسط ای' ],
-                [ 'user_id' => 2, 'title' => 'MySQL', 'score' => 10, 'description' => 'در حد حرفه ای' ],
+                [ 'user_id' => 1, 'title' => 'PHP', 'score'   => 7.5, 'description' => 'در حد حرفه ای' ],
+                [ 'user_id' => 1, 'title' => 'CSS', 'score'   => 9, 'description'   => null ],
+                [ 'user_id' => 1, 'title' => 'HTML', 'score'  => 6, 'description'   => 'در حد متوسط ای' ],
+                [ 'user_id' => 1, 'title' => 'Ps', 'score'    => 5.5, 'description' => null ],
+                [ 'user_id' => 1, 'title' => 'Ai', 'score'    => 8.7, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 1, 'title' => 'MySQL', 'score' => 10, 'description'  => 'در حد حرفه ای' ],
+                [ 'user_id' => 2, 'title' => 'PHP', 'score'   => 9.5, 'description' => 'در حد حرفه ای' ],
+                [ 'user_id' => 2, 'title' => 'CSS', 'score'   => 9.2, 'description' => null ],
+                [ 'user_id' => 2, 'title' => 'HTML', 'score'  => 5.6, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 2, 'title' => 'Ps', 'score'    => 4.5, 'description' => null ],
+                [ 'user_id' => 2, 'title' => 'Ai', 'score'    => 6.7, 'description' => 'در حد متوسط ای' ],
+                [ 'user_id' => 2, 'title' => 'MySQL', 'score' => 10, 'description'  => 'در حد حرفه ای' ],
             ]);
         $this->command->info('Skills seeded!');
 
@@ -249,8 +250,8 @@ class DatabaseSeeder extends Seeder
     # Rate Seeder
         DB::table('rates')->delete();
         DB::table('rates')->insert([
-                [ 'from_user_id' => 1, 'to_user_id' => 2, 'score' => 8 ],
-                [ 'from_user_id' => 2, 'to_user_id' => 1, 'score' => 5 ],
+                [ 'from_user_id' => 1, 'to_user_id' => 2, 'score' => 3.3 ],
+                [ 'from_user_id' => 2, 'to_user_id' => 1, 'score' => 4.2 ],
             ]);
         $this->command->info('Rates seeded!');
     }

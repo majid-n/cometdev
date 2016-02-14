@@ -5,23 +5,21 @@
             <button type="button" class="navbar-toggle slide-top shadow" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="comet-comet"></span>
             </button>
-            <a class="navbar-brand scroll visible-xs" href="#home"><img src='{{ asset('img/logo/comet_fa.png') }}'></a>
+            <a class="navbar-brand scroll visible-xs transitionfast" href="#home"><img class="transitionfast" src='{{ asset('img/logo/comet_fa.png') }}'></a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <!-- navbar right -->
             <ul class="nav navbar-nav navbar-right">
 
-
                 @if( $user = Sentinel::check() )
                     <!-- user small-->
-                    <li class="dropdown visible-xs">
+                    <li class="dropdown userdropdown visible-xs">
 
                         <a href="{{ route('user.show', ['user' => $user->id]) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img class="transitionfast shadow pull-left" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
                             <p class="transitionfast pull-left"><i class="fa fa-star yellow"></i>{{ $user->rates()->avg('score') }}</p>
-                            <span class="caret"></span>
-                            {{ $user->fullName() }}
+                            <p class="username">{{ $user->fullName() }}<span class="caret"></span></p>
                         </a>
 
                         <ul class="dropdown-menu">
@@ -43,12 +41,11 @@
 
                 <li><a class="scroll closeonclick" href="#contact">تماس با ما</a></li>
 
-                <!-- register and login -->
                 <li>
                     <a class="scroll closeonclick" href="#portfolio">پروژه ها</a>
                     @if( $totalnewposts > 0 )
-                        <span class="badge backYellow shadow hidden-xs" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $totalnewposts }}"></span>
-                        <span class="badge backYellow shadow visible-xs" data-number="{{ $totalnewposts }}"></span>
+                        <span class="badge backYellow shadow hidden-xs transitionfast" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $totalnewposts }}"></span>
+                        <span class="badge backYellow shadow visible-xs transitionfast" data-number="{{ $totalnewposts }}"></span>
                     @endif
                 </li>
 
@@ -68,6 +65,7 @@
                     <!-- user big -->
                     <li class="dropdown userdropdown hidden-xs">
 
+                        <!-- rates -->
                         <select class="navrate" data-rate="{{ $user->rates()->avg('score') }}">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -75,9 +73,9 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-
                         <span class="navratenum transitionfast">{{ $user->rates()->avg('score') }}</span>
 
+                        <!-- Toggle -->
                         <a data-toggle="dropdown" class="transitionfast dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
                             <img class="transitionfast shadow" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
                       
@@ -88,6 +86,7 @@
                             </div>
                         </a>
 
+                        <!-- dropdown -->
                         <ul class="dropdown-menu">
                             <i class="fa fa-caret-up fa-2x transitionfast"></i>
 
@@ -119,43 +118,47 @@
                         <div class="dropdown-menu">
                             <i class="fa fa-caret-up fa-2x transitionfast"></i>
                             <div class="col-md-12">
-                            <div class="row">
-                                <ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
-                                {!! Form::open(array('route' => 'login')) !!}
-                                    <div class="form-group">
-                                        {!! Form::email('email', null, array('placeholder' => ' آدرس ایمیل', 'class' => 'form-control loginSize')) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::password('password', array('placeholder' => ' کلمه عبور', 'class' => 'form-control loginSize')) !!}
-                                        <a role="button" class="pull-left forget" href="{{ route('forgot') }}">فراموشی کلمه عبور</a>
-                                    </div>
+                                <div class="row">
+                                    <ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
+                                    {!! Form::open(array('route' => 'login')) !!}
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                {!! Form::email('email', null, array('placeholder' => 'پست الکترنیکی', 'class' => 'form-control loginSize')) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                                                {!! Form::password('password', array('placeholder' => ' کلمه عبور', 'class' => 'form-control loginSize')) !!}
+                                            </div>
+                                            <a role="button" class="pull-left forget" href="{{ route('forgot') }}">فراموشی کلمه عبور</a>
+                                        </div>
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="remember" class="onoffswitch-checkbox" id="myonoffswitch">
+                                            <label class="onoffswitch-label" for="myonoffswitch">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
 
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="remember" class="onoffswitch-checkbox" id="myonoffswitch">
-                                        <label class="onoffswitch-label" for="myonoffswitch">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                    </div>
+                                        {!! Form::button('<i class="fa fa-sign-in"></i> ورود', array('class' => 'btn btn-primary loginSize transtionfast','type' => 'submit')) !!}
+                                        <hr class="hline">
+                                        <a class="btn btn-info loginSize transtionfast" href="{{ route('register') }}"><i class="fa fa-user-plus"></i> ثبت نام</a>
 
-                                    {!! Form::submit('ورود', array('class' => 'btn btn-primary loginSize')) !!}
-                                    <hr class="hline">
-                                    {!! Form::submit('ثبت نام', array('class' => 'btn btn-info loginSize')) !!}
-
-                                    <div class="cometName">
-                                        <i class="comet comet-comet"></i>
-                                        <span class="lato">Comet Design &amp; Developement</span>
-                                    </div>
-                                {!! Form::close() !!}
-
-                            </div>
+                                        <div class="cometName">
+                                            <i class="comet comet-comet"></i>
+                                            <span class="lato">Comet Design &amp; Developement</span>
+                                        </div>
+                                    {!! Form::close() !!}
+                                </div>
                             </div>
                         </div>
                     </li>
 
                     <li class="btn-group col-xs-12 visible-xs">
-                        <a class="btn btn-primary col-xs-6 btn-noback transtionfast closeonclick" href="{{ route('login') }}">ورود <i class="fa fa-sign-in"></i></a>
-                        <a class="btn btn-primary col-xs-6 btn-noback transtionfast closeonclick" href="{{ route('register') }}">ثبت نام <i class="fa fa-user-plus"></i></a>
+                        <a class="btn btn-primary col-xs-6 transtionfast closeonclick" href="{{ route('login') }}">ورود <i class="fa fa-sign-in"></i></a>
+                        <a class="btn btn-info col-xs-6 transtionfast closeonclick" href="{{ route('register') }}">ثبت نام <i class="fa fa-user-plus"></i></a>
                     </li>
                 @endif
             </ul>

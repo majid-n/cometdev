@@ -682,8 +682,12 @@
     .navbar-default .nav li a,
     .navbar-default .nav li a:focus {
         color: #fff;
-        font-size: 16px;
         text-align: right;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
     }
     .navbar-default .nav li a:hover{
         outline: 0;
@@ -693,6 +697,30 @@
         -o-transition: all 0.5s ease-in-out;
         -ms-transition: all 0.5s ease-in-out;
         transition: all 0.5s ease-in-out;
+    }
+    .navbar-default .nav li a.btn-primary{
+        background-color: #fec503;
+        color: #fff;
+        text-align: center;
+    }
+    .navbar-default .nav li a.btn-primary:hover,
+    .navbar-default .nav li a.btn-primary:link,
+    .navbar-default .nav li a.btn-primary:active,
+    .navbar-default .nav li a.btn-primary:focus{
+        background-color: #fed136;
+        color: #fff;
+    }
+    .navbar-default .nav li a.btn-info{
+        background-color: #5bc0de;
+        color: #fff;
+        text-align: center;
+    }
+    .navbar-default .nav li a.btn-info:hover,
+    .navbar-default .nav li a.btn-info:link,
+    .navbar-default .nav li a.btn-info:active,
+    .navbar-default .nav li a.btn-info:focus{
+        background-color: #31b0d5;
+        color: #fff;
     }
     .navbar-default .navbar-nav>.active>a {
         color: #fed136;
@@ -732,17 +760,12 @@
         color: #fed136;
         background-color: #777;
     }
-    .navbar-default .navbar-nav .logo {
-        width: 90px;
-        margin-top: 8px;
-        margin-left: 20px;
-        margin-right: 25px;
-    }
     /*Rating*/
     .navbar-default .nav li .br-wrapper a {
       font-family: FontAwesome !important;
-      font-size: 10px;
+      font-size: 10px !important;
       cursor: default;
+      padding: 0 !important;
       -webkit-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
       -moz-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
       -ms-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
@@ -756,8 +779,8 @@
     }
     .navbar-default .nav li .br-wrapper {
       position: absolute;
-      left: 94px;
-      top: -9px;
+      left: 88px;
+      top: -8px;
       z-index: 1;
       cursor: default;
       opacity: 1;
@@ -778,8 +801,8 @@
     }
     .navbar-default .navbar-left .userdropdown span.navratenum {
         position: absolute;
-        top: -7px;
-        left: 165px;
+        top: -5px;
+        left: 160px;
         font-size: 12px;
         color: #eee;
         opacity: 1;
@@ -795,12 +818,20 @@
         direction: rtl;
         text-align: center;
     }
-    .navbar-default .navbar-left .loginDropdown a {
+    .navbar-default .navbar-left .loginDropdown a.dropdown-toggle {
         background-color: transparent !important;
+    }
+    .navbar-default .navbar-left .loginDropdown .dropdown-menu div.input-group{
+        direction: ltr;
+    }
+    .navbar-default .navbar-left .loginDropdown .dropdown-menu input.form-control{
+        direction: rtl;
     }
     .navbar-default .navbar-left .loginDropdown .dropdown-menu .forget {
         color: #FED136;
-        font-size: 10px;
+        font-size: 10px !important;
+        padding-left: 0 !important;
+        padding-top: 3px;
     }
     .navbar-default .navbar-left .loginDropdown .dropdown-menu div.cometName {
         font-size: 10px;
@@ -813,7 +844,7 @@
     .navbar-default .navbar-left .loginDropdown .dropdown-menu div.cometName i {
         margin-right: 0;
     }
-    .navbar-default .navbar-left .loginDropdown .dropdown-menu input.loginSize {
+    .navbar-default .navbar-left .loginDropdown .dropdown-menu .loginSize{
         height: 40px;
         width: 100%;
     }
@@ -824,7 +855,7 @@
         color: #FFF;
         cursor: default;
     }
-    .navbar-default .navbar-left .loginDropdown a i {
+    .navbar-default .navbar-left .loginDropdown a.dropdown-toggle i.fa-user-plus {
         width: 65px;
         height: 65px;
         border-top-left-radius: 6px;
@@ -840,7 +871,7 @@
         border-right: none;
         color: #fed136;
     }
-    .navbar-default .navbar-left .loginDropdown a div {
+    .navbar-default .navbar-left .loginDropdown a.dropdown-toggle div {
         position: absolute;
         top: -7px;
         min-width: 150px;
@@ -851,18 +882,18 @@
         padding-top: 18px;
         cursor: pointer;
     }
-    .navbar-default .navbar-left .loginDropdown a div p {
+    .navbar-default .navbar-left .loginDropdown a.dropdown-toggle div p {
         margin-bottom: 0;
         cursor: pointer;
     }
-    .navbar-default .navbar-left .loginDropdown a div small {
+    .navbar-default .navbar-left .loginDropdown a.dropdown-toggle div small {
         margin-bottom: 0;
         font-size: 11px;
         color: #ccc;
         cursor: pointer;
     }
     /*shrink*/
-    .navbar-default.navbar-shrink .navbar-left .loginDropdown a i {
+    .navbar-default.navbar-shrink .navbar-left .loginDropdown a.dropdown-toggle i.fa-user-plus {
         width: 40px;
         height: 40px;
         font-size: 18px;
@@ -872,16 +903,16 @@
         border: 2px solid #fed136;
         border-right: none;
     }
-    .navbar-default.navbar-shrink .navbar-left .loginDropdown a div {
+    .navbar-default.navbar-shrink .navbar-left .loginDropdown a.dropdown-toggle div {
         top: 7px;
         left: 54px;
         padding-top: 0px;
     }
-    .navbar-default.navbar-shrink .navbar-left .loginDropdown a div p {
+    .navbar-default.navbar-shrink .navbar-left .loginDropdown a.dropdown-toggle div p {
         margin-bottom: -5px;
         font-size: 12px;
     }
-    .navbar-default.navbar-shrink .navbar-left .loginDropdown a div small {
+    .navbar-default.navbar-shrink .navbar-left .loginDropdown a.dropdown-toggle div small {
         font-size: 10px;
     }
     .navbar-default.navbar-shrink .navbar-left .loginDropdown .dropdown-menu {
@@ -891,42 +922,42 @@
         left: 40px;
     }
     /*User dropdown*/
-    .navbar-default .navbar-left .userdropdown a img {
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle img {
         width: 65px;
         margin-top: -22px;
         margin-left: -10px;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
     }
-    .navbar-default .navbar-left .userdropdown a div.userinfo {
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle div.userinfo {
         position: absolute;
-        top: -7px;
+        top: -6px;
         min-width: 180px;
-        left: 82px;
+        left: 77px;
         text-align: left;
         border-left: 1px dashed #666;
         padding-left: 10px;
         padding-top: 18px;
         cursor: pointer;
     }
-    .navbar-default .navbar-left .userdropdown a div.userinfo p:first-child,
-    .navbar-default .navbar-left .userdropdown a div.userinfo small {
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle div.userinfo p:first-child,
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle div.userinfo small {
         max-width: 120px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
         direction: rtl;
     }
-    .navbar-default .navbar-left .userdropdown a div.userinfo p {
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle div.userinfo p {
         margin-bottom: 0;
         cursor: pointer;
         display: inline-block;
     }
-    .navbar-default .navbar-left .userdropdown a div.userinfo p.navratenum {
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle div.userinfo p.navratenum {
         display: none;
         color: #eee !important;
     }
-    .navbar-default .navbar-left .userdropdown a div.userinfo small {
+    .navbar-default .navbar-left .userdropdown a.dropdown-toggle div.userinfo small {
         margin-bottom: 0;
         font-size: 11px;
         color: #ccc;
@@ -938,37 +969,60 @@
         position: absolute;
         top: -18px;
         color: #fff;
-        left: 68px;
+        left: 64px;
         cursor: default;
     }
+    .navbar-default .navbar-right .userdropdown a.dropdown-toggle p.pull-left,
+    .navbar-default .navbar-right .userdropdown a.dropdown-toggle p.pull-left:hover {
+        color: #fff;
+        font-size: 20px;
+        margin-bottom: 0;
+        margin-top: -5px;
+        margin-right: 10px;
+    }
+    .navbar-default .navbar-right .userdropdown.open a.dropdown-toggle p.pull-left{
+        color: #555;
+    }
+    .navbar-default .navbar-right .userdropdown a.dropdown-toggle p.pull-left i{
+        margin-left: 10px;
+        padding-left: 10px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        border-left: 1px dashed #888;
+    }
+    .navbar-default .navbar-right .userdropdown a.dropdown-toggle p.username{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        direction: rtl;
+        margin: 0;
+    }
+    .navbar-default .navbar-right .userdropdown a.dropdown-toggle p.username span{
+        margin-right: 5px;
+    }
     /*shrink*/
-    .navbar-default.navbar-shrink .navbar-left .userdropdown a img {
+    .navbar-default.navbar-shrink .navbar-left .userdropdown a.dropdown-toggle img {
         width: 39px;
         margin-top: -9px;
     }
-    .navbar-default.navbar-shrink .navbar-left .userdropdown a div.userinfo {
-        top: 6px;
-        left: 53px;
+    .navbar-default.navbar-shrink .navbar-left .userdropdown a.dropdown-toggle div.userinfo {
+        top: 7px;
+        left: 50px;
         border-left: 1px dashed #444;
         padding-top: 0px;
     }
-    .navbar-default.navbar-shrink .navbar-left .userdropdown a div.userinfo p.navratenum {
+    .navbar-default.navbar-shrink .navbar-left .userdropdown a.dropdown-toggle div.userinfo p.navratenum {
         display: inline-block;
     }
-    .navbar-default.navbar-shrink .navbar-left .userdropdown a div.userinfo p {
+    .navbar-default.navbar-shrink .navbar-left .userdropdown a.dropdown-toggle div.userinfo p {
         margin-bottom: -5px;
         font-size: 12px;
     }
-    .navbar-default.navbar-shrink .navbar-left .userdropdown a div.userinfo small {
+    .navbar-default.navbar-shrink .navbar-left .userdropdown a.dropdown-toggle div.userinfo small {
         font-size: 10px;
     }
     .navbar-default.navbar-shrink .navbar-left .userdropdown i.fa-caret-up {
-        left: 39px;
-    }
-    .navbar-default.navbar-shrink .navbar-nav .logo {
-        width: 75px;
-        margin-top: 11px;
-        margin-left: 20px;
+        left: 36px;
     }
     .dropdown-header{
         cursor: default;
@@ -1650,6 +1704,24 @@
     
 /*Media Queries For Large Devices*/
     @media(min-width:1200px) {
+        /*Navigation*/
+            .navbar-default .nav li a,
+            .navbar-default .nav li a:focus {
+                font-size: 16px !important;
+                padding-right: 15px !important;
+                padding-left: 15px !important;
+            }
+            .navbar-default .navbar-nav .logo {
+                width: 90px !important;
+                margin-top: 8px !important;
+                margin-left: 20px !important;
+                margin-right: 25px !important;
+            }
+            .navbar-default.navbar-shrink .navbar-nav .logo {
+                width: 75px !important;
+                margin-top: 11px !important;
+                margin-left: 20px !important;
+            }
         /*Services Section*/
             .timeline>li {
                 min-height: 170px;
@@ -1717,22 +1789,6 @@
                 -moz-transition: all .3s;
                 transition: all .3s;
             }
-            .navbar-brand{
-                padding: 7px 0 15px 0;
-            }
-            .navbar-default .navbar-brand {
-                -webkit-transition: all .3s;
-                -moz-transition: all .3s;
-                transition: all .3s;
-            }
-            .navbar-default .navbar-brand img{
-                width: 100px;
-                -webkit-transition: all 0.3s ease;
-                -moz-transition: all 0.3s ease-in-out;
-                -o-transition: all 0.3s ease-in-out;
-                -ms-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
-            }
             .navbar-default.navbar-shrink {
                 padding: 0;
                 height: 50px;
@@ -1741,35 +1797,24 @@
                 -o-box-shadow: 0px 6px 19px -8px rgba(0,0,0,.5);
                 box-shadow: 0px 6px 19px -8px rgba(0,0,0,.5);
             }
-            .navbar-default.navbar-shrink .nav li a {
+            .navbar-default .nav li a,
+            .navbar-default.navbar-shrink .nav li a,
+            .navbar-default .nav li a:focus {
                 font-size: 14px;
+                padding-right: 10px;
+                padding-left: 10px;
             }
-            .navbar-default.navbar-shrink .navbar-brand {
-                padding: 10px 0 15px 0;
-                -webkit-transition: all 0.3s ease;
-                -moz-transition: all 0.3s ease-in-out;
-                -o-transition: all 0.3s ease-in-out;
-                -ms-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
-            }
-            .navbar-default.navbar-shrink .navbar-brand img{
-               width: 80px;
-               -webkit-transition: all 0.3s ease;
-                -moz-transition: all 0.3s ease-in-out;
-                -o-transition: all 0.3s ease-in-out;
-                -ms-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
+            .navbar-default .navbar-nav .logo,
+            .navbar-default.navbar-shrink .navbar-nav .logo {
+                width: 75px;
+                margin-top: 10px;
+                margin-left: 15px;
+                margin-right: 25px;
             }
             .navbar-default.navbar-shrink .navbar-nav span.badge{
                 font-size: 0.9em;
                 top: -10px;
-                -webkit-transition: all 0.3s ease;
-                -moz-transition: all 0.3s ease-in-out;
-                -o-transition: all 0.3s ease-in-out;
-                -ms-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
             }
-
             .navbar-default .navbar-nav > .open > a,
             .navbar-default .navbar-nav > .open > a:focus,
             .navbar-default .navbar-nav > .open > a:hover {
@@ -1777,15 +1822,11 @@
                 background-color: #202020;
                 border-radius: 4px;
             }
-
-            .navbar-default .navbar-nav  > .userdropdown.open > a,
-            .navbar-default .navbar-nav  > .userdropdown.open > a:focus,
-            .navbar-default .navbar-nav  > .userdropdown.open > a:hover {
-                color: #FED136;
+            .navbar-default .navbar-nav.navbar-left  > .userdropdown.open > a,
+            .navbar-default .navbar-nav.navbar-left  > .userdropdown.open > a:focus,
+            .navbar-default .navbar-nav.navbar-left  > .userdropdown.open > a:hover {
                 background-color: transparent;
-                border-radius: 4px;
             }
-
             .navbar-nav > li > .dropdown-menu {
                 min-width: 200px;
                 border-radius: 4px;
@@ -1798,14 +1839,11 @@
                 margin: 5px;
                 border-radius: 4px;
             }
-
             .navbar-nav > li > .dropdown-menu li a:hover,
             .navbar-nav > li > .dropdown-menu li a:focus {
                 color: #FED136;
                 background-color: #333;
             }
-
-
         /*Portfolio Section*/
             #portfolio .portfolio-item {
                 margin: 0 0 30px;
@@ -1862,11 +1900,6 @@
             }
             .navbar-default .navbar-brand img{
                 width: 70px;
-                -webkit-transition: all 0.3s ease;
-                -moz-transition: all 0.3s ease-in-out;
-                -o-transition: all 0.3s ease-in-out;
-                -ms-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
             }
             .navbar-default .navbar-nav span.badge{
                 position: absolute;
@@ -1893,7 +1926,7 @@
             }
             .navbar-default .navbar-nav .dropdown img{
                 width: 30px;
-                margin-top: -5px;
+                margin-top: -3px;
                 border-radius: 4px;
                 margin-left: -5px;
             }

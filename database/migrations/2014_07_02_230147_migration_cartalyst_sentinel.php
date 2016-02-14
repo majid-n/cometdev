@@ -19,10 +19,10 @@ class MigrationCartalystSentinel extends Migration
             $table->string('password');
             $table->text('permissions')->nullable();
             $table->timestamp('last_login')->nullable();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('photo')->default('noprofile.png');
-            $table->string('cover')->default('nocover.png');
+            $table->string('first_name',15)->nullable();
+            $table->string('last_name',15)->nullable();
+            $table->string('photo',100)->default('noprofile.png');
+            $table->string('cover',100)->default('nocover.png');
             $table->timestamps();
             $table->unique('email');
 

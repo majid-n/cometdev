@@ -18,7 +18,7 @@ class CreateProfilesTable extends Migration
             $table->string('tel',15);
             $table->string('duty',20);
             $table->boolean('rel');
-            $table->string('jobtitle',70);
+            $table->string('jobtitle',50);
             $table->text('address');
             $table->text('bio');
             $table->date('birth');
