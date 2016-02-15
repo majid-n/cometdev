@@ -66,7 +66,7 @@
                 Scroll();
                 Counter('.navbar-nav .badge');
                 Tooltip();
-                CloseOnClick();
+                CloseNavOnClick();
 
                 @if( Sentinel::check() )
                     ReadonlyRate('.navrate');

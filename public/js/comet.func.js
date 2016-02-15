@@ -115,7 +115,7 @@ function NavigationSetup() {
     $(window).scroll(function(){ Shrink() });
 }
 // Close Nav on click in small Device
-function CloseOnClick() {
+function CloseNavOnClick() {
     $('.closeonclick').click(function() {
         $('.navbar-toggle:visible').click();
     });
@@ -235,6 +235,8 @@ function SelectInit(){
         else
             $('.selectBadge').html('');
     });
+
+    $('button[type="reset"]').click(function() { $('.selectBadge').html('') });
 }
 // Animation Numbers
 function Counter(element){
