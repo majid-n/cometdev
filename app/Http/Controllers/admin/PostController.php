@@ -38,13 +38,14 @@ class PostController extends Controller
             'title'             => 'required|farsi|min:5|max:80',
             'description'       => 'required|min:5',
             'smalldescription'  => 'required|min:5',
-            'link'              => 'required|active_url',
+            'link'              => 'active_url|min:5|max:255',
             'cat_id'            => 'required|numeric',
             'image'             => 'required|mimes:jpeg,jpg,png'
         ];
 
         $messeages = [
             'cat_id.required' => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.numeric'  => 'از لیست دسته ها یکی را انتخاب کنید.',
             'image.required'  => 'لطفا یک عکس برای پست انتخاب کنید.'
         ];
 
@@ -110,7 +111,7 @@ class PostController extends Controller
             'title'             => 'required|farsi|min:5|max:80',
             'description'       => 'required|min:5',
             'smalldescription'  => 'required|min:5',
-            'link'              => 'active_url',
+            'link'              => 'active_url|min:5|max:255',
             'cat_id'            => 'required|numeric',
             'views'             => 'required|numeric',
             'active'            => 'regex:/[0-1]{1}/',
@@ -118,6 +119,7 @@ class PostController extends Controller
 
         $messeages = [
             'cat_id.required' => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.numeric'  => 'از لیست دسته ها یکی را انتخاب کنید.',
         ];
 
         $validator = Validator::make( $request->all(), $rules, $messeages);

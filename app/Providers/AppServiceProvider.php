@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Validator::extend('farsi', function($attribute,$value,$parameters){
-            return preg_match('/[اآإأبپتثجچحخدذرزژسشصضظطعغفقکگلمنوؤهةۀیئيءـًٌٍَُِِّ\s]+/', $value);
+            return preg_match('/^[اآإأبپتثجچحخدذرزژسشصضظطعغفقکگلمنوؤهةۀیئيءـًٌٍَُِِّ\s]+$/', $value);
         });
 
         Blade::extend(function($value) {

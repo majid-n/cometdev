@@ -353,19 +353,16 @@
 @section('customjs')
     <script type="text/javascript">
         $(document).ready(function() {
-            AjaxSetup();
             LayoutFixer();
             MockUpAnimation();
             NavigationSetup();
-            Scroll();
-            Counter('.navbar-nav .badge');
-            Tooltip();
             Masonry('.masonry','.portfolio-item','.portfolio-item');
-            HoverAnimation();
             PortfolioModalSetup();
-            PostsLikeSetup();
             PortfolioPaginationSetup();
             ContactFormSetup();
+            @if( Sentinel::check() )
+                PostsLikeSetup();
+            @endif
         });
     </script>
 @endsection

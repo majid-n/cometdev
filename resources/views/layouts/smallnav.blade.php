@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if( $user = Sentinel::check() )
-                     @define $avgrates = $user->rates()->avg('score')
+                    @define $avgrates = $user->rates()->avg('score')
                     <!-- user small-->
                     <li class="dropdown userdropdown visible-xs">
 
@@ -45,18 +45,18 @@
                 <li><a class="closeonclick" href="{{ url('/#contact') }}">تماس با ما</a></li>
 
                 <li>
-                    <a class="scroll closeonclick" href="{{ route('post.index') }}">پروژه ها</a>
+                    <a class="closeonclick" href="{{ route('post.index') }}">پروژه ها</a>
                     @if( $totalnewposts > 0 )
                         <span class="badge backYellow shadow hidden-xs transitionfast" data-toggle="tooltipfa" data-placement="bottom" title="پروژه های جدید" data-number="{{ $totalnewposts }}"></span>
                         <span class="badge backYellow shadow visible-xs transitionfast" data-number="{{ $totalnewposts }}"></span>
                     @endif
                 </li>
 
-                <li><a class="scroll closeonclick" href="{{ url('/#services') }}">سرویس ها</a></li>
+                <li><a class="closeonclick" href="{{ url('/#services') }}">سرویس ها</a></li>
 
-                <li><a class="scroll closeonclick" href="{{ url('/#about') }}">درباره ما</a></li>
+                <li><a class="closeonclick" href="{{ url('/#about') }}">درباره ما</a></li>
 
-                <li><a class="scroll closeonclick" href="{{ url('/') }}">صفحه اصلی</a></li>
+                <li><a class="closeonclick" href="{{ route('home') }}">صفحه اصلی</a></li>
 
                 <!-- logo -->
                 <a class="hidden-xs scroll" href="#home"><img class="logo" src='{{ asset('img/logo/comet_fa.png') }}'></a>

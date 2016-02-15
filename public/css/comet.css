@@ -210,16 +210,28 @@
     section.formSection .formContent{
         background-color: rgba(255,255,255,0.2);
         border-radius: 4px;
-        padding-top: 25px;
+        padding-top: 30px;
         padding-bottom: 10px;
         margin-top: 20px;
         margin-bottom: 20px;
     }
     section.formSection div h3 {
         color: #fff;
+        margin-top: 0;
+        margin-bottom: 0;
     }
     section.formSection div h3 i{
         vertical-align: sub;
+    }
+    section.formSection p.formError{
+        color: #fff;
+        margin-top: 2px;
+        font-size: 1em;
+    }
+    section.formSection .form-group span.selectBadge{
+        position: absolute;
+        top: 7px;
+        left: 45px;
     }
     .form-group {
         margin-bottom: 25px;
@@ -245,7 +257,15 @@
         padding: 6px 10px !important;
     }
     select optgroup {
-        padding: 5px;
+        padding: 10px;
+        font-family: FontAwesome, yekan,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        color: #fec503;
+    }
+    select option{
+        color: #333;
+    }
+    select+option{
+        color: #999;
     }
     button[type=submit],
     button[type=reset]{
@@ -1724,7 +1744,8 @@
     }
 
     footer .social a {
-        margin-right: 15px;
+        margin-right: 7.5px;
+        margin-left: 7.5px;
         cursor: pointer;
         color: #333;
     }
@@ -1807,6 +1828,15 @@
             }
     }
     @media(max-width:991px) {
+        /*Forms*/
+            section.formSection{
+                padding: 50px 30px;
+            }
+            section.formSection div h3 {
+                margin-right: 10px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
     }
 /*Media Queries For Small Devices*/
     @media(min-width:768px){
@@ -1920,8 +1950,16 @@
                 font-weight: normal;
             }
         /*Forms*/
-            input[type=file] + label strong {
-                display: block;
+            section.formSection{
+                padding: 50px 0px;
+            }
+            section.formSection .formContent{
+                border-radius: 0;
+            }
+            section.formSection p.formError{
+                color: #fff;
+                margin-top: 2px;
+                font-size: 0.8em;
             }
         /*Contact Section*/
             .QRCode{

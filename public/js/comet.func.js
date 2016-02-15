@@ -1,6 +1,5 @@
 var ModalParent,
     $Masonry,
-    SkillsLoaded = false,
     Page         = 1,
     LastPage     = parseInt($('.LastPage').html());
 
@@ -108,20 +107,18 @@ function NavigationSetup() {
                                 target : '.navbar-fixed-top',
                                 offset : 50
                             });
-                        },
-        CloseOnClick =  function() {
-
-                            $('.closeonclick').click(function() {
-                                $('.navbar-toggle:visible').click();
-                            });
                         };
-
 
     Shrink();
     ScrollSpy();
-    CloseOnClick();
 
     $(window).scroll(function(){ Shrink() });
+}
+// Close Nav on click in small Device
+function CloseOnClick() {
+    $('.closeonclick').click(function() {
+        $('.navbar-toggle:visible').click();
+    });
 }
 // Mockup Animation
 function MockUpAnimation(){
@@ -136,6 +133,38 @@ function MockUpAnimation(){
     Moving();
 
     $(window).scroll(function(){ Moving() });
+}
+// Set element horizintalcenter of window on resize or orientation change usefull for form
+function SetCenter(element){
+
+    var gap             = 30,
+        defaultMargin   = 10,
+        elementHeight   = $(element).outerHeight();
+        stopResoloution = 767,
+        makeCenter      = function() {
+
+                            if( canResize() ) {
+
+                              margin = Math.ceil( ( $(window).height() - elementHeight )/2 ) - gap;
+
+                              if( margin > defaultMargin ) $(element).css({'margin-top': margin,'margin-bottom': margin});
+                              else $(element).css({'margin-top':defaultMargin,'margin-bottom': defaultMargin});
+
+                            }else{
+
+                              $(element).css({'margin-top':defaultMargin,'margin-bottom': defaultMargin});
+
+                            }
+                        },
+        canResize       = function () {
+                            return $(window).height() > elementHeight && $(window).height() > stopResoloution;
+                        };
+
+
+    makeCenter();
+
+    $(window).resize(function(event) { makeCenter() });
+    window.addEventListener("orientationchange", function() { makeCenter() }, false);
 }
 // Responsive Header Padding and backgrounds
 function LayoutFixer(){
@@ -158,6 +187,54 @@ function LayoutFixer(){
 
     $(window).resize(function(event) { FixPaddding() });
     window.addEventListener("orientationchange", function() { FixPaddding() }, false);
+}
+// File Input customization
+function fileInput() {
+
+    $( 'input[type="file"]' ).each( function() {
+
+        var $input   = $( this ),
+            $label   = $( 'input[type="text"].fileInputText' ),
+            labelVal = $label.val();
+
+        $input.on( 'change', function( event ) {
+
+            var fileName = '';
+
+            if( this.files && this.files.length > 1 ) 
+                fileName = ( $(this).data( 'multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else if( event.target.value )
+                fileName = event.target.value.split( '\\' ).pop();
+            if( fileName )
+                $label.val( fileName );
+            else
+                $label.val( labelVal );
+        });
+
+        // Firefox bug fix
+        $input
+        .on( 'focus', function(){ $input.addClass( 'has-focus' ); })
+        .on( 'blur', function(){ $input.removeClass( 'has-focus' ); });
+    });
+}
+// ReadOnly Rating
+function ReadonlyRate(element){
+    $(element).barrating({
+        theme: 'fontawesome-stars',
+        readonly: true
+    });
+    $(element).barrating('set', Math.floor( $(element).data('rate')) );
+}
+// Select input Init
+function SelectInit(){
+    $('select').on('change', function() {
+        
+        number = $(this).find('option:selected').data('title');
+        if( number > 0)
+            $('.selectBadge').html(number);
+        else
+            $('.selectBadge').html('');
+    });
 }
 // Animation Numbers
 function Counter(element){

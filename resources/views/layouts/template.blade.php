@@ -60,41 +60,37 @@
         @yield('customjs')
         
         <!-- Handle Errors -->
-        @if( session()->has('success') )
-            <script type="text/javascript">
-                $(document).ready(function() {
+        <script type="text/javascript">
+            $(document).ready(function() {
+                AjaxSetup();
+                Scroll();
+                Counter('.navbar-nav .badge');
+                Tooltip();
+                CloseOnClick();
+
+                @if( Sentinel::check() )
+                    ReadonlyRate('.navrate');
+                @endif
+
+                @if( session()->has('success') )
                     Notify({
                         icon    : 'success',
                         title   : '',
                         message : '{!! session('success') !!}',
                         type    : 'success'
                     });
-                });
-            </script>
-            <?php session()->forget('success'); ?>
-        @endif
+                    <?php session()->forget('success'); ?>
+                @endif
 
-        @if( session()->has('fail') )
-            <script type="text/javascript">
-                $(document).ready(function() {
+                @if( session()->has('fail') )
                     Notify({
                         title   : '',
                         message : '{!! session('fail') !!}',
                         type    : 'danger'
                     });
-                });
-            </script>
-            <?php session()->forget('fail'); ?>
-        @endif
-
-        <script type="text/javascript">
-           $(function() {
-              $('.navrate').barrating({
-                theme: 'fontawesome-stars',
-                readonly: true
-              });
-              $('.navrate').barrating('set', Math.floor( $('.navrate').data('rate')) );
-           });
+                    <?php session()->forget('fail'); ?>
+                @endif
+            });
         </script>
     </body>
 </html>
