@@ -528,6 +528,13 @@
         -o-box-shadow: 0px 6px 19px -8px rgba(0,0,0,0.5);
         box-shadow: 0px 6px 19px -8px rgba(0,0,0,0.5);
     }
+    .melowshadow{
+        -webkit-box-shadow: 0px 0px 13px -8px rgba(0,0,0,0.5);
+        -moz-box-shadow: 0px 0px 13px -8px rgba(0,0,0,0.5);
+        -ms-box-shadow: 0px 0px 13px -8px rgba(0,0,0,0.5);
+        -o-box-shadow: 0px 0px 13px -8px rgba(0,0,0,0.5);
+        box-shadow: 0px 0px 13px -8px rgba(0,0,0,0.5);
+    }
     .insetShadow{
         -webkit-box-shadow: 0px 6px 19px -8px rgba(0,0,0,0.5) inset;
         -moz-box-shadow: 0px 6px 19px -8px rgba(0,0,0,0.5) inset;
@@ -1426,6 +1433,135 @@
     #cometModal .ribbon{
         left: -5px !important;
     }
+/*User Profile*/
+    .is-hidden{
+        visibility: hidden;
+    }
+    section.usersection {
+        padding: 0;
+    }
+    section div.usercover{
+        position: relative;
+        z-index: -1;
+    }
+    section div.usercover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        -webkit-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        -moz-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        -ms-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        -o-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+    }    
+    section div.usercover img {
+        width: 100%;
+    }
+    section div.userprofilepic {
+        z-index: 1;
+        display: inline-block;
+        position: relative;
+        top: -110px;
+    }
+    section div.userprofilepic h2 {
+        position: absolute;
+        left: -153px;
+        color: #eee;
+        top: 15px;
+        font-size: 2.2em;
+    }
+    section div.userprofilepic p {
+        position: absolute;
+        top: 75px;
+        color: #bbb;
+        left: -160px;
+    }
+    section div.userprofilepic .br-wrapper {
+        position: absolute;
+        top: 77px;
+        right: -129px;
+    }
+    section div.userprofilepic .br-wrapper a {
+      font-family: FontAwesome !important;
+      font-size: 1.2em;
+      -webkit-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      -moz-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      -ms-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      -o-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+      margin-right: 8px;
+    }
+    section div.userprofilepic .usermedal {
+      position: absolute;
+      top: 35px;
+      right: -85px;
+    }
+    section div.userprofilepic .usermedal img {
+        border-right: 1px dashed rgba(102, 102, 102, 0.4);
+        padding-right: 10px;
+    }
+    section div.userprofilepic .usermedal span {
+        font-size: 2.2em;
+        margin-left: 6px;
+        vertical-align: middle;
+    }
+    section.usertimeline .timeline:before {
+        bottom: 60px !important;
+    }
+
+    section.usertimeline .timeline-image{
+        left: 50% !important;
+        width: 60px !important;
+        height: 60px !important;
+        margin-left: -31px !important;
+        border: 4px solid #eee !important;
+    }
+    section.usertimeline .timeline-image i{
+        color: #333;
+        margin-top: 19px;
+    }
+    section.usertimeline .timeline .timeline-heading time {
+        margin-top: 0;
+        color: inherit;
+    }
+    section.usertimeline .timeline .timeline-heading time.subheading {
+        font-size: 1.5em;
+        direction: rtl;
+        font-weight: bold;
+    }
+    section.usertimeline .timeline>li {
+        margin-bottom: 10px !important;
+    }
+    section.usertimeline li .timeline-panel {
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: 20px !important;
+        background-color: #f8f8f8 !important;
+    }
+    section.usertimeline li.timeline-inverted .timeline-panel {
+        left: -40px !important;
+    }
+    section.usertimeline li .timeline-panel {
+        right: -40px !important;
+    }
+    section.usertimeline li .timeline-panel i.fa-caret-left,
+    section.usertimeline li .timeline-panel i.fa-caret-right{
+        position: absolute;
+        top: 13px;
+        color: rgb(248, 248, 248);
+    }
+    section.usertimeline li .timeline-panel i.fa-caret-right{
+        right: -15px;
+    }
+    section.usertimeline li .timeline-panel i.fa-caret-left{
+        left: -15px;
+    }
+
+
+
 /*Services Section*/
     .timeline {
         position: relative;
@@ -2010,7 +2146,6 @@
             .navbar-default .navbar-nav .dropdown span.caret{
                 margin-right: 3px;
             }
-
         /*Error Modal*/
             #ErrModal .errtxt{
                 font-size: 0.8em;
@@ -2040,6 +2175,9 @@
                 padding: 0 100px 20px 20px;
                 text-align: right;
             }
+            .timeline .timeline-heading h4.subheading {
+                font-weight: normal;
+            }
         /*Portfolio Section*/
             #portfolio .portfolio-item .portfolio-caption h4{
                 font-weight: normal;
@@ -2053,11 +2191,7 @@
             #cometModal .modal-footer div p,
             #cometModal .modal-footer div time{
                 font-weight: normal;
-            }
-        /*Service Section*/
-            .timeline .timeline-heading h4.subheading {
-                font-weight: normal;
-            }
+            }  
         /*ribbon*/
             .ribbon span{
                 font-weight: normal;

@@ -1,41 +1,243 @@
 @extends('layouts.template')
 
+@section('seo')
+	<meta name="description" content="{{ $user->resume->bio }}"/>
+	<meta name="title" content="{{ $user->fullName() }}"/>
+	<meta name="keywords" content="{{ str_slug($user->resume->bio, ",") }}"/>
+
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="{{ '@'.config('app.twitter') }}">
+	<meta name="twitter:title" content="{{ $user->fullName() }}">
+	<meta name="twitter:description" content="{{ $user->resume->bio }}">
+	<meta name="twitter:creator" content="{{ '@'.config('app.twitter') }}">
+	<meta name="twitter:image:src" content="{{ asset('images/profile/'.$user->photo) }}">
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="{{ $user->fullName() }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{{ url()->current() }}" />
+	<meta property="og:image" content="{{ asset('images/profile/'.$user->photo) }}" />
+	<meta property="og:description" content="{{ $user->resume->bio }}" />
+	<meta property="og:site_name" content="کامت" />
+@stop
+
+@section('css')
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/timeline.css') }}">
+@stop
+
+
+@section('nav')
+	@include('layouts.smallnav')
+@stop
+
 @section('content')
 
-	<div>
-			
-		<img src="{{ asset('images/profile/'.$user->photo) }}">
-		<img src="{{ asset('images/cover/'.$user->cover) }}">
-		<h1>{{ $user->first_name.' '.$user->last_name }}</h1>
-		<p>{{ $user->email }}</p>
-		<p>{{ $user->resume->jobtitle }}</p>
-		<p>{{ $user->resume->bio }}</p>
-		<p>{{ $user->resume->duty }}</p>
-		<p>total likes : {{ $user->likes()->count() }}</p>
-		<p>total comments : {{ $user->comments()->count() }}</p>
-		<p>total profile comments : {{ $user->profileComments()->count() }}</p>
-		<p>profile avg rate : {{ $user->profileRates()->avg('score') }}</p>
-		<p>total rates : {{ $user->rates()->count() }}</p>
-		<p>Role : {{ $user->roles()->first()->name }}</p>
+	<section class="container-fluid usersection" itemscope itemtype="http://schema.org/Person">
+		<div class="row text-center">
+			<div class="usercover">
+				<img class="img-responsive" src="{{ asset('images/cover/'.$user->cover) }}" alt="{{ $user->fullName() }} Cover">
+			</div>
+			<div class="userprofilepic">
+				<img class="img-circle img-thumbnail img-responsive shadow" itemprop="image" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
+				<h2 class="text-shadow" itemprop="name">{{ $user->fullName() }}</h2>
+				<p class="text-shadow" itemprop="jobtitle"><i class="fa fa-briefcase yellow"></i>{{ $user->resume->jobtitle }}</p>
+				<select class="userrate" data-rate="{{ $user->profileRates()->avg('score') }}">
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+				    <option value="4">4</option>
+				    <option value="5">5</option>
+				</select>
+				<div class="usermedal">
+					<img src="{{ asset('images/stuff/medal.png') }}" alt="">
+					<span class="yellow text-shadow">{{ $user->rates()->avg('score') }}</span>
+				</div>
+			</div>
+		</div>
+	</section>
 
-		@foreach( $comments as $comment )
+	<section class="usertimeline">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-lg-12 text-center">
+	                <h2 class="section-heading specialHeading">خط زمانی</h2>
+	                <h3 class="section-subheading text-muted">تاریخچه <b class="cyan">تحصیلات</b> و <b class="yellow">تجربیات</b></h3>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <ul class="timeline">
+	                    <li>
+	                        <div class="timeline-image backYellow">
+	                            <i class="fa fa-lg fa-briefcase"></i>
+	                        </div> 
+	                        <div class="timeline-panel melowshadow">
+	                        	<i class="fa fa-caret-right fa-2x"></i>
+	                            <div class="timeline-heading">
+	                            	<time class="subheading cyan" datetime="2011-01-12">90 - 93</time>
+	                            </div>
+	                            <div class="timeline-body">
+	                                <p class="text-muted">گروه <b class="yellow">کامت</b> با طراحی هوشمندانه، ساخت بانک های اطلاعاتی بهینه و بهره مندی از آخرین نسخه <b class="lato cyan">PHP</b> و فریمورک هایی چون <b class="lato cyan">Laravel</b>، ساخت هسته ای قدرتمند، سریع و ایمن را با توجه به استانداردهای روز دنیا برای شما فراهم می نماید.</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li class="timeline-inverted">
+	                        <div class="timeline-image backCyan">
+	                            <i class="fa fa-lg fa-book"></i>
+	                        </div>
+	                        <div class="timeline-panel melowshadow">
+	                        	<i class="fa fa-caret-left fa-2x"></i>
+	                            <div class="timeline-heading">
+	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
+	                            </div>
+	                            <div class="timeline-body">
+	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li>
+	                        <div class="timeline-image backYellow">
+	                            <i class="fa fa-lg fa-briefcase"></i>
+	                        </div>
+	                        <div class="timeline-panel melowshadow">
+	                        	<i class="fa fa-caret-right fa-2x"></i>
+	                            <div class="timeline-heading">
+	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
+	                            </div>
+	                            <div class="timeline-body">
+	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li class="timeline-inverted">
+	                        <div class="timeline-image backCyan">
+	                            <i class="fa fa-lg fa-book"></i>
+	                        </div>
+	                        <div class="timeline-panel melowshadow">
+	                        	<i class="fa fa-caret-left fa-2x"></i>
+	                            <div class="timeline-heading">
+	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
+	                            </div>
+	                            <div class="timeline-body">
+	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li>
+	                        <div class="timeline-image backYellow">
+	                            <i class="fa fa-lg fa-briefcase"></i>
+	                        </div>
+	                        <div class="timeline-panel melowshadow">
+	                        	<i class="fa fa-caret-right fa-2x"></i>
+	                            <div class="timeline-heading">
+	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
+	                            </div>
+	                            <div class="timeline-body">
+	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li>
+	                        <div class="timeline-image backYellow">
+	                            <i class="fa fa-lg fa-briefcase"></i>
+	                        </div>
+	                        <div class="timeline-panel melowshadow">
+	                        	<i class="fa fa-caret-right fa-2x"></i>
+	                            <div class="timeline-heading">
+	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
+	                            </div>
+	                            <div class="timeline-body">
+	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+	                            </div>
+	                        </div>
+	                    </li>
+	                    <li>
+	                        <div class="timeline-image">
+	                            <img src="{{ asset('img/icons/5.jpg') }}" class="img-circle img-responsive">
+	                        </div>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</section>
 
-			<img src="{{ asset('images/profile/'.$comment->fromUser->photo) }}" width="50">
-			<h6>{{ $comment->fromUser->first_name." ".$comment->fromUser->last_name }}</h6>
-			<p>{{ $comment->text }}</p>
+<div>
+	<h1>{{ $user->first_name.' '.$user->last_name }}</h1>
+	<p>{{ $user->email }}</p>
+	<p>{{ $user->resume->jobtitle }}</p>
+	<p>{{ $user->resume->bio }}</p>
+	<p>{{ $user->resume->duty }}</p>
+	<p>total likes : {{ $user->likes()->count() }}</p>
+	<p>total comments : {{ $user->comments()->count() }}</p>
+	<p>total profile comments : {{ $user->profileComments()->count() }}</p>
+	<p>profile avg rate : {{ $user->profileRates()->avg('score') }}</p>
+	<p>total rates : {{ $user->rates()->count() }}</p>
+	<p>Role : {{ $user->roles()->first()->name }}</p>
 
-		@endforeach
+	@foreach( $comments as $comment )
 
-		{!! Form::open(array('method' => 'post', 'route' => array('admin.user.destroy', $user->id))) !!}
-		    
-		    {!! method_field('DELETE') !!}
-		    
-		    {!! Form::button('delete', array('type' => 'submit')) !!}
-		{!! Form::close() !!}
+		<img src="{{ asset('images/profile/'.$comment->fromUser->photo) }}" width="50">
+		<h6>{{ $comment->fromUser->first_name." ".$comment->fromUser->last_name }}</h6>
+		<p>{{ $comment->text }}</p>
 
-	</div>
+	@endforeach
 
-	<br>
-	<br>
+	{!! Form::open(array('method' => 'post', 'route' => array('admin.user.destroy', $user->id))) !!}
+	    
+	    {!! method_field('DELETE') !!}
+	    
+	    {!! Form::button('delete', array('type' => 'submit')) !!}
+	{!! Form::close() !!}
 
+</div>
+
+@stop
+
+@section('customjs')
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('select.userrate').barrating({
+			    theme: 'fontawesome-stars'
+			});
+			$('select.userrate').barrating('set', Math.floor( $('selcet.userrate').data('rate')) );
+
+			var timelineBlocks = $('.timeline li'),
+				offset = 0.8;
+
+			//hide timeline blocks which are outside the viewport
+			hideBlocks(timelineBlocks, offset);
+
+			//on scolling, show/animate timeline blocks when enter the viewport
+			$(window).on('scroll', function(){
+				(!window.requestAnimationFrame) 
+					? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+					: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+			});
+
+			function hideBlocks(blocks, offset) {
+				blocks.each(function(){
+					( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.timeline-image, .timeline-panel').addClass('is-hidden');
+				});
+			}
+
+			function showBlocks(blocks, offset) {
+				blocks.each(function(i,el){
+
+					if( $(window).width() > 767 ) {
+						if( $(el).hasClass('timeline-inverted') ) addClass = 'zoomInRight';
+						else addClass = 'zoomInLeft';
+					}else{
+						addClass = 'bounceInLeft';
+					}
+
+					if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.timeline-image').hasClass('is-hidden') ) {
+						$(this).find('.timeline-image').removeClass('is-hidden').addClass('animated bounceIn');
+						$(this).find('.timeline-panel').removeClass('is-hidden').addClass('animated '+addClass);
+					} 
+				});
+			}
+		});
+	</script>
 @stop

@@ -147,6 +147,7 @@ class DatabaseSeeder extends Seeder
             'first_name'    => 'مجید',
             'last_name'     => 'نورعلی',
             'photo'         => 'majid.jpg'
+            'cover'         => 'majid.jpg'
         ]);
         $this->command->info('Users seeded!');
 

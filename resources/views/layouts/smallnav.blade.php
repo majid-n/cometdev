@@ -76,7 +76,7 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <span class="navratenum transitionfast">{{ $user->rates()->avg('score') }}</span>
+                            <span class="navratenum transitionfast">{{ $avgrates }}</span>
                         @endif
                         <!-- Toggle -->
                         <a data-toggle="dropdown" class="transitionfast dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
