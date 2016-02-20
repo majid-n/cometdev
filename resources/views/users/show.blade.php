@@ -22,11 +22,6 @@
 	<meta property="og:site_name" content="کامت" />
 @stop
 
-@section('css')
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/timeline.css') }}">
-@stop
-
-
 @section('nav')
 	@include('layouts.smallnav')
 @stop
@@ -74,10 +69,8 @@
 	                        </div> 
 	                        <div class="timeline-panel melowshadow">
 	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-heading">
-	                            	<time class="subheading cyan" datetime="2011-01-12">90 - 93</time>
-	                            </div>
 	                            <div class="timeline-body">
+	                            	<time class="subheading cyan" datetime="2011-01-12">90 - 93</time>
 	                                <p class="text-muted">گروه <b class="yellow">کامت</b> با طراحی هوشمندانه، ساخت بانک های اطلاعاتی بهینه و بهره مندی از آخرین نسخه <b class="lato cyan">PHP</b> و فریمورک هایی چون <b class="lato cyan">Laravel</b>، ساخت هسته ای قدرتمند، سریع و ایمن را با توجه به استانداردهای روز دنیا برای شما فراهم می نماید.</p>
 	                            </div>
 	                        </div>
@@ -87,10 +80,8 @@
 	                            <i class="fa fa-lg fa-book"></i>
 	                        </div>
 	                        <div class="timeline-panel melowshadow">
-	                        	<i class="fa fa-caret-left fa-2x"></i>
-	                            <div class="timeline-heading">
-	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
-	                            </div>
+	                        	<i class="fa fa-caret-left fa-2x hidden-xs"></i>
+	                        	<i class="fa fa-caret-right fa-2x visible-xs"></i>
 	                            <div class="timeline-body">
 	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
 	                            </div>
@@ -102,9 +93,6 @@
 	                        </div>
 	                        <div class="timeline-panel melowshadow">
 	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-heading">
-	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
-	                            </div>
 	                            <div class="timeline-body">
 	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
 	                            </div>
@@ -115,10 +103,8 @@
 	                            <i class="fa fa-lg fa-book"></i>
 	                        </div>
 	                        <div class="timeline-panel melowshadow">
-	                        	<i class="fa fa-caret-left fa-2x"></i>
-	                            <div class="timeline-heading">
-	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
-	                            </div>
+	                        	<i class="fa fa-caret-left fa-2x hidden-xs"></i>
+	                        	<i class="fa fa-caret-right fa-2x visible-xs"></i>
 	                            <div class="timeline-body">
 	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
 	                            </div>
@@ -130,9 +116,6 @@
 	                        </div>
 	                        <div class="timeline-panel melowshadow">
 	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-heading">
-	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
-	                            </div>
 	                            <div class="timeline-body">
 	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
 	                            </div>
@@ -144,9 +127,6 @@
 	                        </div>
 	                        <div class="timeline-panel melowshadow">
 	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-heading">
-	                                <time class="subheading cyan" datetime="2011-01-12">85 - 90</time>
-	                            </div>
 	                            <div class="timeline-body">
 	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
 	                            </div>

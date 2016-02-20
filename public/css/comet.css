@@ -196,6 +196,9 @@
     .modal{
         background-color: rgba(254, 197, 3, 0.4) !important;
     }
+    .is-hidden{
+        visibility: hidden;
+    }
 /*Forms*/
     section.formSection{
         background-color: #888;
@@ -468,6 +471,73 @@
     }
     .br-theme-fontawesome-stars .br-widget .br-current-rating {
       display: none;
+    }
+/*Timeline*/
+    .timeline {
+        position: relative;
+        padding: 0;
+        list-style: none;
+    }
+    .timeline:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        margin-left: -1.5px;
+    }
+    .timeline>li {
+        position: relative;
+        min-height: 100px;
+    }
+    .timeline>li:before,
+    .timeline>li:after {
+        content: " ";
+        display: table;
+    }
+    .timeline>li:after {
+        clear: both;
+    }
+    .timeline>li:last-child {
+        margin-bottom: 0;
+    }
+    .timeline>li .timeline-image {
+        z-index: 100;
+        position: absolute;
+        left: 50%;
+        text-align: center;
+    }
+    .timeline>li .timeline-panel {
+        float: left;
+        position: relative;
+        width: 43%;
+        text-align: right;
+    }
+    .timeline>li .timeline-panel:before {
+        right: auto;
+        left: -15px;
+        border-right-width: 15px;
+        border-left-width: 0;
+    }
+    .timeline>li .timeline-panel:after {
+        right: auto;
+        left: -14px;
+        border-right-width: 14px;
+        border-left-width: 0;
+    }
+    .timeline>li.timeline-inverted>.timeline-panel {
+        float: right;
+        text-align: left;
+    }
+    .timeline>li.timeline-inverted>.timeline-panel:before {
+        right: auto;
+        left: -15px;
+        border-right-width: 15px;
+        border-left-width: 0;
+    }
+    .timeline>li.timeline-inverted>.timeline-panel:after {
+        right: auto;
+        left: -14px;
+        border-right-width: 14px;
+        border-left-width: 0;
     }
 /*Appearance*/
     .backCyan{
@@ -1433,236 +1503,44 @@
     #cometModal .ribbon{
         left: -5px !important;
     }
-/*User Profile*/
-    .is-hidden{
-        visibility: hidden;
-    }
-    section.usersection {
-        padding: 0;
-    }
-    section div.usercover{
-        position: relative;
-        z-index: -1;
-    }
-    section div.usercover::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        -webkit-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
-        -moz-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
-        -ms-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
-        -o-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
-        box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
-    }    
-    section div.usercover img {
-        width: 100%;
-    }
-    section div.userprofilepic {
-        z-index: 1;
-        display: inline-block;
-        position: relative;
-        top: -110px;
-    }
-    section div.userprofilepic h2 {
-        position: absolute;
-        left: -153px;
-        color: #eee;
-        top: 15px;
-        font-size: 2.2em;
-    }
-    section div.userprofilepic p {
-        position: absolute;
-        top: 75px;
-        color: #bbb;
-        left: -160px;
-    }
-    section div.userprofilepic .br-wrapper {
-        position: absolute;
-        top: 77px;
-        right: -129px;
-    }
-    section div.userprofilepic .br-wrapper a {
-      font-family: FontAwesome !important;
-      font-size: 1.2em;
-      -webkit-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
-      -moz-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
-      -ms-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
-      -o-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
-      text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-      margin-right: 8px;
-    }
-    section div.userprofilepic .usermedal {
-      position: absolute;
-      top: 35px;
-      right: -85px;
-    }
-    section div.userprofilepic .usermedal img {
-        border-right: 1px dashed rgba(102, 102, 102, 0.4);
-        padding-right: 10px;
-    }
-    section div.userprofilepic .usermedal span {
-        font-size: 2.2em;
-        margin-left: 6px;
-        vertical-align: middle;
-    }
-    section.usertimeline .timeline:before {
-        bottom: 60px !important;
-    }
-
-    section.usertimeline .timeline-image{
-        left: 50% !important;
-        width: 60px !important;
-        height: 60px !important;
-        margin-left: -31px !important;
-        border: 4px solid #eee !important;
-    }
-    section.usertimeline .timeline-image i{
-        color: #333;
-        margin-top: 19px;
-    }
-    section.usertimeline .timeline .timeline-heading time {
-        margin-top: 0;
-        color: inherit;
-    }
-    section.usertimeline .timeline .timeline-heading time.subheading {
-        font-size: 1.5em;
-        direction: rtl;
-        font-weight: bold;
-    }
-    section.usertimeline .timeline>li {
-        margin-bottom: 10px !important;
-    }
-    section.usertimeline li .timeline-panel {
-        border: 1px solid #eee;
-        border-radius: 4px;
-        padding: 20px !important;
-        background-color: #f8f8f8 !important;
-    }
-    section.usertimeline li.timeline-inverted .timeline-panel {
-        left: -40px !important;
-    }
-    section.usertimeline li .timeline-panel {
-        right: -40px !important;
-    }
-    section.usertimeline li .timeline-panel i.fa-caret-left,
-    section.usertimeline li .timeline-panel i.fa-caret-right{
-        position: absolute;
-        top: 13px;
-        color: rgb(248, 248, 248);
-    }
-    section.usertimeline li .timeline-panel i.fa-caret-right{
-        right: -15px;
-    }
-    section.usertimeline li .timeline-panel i.fa-caret-left{
-        left: -15px;
-    }
-
-
-
 /*Services Section*/
-    .timeline {
-        position: relative;
-        padding: 0;
-        list-style: none;
-    }
-    .timeline:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 40px;
+    section.servicesection .timeline:before {
         width: 2px;
-        margin-left: -1.5px;
+        top: 0;
+        bottom: 30px;
         background-color: #eee;
     }
-    .timeline>li {
-        position: relative;
+    section.servicesection .timeline>li {
         margin-bottom: 50px;
-        min-height: 50px;
+    }    
+    section.servicesection .timeline>li .timeline-panel {
+        padding: 0 20px 20px 100px;
     }
-    .timeline>li:before,
-    .timeline>li:after {
-        content: " ";
-        display: table;
+    section.servicesection .timeline>li.timeline-inverted>.timeline-panel {
+        padding: 0 100px 20px 20px;
     }
-    .timeline>li:after {
-        clear: both;
-    }
-    .timeline>li .timeline-panel {
-        float: right;
-        position: relative;
-        width: 100%;
-        padding: 0 20px 0 100px;
-        text-align: left;
-    }
-    .timeline>li .timeline-panel:before {
-        right: auto;
-        left: -15px;
-        border-right-width: 15px;
-        border-left-width: 0;
-    }
-    .timeline>li .timeline-panel:after {
-        right: auto;
-        left: -14px;
-        border-right-width: 14px;
-        border-left-width: 0;
-    }
-    .timeline>li .timeline-image {
-        z-index: 100;
-        position: absolute;
-        left: 0;
-        width: 80px;
-        height: 80px;
-        margin-left: 0;
+    section.servicesection .timeline>li .timeline-image {
+        width: 100px;
+        height: 100px;
+        margin-left: -52px;
         border: 7px solid #eee;
         border-radius: 100%;
-        text-align: center;
-        color: #fff;
         background-color: #fed136;
     }
-    .timeline>li .timeline-image h4 {
-        margin-top: 12px;
-        font-size: 10px;
-        line-height: 14px;
-    }
-    .timeline>li.timeline-inverted>.timeline-panel {
-        float: right;
-        padding: 0 20px 0 100px;
-        text-align: left;
-    }
-    .timeline>li.timeline-inverted>.timeline-panel:before {
-        right: auto;
-        left: -15px;
-        border-right-width: 15px;
-        border-left-width: 0;
-    }
-    .timeline>li.timeline-inverted>.timeline-panel:after {
-        right: auto;
-        left: -14px;
-        border-right-width: 14px;
-        border-left-width: 0;
-    }
-    .timeline>li:last-child {
-        margin-bottom: 0;
-    }
-    .timeline .timeline-heading h4 {
-        margin-top: 0;
-        color: inherit;
-    }
-    .timeline .timeline-heading img {
+    section.servicesection .timeline .timeline-heading img {
         width: 25px;
         margin: 0 0 15px 3px;
     }
-    .timeline .timeline-heading h4.subheading {
+    section.servicesection .timeline .timeline-heading h4 {
+        margin-top: 0;
+        color: inherit;
+    }
+    section.servicesection .timeline .timeline-heading h4.subheading {
         font-size: 1.5em;
         direction: rtl;
         font-weight: bold;
     }
-    .timeline .timeline-body>p,
-    .timeline .timeline-body>ul {
+    section.servicesection .timeline .timeline-body>p{
         margin-bottom: 0;
         direction: rtl;
         text-align: justify;
@@ -1799,63 +1677,125 @@
         text-shadow: 0 0 5px #333;
         font-size: 1.5em;
     }
-/*Team Section*/
-    .team-admin {
-        margin-bottom: 50px;
-        text-align: center;
+/*User Profile*/
+    section.usersection {
+        padding: 0;
     }
-    .team-admin img.img-circle {
-        margin: 0 auto;
-        border: 7px solid #eee;
+    section div.usercover{
+        position: relative;
+        z-index: -1;
     }
-    .team-admin h4 {
-        margin-top: 25px;
-        margin-bottom: 0;
+    section div.usercover:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        -webkit-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        -moz-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        -ms-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        -o-box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+        box-shadow: inset 0px -8px 50px 0px rgba(0,0,0,1);
+    }    
+    section div.usercover img {
+        width: 100%;
+    }
+    section div.userprofilepic {
+        z-index: 1;
+        display: inline-block;
+        position: relative;
+        top: -110px;
+    }
+    section div.userprofilepic h2 {
+        position: absolute;
+        left: -153px;
+        color: #eee;
+        top: 15px;
+        font-size: 2.2em;
+    }
+    section div.userprofilepic p {
+        position: absolute;
+        top: 75px;
+        color: #bbb;
+        left: -160px;
+    }
+    section div.userprofilepic .br-wrapper {
+        position: absolute;
+        top: 77px;
+        right: -129px;
+    }
+    section div.userprofilepic .br-wrapper a {
+      font-family: FontAwesome !important;
+      font-size: 1.2em;
+      -webkit-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      -moz-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      -ms-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      -o-text-shadow:0px 0px 5px rgba(0, 0, 0, 0.4);
+      text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+      margin-right: 8px;
+    }
+    section div.userprofilepic .usermedal {
+      position: absolute;
+      top: 35px;
+      right: -85px;
+    }
+    section div.userprofilepic .usermedal img {
+        border-right: 1px dashed rgba(102, 102, 102, 0.4);
+        padding-right: 10px;
+    }
+    section div.userprofilepic .usermedal span {
+        font-size: 2.2em;
+        margin-left: 6px;
+        vertical-align: middle;
+    }
+    /*timeline*/
+    section.usertimeline .timeline:before {
+        width: 2px;
+        top: 0;
+        bottom: 60px;
+        background-color: #eee;
+    }
+    section.usertimeline .timeline-image{
+        width: 60px;
+        height: 60px;
+        margin-left: -31px;
+        border: 4px solid #eee;
+        border-radius: 50%;
+    }
+    section.usertimeline .timeline-image i{
+        color: #333;
+        margin-top: 19px;
+    }
+    section.usertimeline .timeline .timeline-body time {
+        margin-top: 0;
+        color: inherit;
+    }
+    section.usertimeline .timeline .timeline-body time.subheading {
+        font-size: 1.5em;
+        direction: rtl;
         font-weight: bold;
     }
-    .team-admin p {
-        margin-top: 0;
+    section.usertimeline .timeline>li {
+        margin-bottom: 10px;
     }
-    .team-admin ul{
-        margin-left: 0;
-        margin-right: 0;
+    section.usertimeline li .timeline-body {
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: 20px;
+        background-color: #f8f8f8;
     }
-    .team-admin ul li{
-        padding-right: 2px;
-        padding-left: 2px;
+    section.usertimeline li .timeline-panel i.fa-caret-left,
+    section.usertimeline li .timeline-panel i.fa-caret-right{
+        position: absolute;
+        top: 13px;
+        color: #f8f8f8;
     }
-    .team-admin div.row{
-        margin-top: 25px;
-        border-top: 1px dashed #eee;
-        padding-top: 25px;
+    section.usertimeline li .timeline-panel i.fa-caret-right{
+        right: -15px;
     }
-    .team-admin div.row div.DounatCharts{
-        width:70px;
-        max-height: auto;
-        display: inline-block;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    .team-admin div.row div.DounatCharts p{
-        margin-bottom: 0;
-    }
-    .team-admin div.row div.DounatCharts canvas{
-        width: 70px;
-        height: 70px;
-    }
-    .team-admin div.row{
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-    .team-member{
-        margin-top: 25px;
-        margin-bottom: 25px;
-        float: none;
-        display: inline-block;
-    }
-    .team-member img.img-circle{
-        border:7px solid #eee;
-        margin: 0 auto;
+    section.usertimeline li .timeline-panel i.fa-caret-left{
+        left: -15px;
     }
 /*Footer*/
     footer {
@@ -1894,8 +1834,15 @@
     footer .social a i.fa-instagram:hover {
         color: #8A5A4E;
     }
+
+
 /*Media Queries For Large Devices*/
     @media(min-width:1200px) {
+        /*Header*/
+            header .intro-text .intro-heading {
+                font-size: 3em;
+                line-height: 2.5em;
+            } 
         /*Navigation*/
             .navbar-default .nav li a,
             .navbar-default .nav li a:focus {
@@ -1913,55 +1860,17 @@
                 width: 75px !important;
                 margin-top: 11px !important;
                 margin-left: 20px !important;
-            }
-        /*Services Section*/
-            .timeline>li {
-                min-height: 170px;
-            }
-            .timeline>li .timeline-panel {
-                padding: 0 20px 20px 100px;
-            }
-            .timeline>li .timeline-image {
-                width: 170px;
-                height: 170px;
-                margin-left: -85px;
-            }
-            .timeline>li .timeline-image h4 {
-                margin-top: 40px;
-            }
-            .timeline>li.timeline-inverted>.timeline-panel {
-                padding: 0 100px 20px 20px;
-            }
-        /*Header*/
-            header .intro-text .intro-heading {
-                font-size: 3em;
-                line-height: 2.5em;
-            }      
+            }     
     }
     @media(max-width:1199px){
+        /*Services Section*/
+            section.servicesection .timeline>li.timeline-inverted>.timeline-panel,
+            section.servicesection .timeline>li .timeline-panel {
+                padding: 0 20px 20px;
+            }
     }
 /*Media Queries For Medium Devices*/
     @media(min-width:992px) {
-        /*Services Section*/
-            .timeline>li {
-                min-height: 150px;
-            }
-            .timeline>li .timeline-panel {
-                padding: 0 20px 20px;
-            }
-            .timeline>li .timeline-image {
-                width: 150px;
-                height: 150px;
-                margin-left: -75px;
-            }
-            .timeline>li .timeline-image h4 {
-                margin-top: 30px;
-                font-size: 18px;
-                line-height: 26px;
-            }
-            .timeline>li.timeline-inverted>.timeline-panel {
-                padding: 0 20px 20px;
-            }
     }
     @media(max-width:991px) {
         /*Forms*/
@@ -1972,6 +1881,18 @@
                 margin-right: 10px;
                 margin-bottom: 10px;
                 margin-top: 10px;
+            }
+        /*Services Section*/
+            section.servicesection .timeline>li .timeline-panel{
+                padding: 0 20px 20px 30px;
+            }
+            section.servicesection .timeline>li.timeline-inverted>.timeline-panel {
+                padding: 0 30px 20px 20px;
+            }
+            section.servicesection .timeline>li .timeline-image {
+                width: 80px;
+                height: 80px;
+                margin-left: -42px;
             }
     }
 /*Media Queries For Small Devices*/
@@ -2049,41 +1970,31 @@
             #portfolio .portfolio-item {
                 margin: 0 0 30px;
             }
-        /*Services Section*/
-            .timeline:before {
-                left: 50%;
-            }
-            .timeline>li {
-                margin-bottom: 100px;
-                min-height: 100px;
-            }
-            .timeline>li .timeline-panel {
-                float: left;
-                width: 41%;
-                padding: 0 20px 20px 30px;
-                text-align: right;
-            }
-            .timeline>li .timeline-image {
-                left: 50%;
-                width: 100px;
-                height: 100px;
-                margin-left: -50px;
-            }
-            .timeline>li .timeline-image h4 {
-                margin-top: 16px;
-                font-size: 13px;
-                line-height: 18px;
-            }
-            .timeline>li.timeline-inverted>.timeline-panel {
-                float: right;
-                padding: 0 30px 20px 20px;
-                text-align: left;
-            }
     }
     @media(max-width:767px){
         /*CSS reset*/
             p,.btn{
                 font-weight: normal;
+            }
+            h1,h2,h3,h4,h5,h6{
+                font-weight: normal;
+            }
+        /*Timeline*/
+            .timeline:before {
+                left: auto;
+            }
+            .timeline>li .timeline-image {
+                right: 0;
+                left: auto;
+            }
+            .timeline>li .timeline-panel {
+                float: right;
+                width: 100%;
+                text-align: right;
+            }
+            .timeline>li.timeline-inverted>.timeline-panel {
+                float: right;
+                text-align: right;
             }
         /*Forms*/
             section.formSection{
@@ -2097,15 +2008,19 @@
                 margin-top: 2px;
                 font-size: 0.8em;
             }
-        /*Contact Section*/
-            .QRCode{
-                border: none;
-                padding-top: 60px;
-                margin-top: 60px;
-                border-top: 1px dashed rgba(136,136,136,0.3);
+        /*ribbon*/
+            .ribbon span{
+                font-weight: normal;
             }
-            section#contact{
-                padding-bottom: 25px;
+        /*Error Modal*/
+            #ErrModal .errtxt{
+                font-size: 0.8em;
+                padding-right: 25px;
+            }
+            #ErrModal .errtxt span{
+                position: absolute;
+                right: 0px;
+                top: 5px;
             }
         /*Navigation*/
             .navbar-default {
@@ -2146,37 +2061,36 @@
             .navbar-default .navbar-nav .dropdown span.caret{
                 margin-right: 3px;
             }
-        /*Error Modal*/
-            #ErrModal .errtxt{
-                font-size: 0.8em;
-                padding-right: 25px;
-            }
-            #ErrModal .errtxt span{
-                position: absolute;
-                right: 0px;
-                top: 5px;
-            }
-        /*Services Section*/
-            .timeline:before {
-                left: auto;
-                right: 40px;
-            }
-            .timeline>li .timeline-panel {
-                float: right;
-                padding: 0 100px 20px 20px;
-                text-align: right;
-            }
-            .timeline>li .timeline-image {
-                right: 0;
-                left: auto;
-            }
-            .timeline>li.timeline-inverted>.timeline-panel {
-                float: right;
-                padding: 0 100px 20px 20px;
-                text-align: right;
-            }
-            .timeline .timeline-heading h4.subheading {
+        /*Sections Config*/
+            section h2.section-heading {
                 font-weight: normal;
+            }         
+        /*Services Section*/
+            section.servicesection .timeline:before {
+                bottom: 50px;
+                right: 29px;
+            }
+            section.servicesection .timeline>li .timeline-image {
+                width: 60px;
+                height: 60px;
+                margin-left: 0px;
+                border: 5px solid #eee;
+            }
+            section.servicesection .timeline>li .timeline-panel,
+            section.servicesection .timeline>li.timeline-inverted>.timeline-panel{
+                padding: 0 75px 20px 20px;
+            }
+        /*User Profile*/
+            section.usertimeline .timeline:before {
+                bottom: 50px;
+                right: 29px;
+            }
+            section.usertimeline li .timeline-panel i.fa-caret-right{
+                right: 66px;
+            }
+            section.usertimeline .timeline>li .timeline-panel,
+            section.usertimeline .timeline>li.timeline-inverted>.timeline-panel{
+                padding-right: 80px;
             }
         /*Portfolio Section*/
             #portfolio .portfolio-item .portfolio-caption h4{
@@ -2192,28 +2106,16 @@
             #cometModal .modal-footer div time{
                 font-weight: normal;
             }  
-        /*ribbon*/
-            .ribbon span{
-                font-weight: normal;
+        /*Contact Section*/
+            .QRCode{
+                border: none;
+                padding-top: 60px;
+                margin-top: 60px;
+                border-top: 1px dashed rgba(136,136,136,0.3);
             }
-        /*Sections Config*/
-            section h2.section-heading {
-                font-weight: normal;
-            }
-        /*Team Section*/
-            .team-admin h4 {
-                font-weight: normal;
-            }
-            .team-admin div.row{
-                margin-left: 10%;
-                margin-right: 10%;
-            }
-            .team-member{
-                margin-top: 15px;
-                margin-bottom: 15px;
-                float: left;
-                display: block;
-            }
+            section#contact{
+                padding-bottom: 25px;
+            }   
         /*Footer*/
             footer .copyright{
                 text-align: center;
@@ -2245,7 +2147,7 @@
                 font-size: 1em;
             }
         /*Service Section*/
-            .timeline .timeline-heading h4.subheading {
+            section.servicesection .timeline .timeline-heading h4.subheading {
                 font-size: 1em;
             }
         /*Portfolio Section*/
@@ -2287,7 +2189,7 @@
                 margin-left: 0;
                 margin-right: 0;
             }
-        /*ContactSection*/
+        /*Contact Section*/
             .QRCode img.radius5 {
                 width: 200px;
             }
