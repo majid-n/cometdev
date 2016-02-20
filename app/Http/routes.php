@@ -25,7 +25,7 @@ Route::get('post/{post}', 'PostController@show')->name('post.show');
 Route::post('support', 'SupportController@store')->name('support.store');
 
 # Posts Routes for all
-Route::get('profile/{user}', 'user\UserController@show')->name('profile.show');
+Route::get('profile/{user}', 'UserController@show')->name('profile.show');
 
 /*
 |--------------------------------------------------------------------------

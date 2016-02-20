@@ -13,14 +13,14 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if( $user = Sentinel::check() )
-                    @define $avgrates = $user->rates()->avg('score')
+                    @define $avgrates = $user->profileRates()->avg('score')
                     <!-- user small-->
                     <li class="dropdown userdropdown visible-xs">
 
                         <a href="{{ route('user.show', ['user' => $user->id]) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <img class="transitionfast shadow pull-left" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
                             @if( isset($avgrates) )
-                            <p class="transitionfast pull-left"><i class="fa fa-star yellow"></i>{{ $user->rates()->avg('score') }}</p>
+                            <p class="transitionfast pull-left"><i class="fa fa-star yellow"></i>{{ $avgrates }}</p>
                             @endif
                             <p class="username">{{ $user->fullName() }}<span class="caret"></span></p>
                         </a>
@@ -86,7 +86,7 @@
                                 <p class="transitionfast text-shadow">{{ $user->fullName() }}</p>
 
                                 @if( isset($avgrates) )
-                                <p class="transitionfast navratenum"><i class="fa fa-star yellow"></i>{{ $user->rates()->avg('score') }}</p>
+                                <p class="transitionfast navratenum"><i class="fa fa-star yellow"></i>{{ $avgrates }}</p>
                                 @endif
 
                                 @if( isset( $user->resume->jobtitle ) )

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -21,28 +21,27 @@ class UserController extends Controller
 
     # Show All resources.
     public function index( Request $request ) {
-        $users = User::with('resume','comments','profileComments','rates','profileRates','likes','roles')->paginate(config('app.users_per_page'));
-        return view('users.index', compact('users') );
+        abort(404);
     }
 
     # Display the specified resource.
     public function show( Request $request, User $user ) {
-        
+
         $collection     = collect([$user->edus, $user->xps]);
         $collapsed      = $collection->collapse();
         $timelineItems  = $collapsed->sortBy( function($item) { return $item->startyear; } );
         $comments       = Comment::with('fromUser')->where('to_user_id',$user->id)->paginate(5);
-        return view('users.show', compact('user','comments') );
+        return view('users.show', compact('user','comments','timelineItems') );
     }
 
     # Show the form for editing the specified resource.
     public function edit( User $user ) {
-        //
+        abort(404);
     }
 
     # Update the specified resource in storage.
     public function update( Request $request, User $user ) {
-        //
+        abort(404);
     }
 
     # Remove the specified resource from storage
