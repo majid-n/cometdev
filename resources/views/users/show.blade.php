@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="userprofilepic">
-				<img class="img-circle img-thumbnail img-responsive shadow" itemprop="image" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
+				<img class="img-circle img-thumbnail img-responsive" itemprop="image" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
 				<h2 class="text-shadow" itemprop="name">{{ $user->fullName() }}</h2>
 				<p class="text-shadow" itemprop="jobtitle"><i class="fa fa-briefcase yellow"></i>{{ $user->resume->jobtitle }}</p>
 				<select class="userrate" data-rate="{{ $user->profileRates()->avg('score') }}">
@@ -47,102 +47,137 @@
 				    <option value="5">5</option>
 				</select>
 				<div class="usermedal">
-					<img src="{{ asset('images/stuff/medal.png') }}" alt="">
-					<span class="yellow text-shadow">{{ $user->profileRates()->avg('score') }}</span>
+					<img src="{{ asset('images/stuff/medal1.png') }}" alt="">
+					<span class="yellow text-shadow">{{ $user->profileRates()->avg('score') }}<b>امتیاز</b></span>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<section class="usertimeline">
-	    <div class="container">
-	        <div class="row">
-	            <div class="col-lg-12 text-center">
-	                <h2 class="section-heading specialHeading">خط زمانی</h2>
-	                <h3 class="section-subheading text-muted">تاریخچه <b class="cyan">تحصیلات</b> و <b class="yellow">تجربیات</b></h3>
-	            </div>
-	        </div>
-	        <div class="row">
-	            <div class="col-lg-12">
-	                <ul class="timeline">
-	                    <li>
-	                        <div class="timeline-image backYellow">
-	                            <i class="fa fa-lg fa-briefcase"></i>
-	                        </div> 
-	                        <div class="timeline-panel">
-	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-body">
-	                            	<time class="subheading cyan" datetime="2011-01-12">90 - 93</time>
-	                                <p class="text-muted">گروه <b class="yellow">کامت</b> با طراحی هوشمندانه، ساخت بانک های اطلاعاتی بهینه و بهره مندی از آخرین نسخه <b class="lato cyan">PHP</b> و فریمورک هایی چون <b class="lato cyan">Laravel</b>، ساخت هسته ای قدرتمند، سریع و ایمن را با توجه به استانداردهای روز دنیا برای شما فراهم می نماید.</p>
-	                            </div>
-	                        </div>
-	                    </li>
-	                    <li class="timeline-inverted">
-	                        <div class="timeline-image backCyan">
-	                            <i class="fa fa-lg fa-book"></i>
-	                        </div>
-	                        <div class="timeline-panel">
-	                        	<i class="fa fa-caret-left fa-2x hidden-xs"></i>
-	                        	<i class="fa fa-caret-right fa-2x visible-xs"></i>
-	                            <div class="timeline-body">
-	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
-	                            </div>
-	                        </div>
-	                    </li>
-	                    <li>
-	                        <div class="timeline-image backYellow">
-	                            <i class="fa fa-lg fa-briefcase"></i>
-	                        </div>
-	                        <div class="timeline-panel">
-	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-body">
-	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
-	                            </div>
-	                        </div>
-	                    </li>
-	                    <li class="timeline-inverted">
-	                        <div class="timeline-image backCyan">
-	                            <i class="fa fa-lg fa-book"></i>
-	                        </div>
-	                        <div class="timeline-panel">
-	                        	<i class="fa fa-caret-left fa-2x hidden-xs"></i>
-	                        	<i class="fa fa-caret-right fa-2x visible-xs"></i>
-	                            <div class="timeline-body">
-	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
-	                            </div>
-	                        </div>
-	                    </li>
-	                    <li>
-	                        <div class="timeline-image backYellow">
-	                            <i class="fa fa-lg fa-briefcase"></i>
-	                        </div>
-	                        <div class="timeline-panel">
-	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-body">
-	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
-	                            </div>
-	                        </div>
-	                    </li>
-	                    <li>
-	                        <div class="timeline-image backYellow">
-	                            <i class="fa fa-lg fa-briefcase"></i>
-	                        </div>
-	                        <div class="timeline-panel">
-	                        	<i class="fa fa-caret-right fa-2x"></i>
-	                            <div class="timeline-body">
-	                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
-	                            </div>
-	                        </div>
-	                    </li>
-	                    <li>
-	                        <div class="timeline-image">
-	                            <img src="{{ asset('img/icons/5.jpg') }}" class="img-circle img-responsive">
-	                        </div>
-	                    </li>
-	                </ul>
-	            </div>
-	        </div>
-	    </div>
+
+	<section class="normalsection userinfo">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-6 userskill">
+					<i class="fa fa-bar-chart yellow headericon"></i>
+					<h3 class="text-right headertitle">مهارت ها</h3>
+					<div class="text-center">
+						<div class="circleprogress" data-value="8.5">
+							<span></span>
+						</div>
+
+						<div class="circleprogress" data-value="4.8">
+							<span></span>
+						</div>
+
+						<div class="circleprogress" data-value="6.7">
+							<span></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 userbio">
+					<i class="fa fa-info-circle yellow headericon"></i>
+					<h3 class="text-right headertitle">بیوگرافی</h3>
+					<blockquote cite="http://example.com/facts">
+						<p class="text-justify">
+							<i class="fa fa-fw fa-quote-right"></i>
+							{{ $user->resume->bio }}
+							<i class="fa fa-fw fa-quote-left"></i>
+						</p>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="usertimeline container normalsection">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading specialHeading">خط زمانی</h2>
+                <h3 class="section-subheading text-muted">تاریخچه <b class="cyan">تحصیلات</b> و <b class="yellow">تجربیات</b></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image backYellow">
+                            <i class="fa fa-lg fa-briefcase"></i>
+                        </div> 
+                        <div class="timeline-panel">
+                        	<i class="fa fa-caret-right fa-2x"></i>
+                            <div class="timeline-body">
+                            	<time class="subheading cyan" datetime="2011-01-12">90 - 93</time>
+                                <p class="text-muted">گروه <b class="yellow">کامت</b> با طراحی هوشمندانه، ساخت بانک های اطلاعاتی بهینه و بهره مندی از آخرین نسخه <b class="lato cyan">PHP</b> و فریمورک هایی چون <b class="lato cyan">Laravel</b>، ساخت هسته ای قدرتمند، سریع و ایمن را با توجه به استانداردهای روز دنیا برای شما فراهم می نماید.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image backCyan">
+                            <i class="fa fa-lg fa-book"></i>
+                        </div>
+                        <div class="timeline-panel">
+                        	<i class="fa fa-caret-left fa-2x hidden-xs"></i>
+                        	<i class="fa fa-caret-right fa-2x visible-xs"></i>
+                            <div class="timeline-body">
+                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image backYellow">
+                            <i class="fa fa-lg fa-briefcase"></i>
+                        </div>
+                        <div class="timeline-panel">
+                        	<i class="fa fa-caret-right fa-2x"></i>
+                            <div class="timeline-body">
+                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image backCyan">
+                            <i class="fa fa-lg fa-book"></i>
+                        </div>
+                        <div class="timeline-panel">
+                        	<i class="fa fa-caret-left fa-2x hidden-xs"></i>
+                        	<i class="fa fa-caret-right fa-2x visible-xs"></i>
+                            <div class="timeline-body">
+                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image backYellow">
+                            <i class="fa fa-lg fa-briefcase"></i>
+                        </div>
+                        <div class="timeline-panel">
+                        	<i class="fa fa-caret-right fa-2x"></i>
+                            <div class="timeline-body">
+                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image backYellow">
+                            <i class="fa fa-lg fa-briefcase"></i>
+                        </div>
+                        <div class="timeline-panel">
+                        	<i class="fa fa-caret-right fa-2x"></i>
+                            <div class="timeline-body">
+                                <p class="text-muted">همانطور که می دانید <b class="lato cyan">HTML</b> و <b class="lato cyan">CSS</b> زبان های برنامه نویسی هستند که ساختار و ظاهر وب سایت را تشکیل می دهند. گروه <b class="yellow">کامت</b> با استفاده از اخرین نسخه این زبان ها و همچنین با بهره گیری از به روزترین فریم ورک ها از جمله <b class="lato cyan">BootStrap</b> و <b class="lato cyan">Materialize</b> میتواند، ساختار و ظاهری بهینه و زیبا متناسب با نیاز شما طراحی کند.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <img src="{{ asset('img/icons/5.jpg') }}" class="img-circle img-responsive">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 	</section>
 
 <div>
@@ -177,6 +212,12 @@
 
 @stop
 
+
+@section('js')
+	<script src="{{ asset('js/circle-progress.js') }}" type="text/javascript"></script>
+@stop
+
+
 @section('customjs')
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -184,6 +225,21 @@
 			    theme: 'fontawesome-stars'
 			});
 			$('select.userrate').barrating('set', Math.floor( $('select.userrate').data('rate')) );
+
+			$('.circleprogress').each(function(index, el) {
+				$(el).circleProgress({
+				    value: $(el).data('value')/10,
+				    size: 75,
+				    fill: { gradient: ['#fed136', '#fec503'] },
+				    animation: {
+				        duration: 3000,
+				        easing: 'circleProgressEasing'
+				    }
+				}).on('circle-animation-progress', function(event, progress, stepValue) {
+	    			$(el).find('span').html((stepValue*10).toFixed(1));
+				});
+			});
+			
 
 			var timelineBlocks = $('.timeline li'),
 				offset = 0.8;
