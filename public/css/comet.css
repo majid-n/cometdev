@@ -1784,7 +1784,7 @@
     section.userinfo div.userbio blockquote { 
         margin: 0;
         padding: 25px 0 0 0;
-        border: none;
+        border: 0;
         font-size: inherit;
         border-top: 1px solid #eee;
         -moz-border-image: -moz-linear-gradient(left, #fed136 0%, #eee 50%, #eee 100%);

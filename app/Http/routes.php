@@ -71,14 +71,15 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 
 	# user Folder Routes
 	Route::group([ 'namespace' => 'user' ], function () {
-		# Post Routes
 		Route::get('post/{post}/like', 'PostController@like')->name('post.like');
 		Route::resource('user', 'UserController');
+		Route::post('/rate', 'RateController@store')->name('rate.store');
+		Route::post('/comment', 'CommentController@store')->name('comment.store');
+		Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
 	});
 
 	# Admins Folder Routes
 	Route::group([ 'middleware' => ['role:admins'], 'prefix' => 'admin' , 'namespace' => 'admin'], function () {
-		# Model RESTful Resource Routes
 		Route::resource('post', 'PostController');
 		Route::resource('cat', 'CatController');
 		Route::resource('support', 'SupportController');

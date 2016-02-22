@@ -35,6 +35,16 @@ class UserController extends Controller
         return view('users.show', compact('user','comments') );
     }
 
+    # Show Create Form.
+    public function create() {
+        abort(404);
+    }
+
+    # Store the New resource in DB.
+    public function store( Request $request ) {
+        abort(404);
+    }
+
     # Show the form for editing the specified resource.
     public function edit( User $user ) {
         //

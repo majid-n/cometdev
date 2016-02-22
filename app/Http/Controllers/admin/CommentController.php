@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Comment;
 
-class Comment extends Controller
+class CommentController extends Controller
 {	
-
 	# Dependency Injection & Controllers & Middlewares
 	public function __construct(){
 	    # Define Middleware

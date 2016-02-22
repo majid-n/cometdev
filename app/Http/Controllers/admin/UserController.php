@@ -5,11 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Validator;
-use Image;
 use Storage;
 use App\User;
-use App\Comment;
 
 class UserController extends Controller
 {   
