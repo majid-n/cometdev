@@ -39,7 +39,7 @@
 				<img class="img-circle img-thumbnail img-responsive" itemprop="image" src="{{ asset('images/profile/'.$user->photo) }}" alt="{{ $user->fullName() }}">
 				<h2 class="text-shadow" itemprop="name">{{ $user->fullName() }}</h2>
 				<p class="text-shadow" itemprop="jobtitle"><i class="fa fa-briefcase yellow"></i>{{ $user->resume->jobtitle }}</p>
-				<select class="userrate" data-rate="{{ $user->profileRates()->avg('score') }}">
+				<select class="userrate" data-rate="{{ floatval($user->profileRates()->avg('score')) }}">
 				    <option value="1">1</option>
 				    <option value="2">2</option>
 				    <option value="3">3</option>
@@ -48,7 +48,7 @@
 				</select>
 				<div class="usermedal">
 					<img src="{{ asset('images/stuff/medal1.png') }}" alt="">
-					<span class="yellow text-shadow">{{ $user->profileRates()->avg('score') }}<b>امتیاز</b></span>
+					<span class="yellow text-shadow">{{ floatval($user->profileRates()->avg('score')) }}<b>امتیاز</b></span>
 				</div>
 			</div>
 		</div>

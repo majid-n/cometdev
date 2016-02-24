@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Resume::class   => ResumePolicy::class,
         Lang::class     => LangPolicy::class,
         Edu::class      => EduPolicy::class,
-        Edu::class      => XpPolicy::class,
+        Xp::class       => XpPolicy::class,
         Skill::class    => SkillPolicy::class,
     ];
 

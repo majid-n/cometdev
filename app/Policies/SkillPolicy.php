@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\User;
+use Cartalyst\Sentinel\Users\EloquentUser as User;
 use App\Skill;
 
 class SkillPolicy

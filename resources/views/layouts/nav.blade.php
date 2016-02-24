@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if( $user = Sentinel::check() )
-                    @define $avgrates = $user->profileRates()->avg('score')
+                    @define $avgrates = floatval($user->profileRates()->avg('score'))
                     <!-- user small-->
                     <li class="dropdown userdropdown visible-xs">
 
@@ -36,7 +36,7 @@
                                 <li role="separator" class="divider"></li>
                             @endif
                             <li><a class="closeonclick" href="{{ route('user.show', ['user' => $user->id]) }}">صفحه شخصی <i class="fa fa-user yellow"></i></a></li>
-                            <li><a class="closeonclick" href="#">تنظیمات <i class="fa fa-cog yellow"></i></a></li>
+                            <li><a class="closeonclick" href="{{ route('user.edit', ['user' => $user->id]) }}">تنظیمات <i class="fa fa-cog yellow"></i></a></li>
                             <li><a class="closeonclick" href="{{ route('logout') }}">خروج <i class="fa fa-sign-out yellow"></i></a></li>
                         </ul>
                     </li>
@@ -86,7 +86,7 @@
                                 <p class="transitionfast text-shadow">{{ $user->fullName() }}</p>
 
                                 @if( isset($avgrates) )
-                                <p class="transitionfast navratenum"><i class="fa fa-star yellow"></i>{{ $user->rates()->avg('score') }}</p>
+                                <p class="transitionfast navratenum"><i class="fa fa-star yellow"></i>{{ $avgrates }}</p>
                                 @endif
 
                                 @if( isset( $user->resume->jobtitle ) )
@@ -111,7 +111,7 @@
                                 <li role="separator" class="divider"></li>
                             @endif
                             <li><a class="closeonclick" href="{{ route('user.show', ['user' => $user->id]) }}">صفحه شخصی <i class="fa fa-user yellow"></i></a></li>
-                            <li><a href="#">تنظیمات <i class="fa fa-cog yellow"></i></a></li>
+                            <li><a href="{{ route('user.edit', ['user' => $user->id]) }}">تنظیمات <i class="fa fa-cog yellow"></i></a></li>
                             <li><a href="{{ route('logout') }}">خروج <i class="fa fa-sign-out yellow"></i></a></li>
                         </ul>
                     </li>

@@ -27,7 +27,7 @@ class UserController extends Controller
         $collection     = collect([$user->edus, $user->xps]);
         $collapsed      = $collection->collapse();
         $timelineItems  = $collapsed->sortByDesc( function($item) { return $item->startyear; } );
-        $comments       = Comment::with('fromUser')->where('to_user_id',$user->id)->paginate(5);
+        $comments       = $user->profileComments()->paginate(5);
         return view('users.show', compact('user','comments') );
     }
 
@@ -43,7 +43,8 @@ class UserController extends Controller
 
     # Show the form for editing the specified resource.
     public function edit( User $user ) {
-        //
+        $comments = $user->comments()->paginate(5);
+        return view('users.edit', compact('user','comments') );
     }
 
     # Update the specified resource in storage.

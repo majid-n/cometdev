@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -65,7 +65,9 @@ class SkillController extends Controller
     # Remove the specified resource from storage
     public function destroy( Request $request, Skill $skill ) {
         
-        $this->authorize('destroy', $skill);
+        $user = Sentinel::getUser();
+
+        $this->authorizeForUser($user, $skill);
 
         if( $skill->delete() ) {
         	if( $request->ajax() ) 
