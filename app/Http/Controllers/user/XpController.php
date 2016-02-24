@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Comment;
-use Sentinel;
+use App\Xp;
 use Validator;
+use Sentinel;
 
-class CommentController extends Controller
+class XpController extends Controller
 {
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
@@ -22,11 +22,12 @@ class CommentController extends Controller
     	$user = Sentinel::getUser();
 
     	$rules = [
-    	    'uid'   	=> 'required|exists:users,id|min:1',
-    	    'comment' 	=> 'required|min:2',
+    	    'startyear' => 'required|date_format:d/m/Y|before:tomorrow',
+    	    'endyear' 	=> 'required|date_format:d/m/Y|before:startyear',
+    	    'company'   => 'required|min:3|max:70',
     	];
 
-    	$validator = Validator::make( $request->all(), $rules );
+    	$validator = Validator::make( $request->all(), $rules);
 
     	if ( $validator->fails() ) {
 
@@ -37,19 +38,20 @@ class CommentController extends Controller
     	                 	 ->withErrors($validator);
     	} else {
 
-    	    # Create Resume
-    	    $comment = new Comment;
-    	    $comment->text  	 = $request->comment;
-    	    $comment->to_user_id = intval($request->uid);
+    	    # Create Experience
+    	    $xp 			= new Xp;
+    	    $xp->startyear 	= $request->startyear;
+    	    $xp->endyear 	= $request->endyear;
+    	    $xp->company 	= $request->company;
 
     	    # Redirect on Success
-    	    if ( $user->comments()->save($comment) ) {
+    	    if ( $user->xps()->save($xp) ) {
 
     	        if( $request->ajax() ) 
                     return  response()->json(['result' => true]);
     	        else 
-                    return redirect()->route('user.show', [ 'user' => $comment->to_user_id ])
-                                     ->with('success', 'دیدگاه شما با موفقیت ثبت شد.');
+                    return redirect()->route('user.show', [ 'user' => $user->id ])
+                                     ->with('success', 'سابقه کاری شما با موفقیت ثبت شد.');
     	    }
     	}
 
@@ -61,16 +63,16 @@ class CommentController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy( Request $request, Comment $comment ) {
+    public function destroy( Request $request, Xp $xp ) {
         
-        $this->authorize('destroy', $comment);
+        $this->authorize('destroy', $xp);
 
-        if( $comment->delete() ) {
+        if( $xp->delete() ) {
         	if( $request->ajax() ) 
                 return  response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $comment->to_user_id ])
-                                 ->with('success', 'دیدگاه شما با موفقیت حذف شد.');
+                return redirect()->route('user.show', [ 'user' => $xp->user_id ])
+                                 ->with('success', 'سابقه کاری شما با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 

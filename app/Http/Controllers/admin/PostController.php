@@ -114,7 +114,7 @@ class PostController extends Controller
             'link'              => 'active_url|min:5|max:255',
             'cat_id'            => 'required|numeric',
             'views'             => 'required|numeric',
-            'active'            => 'regex:/[0-1]{1}/',
+            'active'            => 'boolean',
         ];
 
         $messeages = [

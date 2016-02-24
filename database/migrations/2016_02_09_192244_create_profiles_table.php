@@ -16,8 +16,9 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('tel',15);
-            $table->string('duty',20);
+            $table->string('duty',20)->nullable();
             $table->boolean('rel');
+            $table->boolean('gender');
             $table->string('jobtitle',50);
             $table->text('address');
             $table->text('bio');
@@ -115,7 +116,7 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('from_user_id')->unsigned();
             $table->integer('to_user_id')->unsigned();
-            $table->float('score');
+            $table->integer('score');
             $table->timestamps();
             $table->foreign('from_user_id')
                   ->references('id')->on('users')

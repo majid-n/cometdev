@@ -5,7 +5,17 @@ namespace App\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Policies\CommentPolicy;
+use App\Policies\ResumePolicy;
+use App\Policies\LangPolicy;
+use App\Policies\EduPolicy;
+use App\Policies\XpPolicy;
+use App\Policies\SkillPolicy;
 use App\Comment;
+use App\Resume;
+use App\Lang;
+use App\Edu;
+use App\Xp;
+use App\Skill;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,7 +25,12 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Comment::class   => CommentPolicy::class,
+        Comment::class  => CommentPolicy::class,
+        Resume::class   => ResumePolicy::class,
+        Lang::class     => LangPolicy::class,
+        Edu::class      => EduPolicy::class,
+        Edu::class      => XpPolicy::class,
+        Skill::class    => SkillPolicy::class,
     ];
 
     /**

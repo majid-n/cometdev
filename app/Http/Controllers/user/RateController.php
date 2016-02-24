@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
@@ -6,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Rate;
 use Sentinel;
+use Validator;
 
 class RateController extends Controller
 {
@@ -22,7 +24,7 @@ class RateController extends Controller
         if( $user->id !== intval( $request->uid ) ) {
 
         	$rules = [
-        	    'uid'   => 'required|exists:users,id|min:1',
+        	    'uid'   => 'required|numeric|exists:users,id|min:1',
         	    'score' => 'required|numeric',
         	];
 
@@ -37,7 +39,7 @@ class RateController extends Controller
         	                 	 ->withErrors($validator);
         	} else {
 
-        	    # Create Category
+        	    # Create Resume
         	    $rate = new Rate;
         	    $rate->score  	  = intval($request->score);
         	    $rate->to_user_id = intval($request->uid);
@@ -55,7 +57,7 @@ class RateController extends Controller
         	        			]);
         	        } else {
         	        	return redirect()->route('user.show', [ 'user' => $rate->to_user_id ])
-        	        					 ->with('success', 'امتیاز شما موفقیت ثبت شد.');
+        	        					 ->with('success', 'امتیاز شما با موفقیت ثبت شد.');
         	        }
         	    }
         	}

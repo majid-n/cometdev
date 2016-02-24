@@ -5,11 +5,11 @@ namespace App\Http\Controllers\user;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Comment;
+use App\Edu;
 use Sentinel;
 use Validator;
 
-class CommentController extends Controller
+class EduController extends Controller
 {
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
@@ -22,11 +22,14 @@ class CommentController extends Controller
     	$user = Sentinel::getUser();
 
     	$rules = [
-    	    'uid'   	=> 'required|exists:users,id|min:1',
-    	    'comment' 	=> 'required|min:2',
+    	    'startyear' => 'required|date_format:d/m/Y|before:tomorrow',
+    	    'endyear' 	=> 'required|date_format:d/m/Y|before:startyear',
+    	    'degree' 	=> 'required|min:3|max:100',
+    	    'uni' 		=> 'required|min:3|max:70',
+    	    'uniscore' 	=> 'required|regex:/^\d{1,2}(\.\d{2})?$/',
     	];
 
-    	$validator = Validator::make( $request->all(), $rules );
+    	$validator = Validator::make( $request->all(), $rules);
 
     	if ( $validator->fails() ) {
 
@@ -37,19 +40,22 @@ class CommentController extends Controller
     	                 	 ->withErrors($validator);
     	} else {
 
-    	    # Create Resume
-    	    $comment = new Comment;
-    	    $comment->text  	 = $request->comment;
-    	    $comment->to_user_id = intval($request->uid);
+    	    # Create Education
+    	    $edu 			= new Edu;
+    	    $edu->startyear = $request->startyear;
+    	    $edu->endyear 	= $request->endyear;
+    	    $edu->degree 	= $request->degree;
+    	    $edu->uni 		= $request->uni;
+    	    $edu->score 	= floatval($request->uniscore);
 
     	    # Redirect on Success
-    	    if ( $user->comments()->save($comment) ) {
+    	    if ( $user->edus()->save($edu) ) {
 
     	        if( $request->ajax() ) 
                     return  response()->json(['result' => true]);
     	        else 
-                    return redirect()->route('user.show', [ 'user' => $comment->to_user_id ])
-                                     ->with('success', 'دیدگاه شما با موفقیت ثبت شد.');
+                    return redirect()->route('user.show', [ 'user' => $user->id ])
+                                     ->with('success', 'مدرک تحصیلی شما با موفقیت ثبت شد.');
     	    }
     	}
 
@@ -61,16 +67,16 @@ class CommentController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy( Request $request, Comment $comment ) {
+    public function destroy( Request $request, Edu $edu ) {
         
-        $this->authorize('destroy', $comment);
+        $this->authorize('destroy', $edu);
 
-        if( $comment->delete() ) {
+        if( $edu->delete() ) {
         	if( $request->ajax() ) 
                 return  response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $comment->to_user_id ])
-                                 ->with('success', 'دیدگاه شما با موفقیت حذف شد.');
+                return redirect()->route('user.show', [ 'user' => $edu->user_id ])
+                                 ->with('success', 'مدرک تحصیلی شما با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 

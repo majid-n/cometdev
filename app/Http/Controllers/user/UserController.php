@@ -5,9 +5,6 @@ namespace App\Http\Controllers\user;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Validator;
-use Image;
-use Storage;
 use App\User;
 use App\Comment;
 
@@ -27,10 +24,9 @@ class UserController extends Controller
 
     # Display the specified resource.
     public function show( Request $request, User $user ) {
-        
         $collection     = collect([$user->edus, $user->xps]);
         $collapsed      = $collection->collapse();
-        $timelineItems  = $collapsed->sortBy( function($item) { return $item->startyear; } );
+        $timelineItems  = $collapsed->sortByDesc( function($item) { return $item->startyear; } );
         $comments       = Comment::with('fromUser')->where('to_user_id',$user->id)->paginate(5);
         return view('users.show', compact('user','comments') );
     }

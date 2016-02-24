@@ -5,11 +5,11 @@ namespace App\Http\Controllers\user;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Comment;
+use App\Lang;
 use Sentinel;
 use Validator;
 
-class CommentController extends Controller
+class LangController extends Controller
 {
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
@@ -22,11 +22,11 @@ class CommentController extends Controller
     	$user = Sentinel::getUser();
 
     	$rules = [
-    	    'uid'   	=> 'required|exists:users,id|min:1',
-    	    'comment' 	=> 'required|min:2',
+    	    'lang'   	=> 'required|farsi|min:3|max:20',
+    	    'score' 	=> 'required|regex:/^\d{1,2}(\.\d{1})?$/',
     	];
 
-    	$validator = Validator::make( $request->all(), $rules );
+    	$validator = Validator::make( $request->all(), $rules);
 
     	if ( $validator->fails() ) {
 
@@ -37,19 +37,19 @@ class CommentController extends Controller
     	                 	 ->withErrors($validator);
     	} else {
 
-    	    # Create Resume
-    	    $comment = new Comment;
-    	    $comment->text  	 = $request->comment;
-    	    $comment->to_user_id = intval($request->uid);
+    	    # Create Language
+    	    $lang 			= new Lang;
+    	    $lang->title 	= $request->lang;
+    	    $lang->score    = floatval($request->score);
 
     	    # Redirect on Success
-    	    if ( $user->comments()->save($comment) ) {
+    	    if ( $user->langs()->save($lang) ) {
 
     	        if( $request->ajax() ) 
                     return  response()->json(['result' => true]);
     	        else 
-                    return redirect()->route('user.show', [ 'user' => $comment->to_user_id ])
-                                     ->with('success', 'دیدگاه شما با موفقیت ثبت شد.');
+                    return redirect()->route('user.show', [ 'user' => $user->id ])
+                                     ->with('success', 'زبان خارجی با موفقیت ثبت شد.');
     	    }
     	}
 
@@ -61,16 +61,16 @@ class CommentController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy( Request $request, Comment $comment ) {
+    public function destroy( Request $request, Lang $lang ) {
         
-        $this->authorize('destroy', $comment);
+        $this->authorize('destroy', $lang);
 
-        if( $comment->delete() ) {
+        if( $lang->delete() ) {
         	if( $request->ajax() ) 
                 return  response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $comment->to_user_id ])
-                                 ->with('success', 'دیدگاه شما با موفقیت حذف شد.');
+                return redirect()->route('user.show', [ 'user' => $lang->user_id ])
+                                 ->with('success', 'زبان خارجی با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 

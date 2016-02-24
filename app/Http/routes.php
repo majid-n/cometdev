@@ -71,18 +71,40 @@ Route::group([ 'middleware' => ['auth'] ], function () {
 
 	# user Folder Routes
 	Route::group([ 'namespace' => 'user' ], function () {
-		Route::get('post/{post}/like', 'PostController@like')->name('post.like');
+
+		# RESTful Models for Users
 		Route::resource('user', 'UserController');
-		Route::post('/rate', 'RateController@store')->name('rate.store');
-		Route::post('/comment', 'CommentController@store')->name('comment.store');
-		Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
+
+		# Like Post for Login Users
+		Route::get('post/{post}/like', 'PostController@like')->name('post.like');
+
+		# Store models for Users
+		Route::post('rate', 'RateController@store')->name('rate.store');
+		Route::post('comment', 'CommentController@store')->name('comment.store');
+		Route::post('skill', 'SkillController@store')->name('skill.store');
+		Route::post('xp', 'XpController@store')->name('xp.store');
+		Route::post('lang', 'LangController@store')->name('lang.store');
+		Route::post('edu', 'EduController@store')->name('edu.store');
+		Route::post('resume', 'ResumeController@store')->name('resume.store');
+
+		# Destroy Models for Users
+		Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
+		Route::delete('edu/{edu}','EduController@destroy')->name('edu.destroy');
+		Route::delete('lang/{lang}','LangController@destroy')->name('lang.destroy');
+		Route::delete('skill/{skill}','SkillController@destroy')->name('skill.destroy');
+		Route::delete('xp/{xp}','XpController@destroy')->name('xp.destroy');
+		Route::delete('resume/{resume}','ResumeController@destroy')->name('resume.destroy');
 	});
 
 	# Admins Folder Routes
 	Route::group([ 'middleware' => ['role:admins'], 'prefix' => 'admin' , 'namespace' => 'admin'], function () {
+
+		# RESTful Models for Admins
 		Route::resource('post', 'PostController');
 		Route::resource('cat', 'CatController');
 		Route::resource('support', 'SupportController');
+
+		# Destroy Models for Admins
 		Route::delete('user/{user}','UserController@destroy')->name('admin.user.destroy');
 		Route::delete('comment/{comment}','CommentController@destroy')->name('admin.comment.destroy');
 		Route::delete('edu/{edu}','EduController@destroy')->name('admin.edu.destroy');
