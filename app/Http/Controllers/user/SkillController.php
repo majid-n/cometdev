@@ -65,9 +65,7 @@ class SkillController extends Controller
     # Remove the specified resource from storage
     public function destroy( Request $request, Skill $skill ) {
         
-        $user = Sentinel::getUser();
-
-        $this->authorizeForUser($user, $skill);
+        $this->authorize($skill);
 
         if( $skill->delete() ) {
         	if( $request->ajax() ) 
