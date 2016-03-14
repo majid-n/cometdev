@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Cat;
+use Validator;
 
 class CatController extends Controller
 {
@@ -32,11 +33,14 @@ class CatController extends Controller
 
         $rules = [
             'title'             => 'required|farsi|min:5|max:80',
-            'cat_id'            => 'required|numeric',
+            'cat_id'            => 'required|numeric|min:1|exists:cats,id'
         ];
 
         $messeages = [
-            'cat_id.required' => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.required'   => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.numeric'    => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.min'        => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.exists'     => 'دسته مورد نظر موجود نمی باشد.'
         ];
 
         $validator = Validator::make( $request->all(), $rules, $messeages );
@@ -63,11 +67,6 @@ class CatController extends Controller
                      ->with('fail', 'مشکل در اتصال به سرور. لطفا مجددا تلاش کنید.');
     }
 
-    # Display the specified resource.
-    public function show( Request $request, Cat $cat ) {
-        abort(404);
-    }
-
     # Show the form for editing the specified resource.
     public function edit( Cat $cat ) {
         $categories = Cat::where( 'parent', 0 )->get();
@@ -79,11 +78,14 @@ class CatController extends Controller
 
         $rules = [
             'title'             => 'required|farsi|min:5|max:80',
-            'cat_id'            => 'required|numeric',
+            'cat_id'            => 'required|numeric|min:1|exists:cats,id'
         ];
 
         $messeages = [
-            'cat_id.required' => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.required'   => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.numeric'    => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.min'        => 'از لیست دسته ها یکی را انتخاب کنید.',
+            'cat_id.exists'     => 'دسته مورد نظر موجود نمی باشد.'
         ];
 
         $validator = Validator::make( $request->all(), $rules, $messeages );

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -25,7 +25,7 @@ class RateController extends Controller
 
         	$rules = [
         	    'uid'   => 'required|numeric|exists:users,id|min:1',
-        	    'score' => 'required|numeric',
+        	    'score' => 'required|numeric'
         	];
 
         	$validator = Validator::make( $request->all(), $rules );

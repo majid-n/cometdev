@@ -16,6 +16,6 @@ class LangPolicy
 
     # Check user can delete this lang or not
     public function destroy( User $user, Lang $lang ) {
-        return $user->id === $lang->user_id;
+        return $user->id === $lang->user_id || $user->inRole('admins');
     }
 }

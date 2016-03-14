@@ -23,7 +23,7 @@
 			<p>total rates : {{ $user->rates()->count() }}</p>
 			<p>Role : {{ $user->roles()->first()->name }}</p>
 
-			{!! Form::open(array('method' => 'post', 'route' => array('admin.user.destroy', $user->id))) !!}
+			{!! Form::open(array('method' => 'post', 'route' => array('user.destroy', $user->id))) !!}
 			    
 			    {!! method_field('DELETE') !!}
 			    

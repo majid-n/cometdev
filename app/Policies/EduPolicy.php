@@ -16,6 +16,6 @@ class EduPolicy
 
     # Check user can delete this edu or not
     public function destroy( User $user, Edu $edu ) {
-        return $user->id === $edu->user_id;
+        return $user->id === $edu->user_id || $user->inRole('admins');
     }
 }

@@ -39,77 +39,62 @@ Route::get('profile/{user}', 'UserController@show')->name('profile.show');
 */
 
 # auth Folder Routes
-Route::group([ 'namespace' => 'auth' ], function () {
+Route::group([ 'middleware' => ['guest'] , 'namespace' => 'auth' ], function () {
 
 	# Login and Register Routes
-	Route::get('login', 'AuthController@login')->name('login');
-	Route::post('login', 'AuthController@authenticate')->name('login.post');
-	Route::get('register', 'AuthController@register')->name('register');
-	Route::post('register', 'AuthController@store')->name('register.post');
+	Route::get('login'		, 'AuthController@login')->name('login');
+	Route::post('login'		, 'AuthController@authenticate')->name('login.post');
+	Route::get('register'	, 'AuthController@register')->name('register');
+	Route::post('register'	, 'AuthController@store')->name('register.post');
 
 	# Activation Progress Routes
-	Route::get('activate', 'ActivationController@reactivate')->name('reactivate');
-	Route::post('activate', 'ActivationController@generateActivate')->name('reactivate.post');
-	Route::get('activate/{user}/{code}', 'ActivationController@activate')->name('activate');
+	Route::get('activate'				, 'ActivationController@reactivate')->name('reactivate');
+	Route::post('activate'				, 'ActivationController@generateActivate')->name('reactivate.post');
+	Route::get('activate/{user}/{code}'	, 'ActivationController@activate')->name('activate');
 
 	# Reset Password Progress Routes
-	Route::get('forgot', 'PasswordController@forgot')->name('forgot');
-	Route::post('forgot', 'PasswordController@prepareReset')->name('forgot.post');
-	Route::get('reset/{user}/{code}', 'PasswordController@reset')->name('reset');
-	Route::post('reset', 'PasswordController@resetPassword')->name('reset.post');
+	Route::get('forgot'					, 'PasswordController@forgot')->name('forgot');
+	Route::post('forgot'				, 'PasswordController@prepareReset')->name('forgot.post');
+	Route::get('reset/{user}/{code}'	, 'PasswordController@reset')->name('reset');
+	Route::post('reset'					, 'PasswordController@resetPassword')->name('reset.post');
 });
 
-# Login Group Routes
+# Check User is Login
 Route::group([ 'middleware' => ['auth'] ], function () {
 
-	# auth Folder Routes
+	# Log Out Routes
 	Route::group([ 'namespace' => 'auth' ], function () {
 		# Logout Routes
-		Route::get('logout', 'AuthController@logout')->name('logout');
-		Route::get('logout/everywhere', 'AuthController@logoutEverywhere')->name('logout.all');
+		Route::get('logout'				, 'AuthController@logout')->name('logout');
+		Route::get('logout/everywhere'	, 'AuthController@logoutEverywhere')->name('logout.all');
 	});
 
-	# user Folder Routes
-	Route::group([ 'namespace' => 'user' ], function () {
+	# RESTful resource for Users
+	Route::resource('user', 'UserController', ['except' => ['create','store','edit','destroy']]);
 
-		# RESTful Models for Users
-		Route::resource('user', 'UserController');
+	# Like Posts
+	Route::get('post/{post}/like', 'PostController@like')->name('post.like');
 
-		# Like Post for Login Users
-		Route::get('post/{post}/like', 'PostController@like')->name('post.like');
+	# RESTful resource Other Models
+	Route::resource('rate'		, 'RateController'		, ['only' => ['store']]);
+	Route::resource('comment'	, 'CommentController'	, ['only' => ['store','destroy']]);
+	Route::resource('skill'		, 'SkillController'		, ['only' => ['store','destroy']]);
+	Route::resource('xp'		, 'XpController'		, ['only' => ['store','destroy']]);
+	Route::resource('lang'		, 'LangController'		, ['only' => ['store','destroy']]);
+	Route::resource('edu'		, 'EduController'		, ['only' => ['store','destroy']]);
+	Route::resource('resume'	, 'ResumeController'	, ['only' => ['store','destroy']]);
 
-		# Store models for Users
-		Route::post('rate', 'RateController@store')->name('rate.store');
-		Route::post('comment', 'CommentController@store')->name('comment.store');
-		Route::post('skill', 'SkillController@store')->name('skill.store');
-		Route::post('xp', 'XpController@store')->name('xp.store');
-		Route::post('lang', 'LangController@store')->name('lang.store');
-		Route::post('edu', 'EduController@store')->name('edu.store');
-		Route::post('resume', 'ResumeController@store')->name('resume.store');
-
-		# Destroy Models for Users
-		Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
-		Route::delete('edu/{edu}','EduController@destroy')->name('edu.destroy');
-		Route::delete('lang/{lang}','LangController@destroy')->name('lang.destroy');
-		Route::delete('skill/{skill}','SkillController@destroy')->name('skill.destroy');
-		Route::delete('xp/{xp}','XpController@destroy')->name('xp.destroy');
-		Route::delete('resume/{resume}','ResumeController@destroy')->name('resume.destroy');
+	Route::group([ 'middleware' => ['owner'] ], function () {
+		# RESTful resource for Users
+		Route::resource('user', 'UserController', ['only' => ['edit','destroy']]);
 	});
+});
 
-	# Admins Folder Routes
-	Route::group([ 'middleware' => ['role:admins'], 'prefix' => 'admin' , 'namespace' => 'admin'], function () {
+# Check User is Login And Admin
+Route::group([ 'middleware' => ['role:admins'], 'prefix' => 'admin'], function () {
 
-		# RESTful Models for Admins
-		Route::resource('post', 'PostController');
-		Route::resource('cat', 'CatController');
-		Route::resource('support', 'SupportController');
-
-		# Destroy Models for Admins
-		Route::delete('user/{user}','UserController@destroy')->name('admin.user.destroy');
-		Route::delete('comment/{comment}','CommentController@destroy')->name('admin.comment.destroy');
-		Route::delete('edu/{edu}','EduController@destroy')->name('admin.edu.destroy');
-		Route::delete('lang/{lang}','LangController@destroy')->name('admin.lang.destroy');
-		Route::delete('skill/{skill}','SkillController@destroy')->name('admin.skill.destroy');
-		Route::delete('xp/{xp}','XpController@destroy')->name('admin.xp.destroy');
-	});
+	# RESTful resource Models for Admins
+	Route::resource('cat'		, 'CatController'		, ['except' => ['show']]);
+	Route::resource('post'		, 'PostController'		, ['except' => ['index','show']]);
+	Route::resource('support'	, 'SupportController'	, ['except' => ['create', 'store', 'show']]);
 });

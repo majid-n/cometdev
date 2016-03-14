@@ -7,19 +7,20 @@ use Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class roleWare
+class RoleWare
 {
     # Continue if the user had the specific role
     public function handle( Request $request, Closure $next, $role )
     {
     	
-    	if( Sentinel::check() ) {
-    		if ( !Sentinel::inRole($role) ) return redirect()->home()->with('fail', 'شما امکان دسترسی به این محدوده را ندارید.');
-    	} else { 
-            # throw 404 not found Error
-    		abort(404);
-    	}
-        
-        return $next($request);
+        if( Sentinel::check() ) {
+            if( Sentinel::inRole($role) ) 
+                return $next($request);
+        }
+
+        if( $request->ajax() ) 
+            return response('Notfound.', 404);
+        else 
+            abort(404);
     }
 }

@@ -53,6 +53,7 @@ class CreateProfilesTable extends Migration
             $table->date('startyear');
             $table->date('endyear');
             $table->string('degree',100);
+            $table->string('branch',100);
             $table->string('uni',70);
             $table->float('score');
             $table->timestamps();

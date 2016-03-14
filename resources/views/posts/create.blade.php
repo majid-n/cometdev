@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-8 col-md-offset-2 shadow formContent">
 
-                {!! Form::open(array('method' => 'post', 'route' => 'admin.post.store', 'files' => true)) !!}
+                {!! Form::open(['method' => 'post', 'route' => 'admin.post.store', 'files' => true]) !!}
 
                     <div class="form-group col-md-6">
                         <select class="form-control" name="cat_id">
@@ -54,7 +54,7 @@
                     <div class="form-group col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                            {!! Form::text('title', null, array('class' => 'form-control','placeholder' => 'نام پست')) !!}
+                            {!! Form::text('title', null, ['class' => 'form-control','placeholder' => 'نام پست']) !!}
                         </div>
                         {!! ($errors->has('title')) ? $errors->first('title','<p class="formError text-shadow"><i class="fa fa-exclamation-triangle yellow"></i>:message</p>') : "" !!}
                     </div>
@@ -62,7 +62,7 @@
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-align-left"></i></span>
-                            {!! Form::textarea('smalldescription', null, array('class' => 'form-control','placeholder' => 'توضیحات مختصر','rows' => 3)) !!}
+                            {!! Form::textarea('smalldescription', null, ['class' => 'form-control','placeholder' => 'توضیحات مختصر','rows' => 3]) !!}
                         </div>
                         {!! ($errors->has('smalldescription')) ? $errors->first('smalldescription','<p class="formError text-shadow"><i class="fa fa-exclamation-triangle yellow"></i>:message</p>') : "" !!}
                     </div>
@@ -70,7 +70,7 @@
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-align-justify"></i></span>
-                            {!! Form::textarea('description', null, array('class' => 'form-control','placeholder' => 'توضیحات','rows' => 5)) !!}
+                            {!! Form::textarea('description', null, ['class' => 'form-control','placeholder' => 'توضیحات','rows' => 5]) !!}
                         </div>
                         {!! ($errors->has('description')) ? $errors->first('description','<p class="formError text-shadow"><i class="fa fa-exclamation-triangle yellow"></i>:message</p>') : "" !!}
                     </div>
@@ -78,7 +78,7 @@
                     <div class="form-group col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-link"></i></span>
-                            {!! Form::text('link', null, array('class' => 'form-control','placeholder' => 'آدرس اینترنتی')) !!}
+                            {!! Form::text('link', null, ['class' => 'form-control','placeholder' => 'آدرس اینترنتی']) !!}
                         </div>
                         {!! ($errors->has('link')) ? $errors->first('link','<p class="formError text-shadow"><i class="fa fa-exclamation-triangle yellow"></i>:message</p>') : "" !!}
                     </div>
@@ -95,8 +95,8 @@
                     </div>
 
                     <div class="form-group col-md-12 btn-group btn-group-lg" role="group">
-                        {!! Form::button('ایجاد پست جدید<i class="fa fa-plus"></i>', array('class' => 'btn btn-xl', 'type' => 'submit')) !!}
-                        {!! Form::button('<i class="fa fa-retweet"></i>', array('class' => 'btn btn-default', 'type' => 'reset')) !!}
+                        {!! Form::button('ایجاد پست جدید<i class="fa fa-plus"></i>',['class' => 'btn btn-xl', 'type' => 'submit']) !!}
+                        {!! Form::button('<i class="fa fa-retweet"></i>', ['class' => 'btn btn-default', 'type' => 'reset']) !!}
                     </div>
 
                 {!! Form::close() !!}

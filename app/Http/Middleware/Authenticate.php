@@ -9,22 +9,17 @@ use App\Http\Requests;
 
 class Authenticate
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
-     * @return mixed
-     */
+
+    # Check if Somebody Login or Not
     public function handle(Request $request, Closure $next)
     {
-        if ( !Sentinel::check() ) {
 
-            if ( $request->ajax() ) return response('Unauthorized.', 401);
-            else return redirect()->guest('login')->with('fail', 'جهت دسترسی به این صفحه به سایت وارد شوید.');
-        }
+        if ( Sentinel::check() )
+        	return $next($request);
 
-        return $next($request);
+        if ( $request->ajax() ) 
+        	return response('Unauthorized.', 401);
+        else 
+        	return redirect()->guest('login')->with('fail', 'جهت دسترسی به این صفحه به سایت وارد شوید.');
     }
 }

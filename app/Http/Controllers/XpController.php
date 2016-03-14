@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Lang;
-use Sentinel;
+use App\Xp;
 use Validator;
+use Sentinel;
 
-class LangController extends Controller
+class XpController extends Controller
 {
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
@@ -22,8 +22,9 @@ class LangController extends Controller
     	$user = Sentinel::getUser();
 
     	$rules = [
-    	    'lang'   	=> 'required|farsi|min:3|max:20',
-    	    'score' 	=> 'required|regex:/^\d{1,2}(\.\d{1})?$/',
+    	    'startyear' => 'required|date_format:d/m/Y|before:tomorrow',
+    	    'endyear' 	=> 'required|date_format:d/m/Y|before:startyear',
+    	    'company'   => 'required|min:3|max:70',
     	];
 
     	$validator = Validator::make( $request->all(), $rules);
@@ -37,19 +38,20 @@ class LangController extends Controller
     	                 	 ->withErrors($validator);
     	} else {
 
-    	    # Create Language
-    	    $lang 			= new Lang;
-    	    $lang->title 	= $request->lang;
-    	    $lang->score    = floatval($request->score);
+    	    # Create Experience
+    	    $xp 			= new Xp;
+    	    $xp->startyear 	= $request->startyear;
+    	    $xp->endyear 	= $request->endyear;
+    	    $xp->company 	= $request->company;
 
     	    # Redirect on Success
-    	    if ( $user->langs()->save($lang) ) {
+    	    if ( $user->xps()->save($xp) ) {
 
     	        if( $request->ajax() ) 
                     return  response()->json(['result' => true]);
     	        else 
                     return redirect()->route('user.show', [ 'user' => $user->id ])
-                                     ->with('success', 'زبان خارجی با موفقیت ثبت شد.');
+                                     ->with('success', 'سابقه کاری شما با موفقیت ثبت شد.');
     	    }
     	}
 
@@ -61,16 +63,16 @@ class LangController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy( Request $request, Lang $lang ) {
+    public function destroy( Request $request, Xp $xp ) {
         
-        $this->authorize('destroy', $lang);
+        $this->authorize('destroy', $xp);
 
-        if( $lang->delete() ) {
+        if( $xp->delete() ) {
         	if( $request->ajax() ) 
                 return  response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $lang->user_id ])
-                                 ->with('success', 'زبان خارجی با موفقیت حذف شد.');
+                return redirect()->route('user.show', [ 'user' => $xp->user_id ])
+                                 ->with('success', 'سابقه کاری شما با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 

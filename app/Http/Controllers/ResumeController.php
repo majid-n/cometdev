@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -19,8 +19,6 @@ class ResumeController extends Controller
     # Store the New resource in DB.
     public function store( Request $request ) {
 
-    	$user = Sentinel::getUser();
-
     	$rules = [
     	    'tel'   	=> 'required|digits_between:8,15|unique:resumes,tel',
     	    'jobtitle' 	=> 'required|min:4|max:50',
@@ -29,26 +27,29 @@ class ResumeController extends Controller
     	    'duty' 		=> 'min:5|max:20',
     	    'rel' 		=> 'required|boolean',
     	    'gender' 	=> 'required|boolean',
-    	    'birth' 	=> 'required|date_format:d/m/Y|before:now -1 year',
+    	    'birth' 	=> 'required|date_format:d/m/Y|before:now -1 year'
     	];
 
     	$messages = [
     		'gender.required' => 'لطفا جنسیت خود را انتخاب کنید.',
     		'gender.boolean'  => 'لطفا جنسیت خود را انتخاب کنید.',
     		'rel.boolean'     => 'لطفا وضعیت تاعهل خود را انتخاب کنید.',
-    		'rel.required'    => 'لطفا وضعیت تاعهل خود را انتخاب کنید.',
-    	]
+    		'rel.required'    => 'لطفا وضعیت تاعهل خود را انتخاب کنید.'
+    	];
 
     	$validator = Validator::make( $request->all(), $rules, $messages);
 
     	if ( $validator->fails() ) {
 
     		if( $request->ajax() ) 
-                return  response()->json(['result' => false]);
+                return response()->json(['result' => false]);
     		else 
                 return back()->withInput()
     	                 	 ->withErrors($validator);
     	} else {
+
+            # Get Login User
+            $user = Sentinel::getUser();
 
     	    # Create Resume
     	    $resume 			= new Resume;
@@ -65,15 +66,15 @@ class ResumeController extends Controller
     	    if ( $user->resume()->save($resume) ) {
 
     	        if( $request->ajax() ) 
-                    return  response()->json(['result' => true]);
+                    return response()->json(['result' => true]);
     	        else 
-                    return redirect()->route('user.show', [ 'user' => $user->id ])
+                    return redirect()->route('user.edit', [ 'user' => $user->id ])
                                      ->with('success', 'اطلاعات شخصی شما با موفقیت ثبت شد.');
     	    }
     	}
 
         if( $request->ajax() ) 
-            return  response()->json(['result' => false]);
+            return response()->json(['result' => false]);
     	else
             return back()->withInput()
     	                 ->with('fail', 'مشکل در اتصال به سرور. لطفا مجددا تلاش کنید.');
@@ -82,18 +83,18 @@ class ResumeController extends Controller
     # Remove the specified resource from storage
     public function destroy( Request $request, Resume $resume ) {
         
-        $this->authorize('destroy', $resume);
+        $this->authorize($resume);
 
         if( $resume->delete() ) {
         	if( $request->ajax() ) 
-                return  response()->json(['result' => true]);
+                return response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $resume->user_id ])
+                return redirect()->route('user.edit', [ 'user' => $resume->user_id ])
                                  ->with('success', 'اطلاعات شخصی شما با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 
-            return  response()->json(['result' => false]);
+            return response()->json(['result' => false]);
         else
             return back()->with('fail', 'مشکل در اتصال به سرور. لطفا مجددا تلاش کنید.');
     }

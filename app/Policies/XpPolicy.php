@@ -16,6 +16,6 @@ class XpPolicy
 
     # Check user can delete this Xp or not
     public function destroy( User $user, Xp $xp ) {
-        return $user->id === $xp->user_id;
+        return $user->id === $xp->user_id || $user->inRole('admins');
     }
 }

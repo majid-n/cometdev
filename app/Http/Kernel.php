@@ -51,10 +51,11 @@ class Kernel extends HttpKernel
 
 
     protected $routeMiddleware = [
-        'auth.basic'    => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'role'          => \App\Http\Middleware\roleWare::class,
-        'guest'         => \App\Http\Middleware\guestWare::class,
+        'role'          => \App\Http\Middleware\RoleWare::class,
+        'owner'         => \App\Http\Middleware\OwnerWare::class,
+        'guest'         => \App\Http\Middleware\GuestWare::class,
         'auth'          => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'    => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

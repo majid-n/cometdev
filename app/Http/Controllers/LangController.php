@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Validator;
+use App\Lang;
 use Sentinel;
-use App\Skill;
+use Validator;
 
-class SkillController extends Controller
+class LangController extends Controller
 {
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
@@ -19,12 +19,9 @@ class SkillController extends Controller
     # Store the New resource in DB.
     public function store( Request $request ) {
 
-    	$user = Sentinel::getUser();
-
     	$rules = [
-    	    'skill' => 'required|min:3|max:20',
-    	    'score' => 'required|regex:/^\d{1,2}(\.\d{1})?$/',
-    	    'des'   => 'min:10|max:255',
+    	    'lang'   	=> 'required|farsi|min:3|max:20',
+    	    'score' 	=> 'required|regex:/^\d{1,2}(\.\d{1})?$/'
     	];
 
     	$validator = Validator::make( $request->all(), $rules);
@@ -38,20 +35,22 @@ class SkillController extends Controller
     	                 	 ->withErrors($validator);
     	} else {
 
-    	    # Create Experience
-    	    $skill 			= new Skill;
-    	    $skill->title 	= $request->skill;
-    	    $skill->score 	= floatval($request->score);
-    	    $skill->des 	= $request->des;
+            # Get Login user
+            $user = Sentinel::getUser();
+
+    	    # Create Language
+    	    $lang 			= new Lang;
+    	    $lang->title 	= $request->lang;
+    	    $lang->score    = floatval($request->score);
 
     	    # Redirect on Success
-    	    if ( $user->skills()->save($skill) ) {
+    	    if ( $user->langs()->save($lang) ) {
 
     	        if( $request->ajax() ) 
                     return  response()->json(['result' => true]);
     	        else 
-                    return redirect()->route('user.show', [ 'user' => $user->id ])
-                                     ->with('success', 'مهارت شما با موفقیت ثبت شد.');
+                    return redirect()->route('user.edit', [ 'user' => $user->id ])
+                                     ->with('success', 'زبان خارجی با موفقیت ثبت شد.');
     	    }
     	}
 
@@ -63,16 +62,16 @@ class SkillController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy( Request $request, Skill $skill ) {
+    public function destroy( Request $request, Lang $lang ) {
         
-        $this->authorize($skill);
+        $this->authorize($lang);
 
-        if( $skill->delete() ) {
+        if( $lang->delete() ) {
         	if( $request->ajax() ) 
                 return  response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $skill->user_id ])
-                                 ->with('success', 'مهارت شما با موفقیت حذف شد.');
+                return redirect()->route('user.edit', [ 'user' => $lang->user_id ])
+                                 ->with('success', 'زبان خارجی با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 

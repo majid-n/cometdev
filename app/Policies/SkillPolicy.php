@@ -12,6 +12,6 @@ class SkillPolicy
 
     # Check user can delete this Skill or not
     public function destroy( User $user , Skill $skill ) {
-        return $user->id === $skill->user_id;
+        return $user->id === $skill->user_id || $user->inRole('admins');
     }
 }

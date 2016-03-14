@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Edu;
-use Sentinel;
 use Validator;
+use Sentinel;
+use App\Skill;
 
-class EduController extends Controller
+class SkillController extends Controller
 {
     # Dependency Injection & Controllers & Middlewares
     public function __construct(){
@@ -19,14 +19,10 @@ class EduController extends Controller
     # Store the New resource in DB.
     public function store( Request $request ) {
 
-    	$user = Sentinel::getUser();
-
     	$rules = [
-    	    'startyear' => 'required|date_format:d/m/Y|before:tomorrow',
-    	    'endyear' 	=> 'required|date_format:d/m/Y|before:startyear',
-    	    'degree' 	=> 'required|min:3|max:100',
-    	    'uni' 		=> 'required|min:3|max:70',
-    	    'uniscore' 	=> 'required|regex:/^\d{1,2}(\.\d{2})?$/',
+    	    'skill' => 'required|min:3|max:20',
+    	    'score' => 'required|regex:/^\d{1,2}(\.\d{1})?$/',
+    	    'des'   => 'min:5|max:255'
     	];
 
     	$validator = Validator::make( $request->all(), $rules);
@@ -40,22 +36,23 @@ class EduController extends Controller
     	                 	 ->withErrors($validator);
     	} else {
 
-    	    # Create Education
-    	    $edu 			= new Edu;
-    	    $edu->startyear = $request->startyear;
-    	    $edu->endyear 	= $request->endyear;
-    	    $edu->degree 	= $request->degree;
-    	    $edu->uni 		= $request->uni;
-    	    $edu->score 	= floatval($request->uniscore);
+            # Get Login User
+            $user = Sentinel::getUser();
+
+    	    # Create Experience
+    	    $skill 			= new Skill;
+    	    $skill->title 	= $request->skill;
+    	    $skill->score 	= floatval($request->score);
+    	    $skill->des 	= $request->des;
 
     	    # Redirect on Success
-    	    if ( $user->edus()->save($edu) ) {
+    	    if ( $user->skills()->save($skill) ) {
 
     	        if( $request->ajax() ) 
                     return  response()->json(['result' => true]);
     	        else 
-                    return redirect()->route('user.show', [ 'user' => $user->id ])
-                                     ->with('success', 'مدرک تحصیلی شما با موفقیت ثبت شد.');
+                    return redirect()->route('user.edit', [ 'user' => $user->id ])
+                                     ->with('success', 'مهارت شما با موفقیت ثبت شد.');
     	    }
     	}
 
@@ -67,16 +64,16 @@ class EduController extends Controller
     }
 
     # Remove the specified resource from storage
-    public function destroy( Request $request, Edu $edu ) {
+    public function destroy( Request $request, Skill $skill ) {
         
-        $this->authorize('destroy', $edu);
+        $this->authorize($skill);
 
-        if( $edu->delete() ) {
+        if( $skill->delete() ) {
         	if( $request->ajax() ) 
                 return  response()->json(['result' => true]);
         	else 
-                return redirect()->route('user.show', [ 'user' => $edu->user_id ])
-                                 ->with('success', 'مدرک تحصیلی شما با موفقیت حذف شد.');
+                return redirect()->route('user.edit', [ 'user' => $skill->user_id ])
+                                 ->with('success', 'مهارت شما با موفقیت حذف شد.');
         }
         
         if( $request->ajax() ) 

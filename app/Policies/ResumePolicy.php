@@ -16,6 +16,6 @@ class ResumePolicy
 
     # Check user can delete this resume or not
     public function destroy( User $user, Resume $resume ) {
-        return $user->id === $resume->user_id;
+        return $user->id === $resume->user_id || $user->inRole('admins');
     }
 }

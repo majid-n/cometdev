@@ -7,13 +7,15 @@ use Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class guestWare
+class GuestWare
 {
 
     # Continue if the request was in GUEST role
     public function handle( Request $request, Closure $next )
     {
-        if ( Sentinel::check() ) return redirect()->home();
+        if ( Sentinel::check() ) 
+        	return redirect()->home();
+
         return $next($request);
     }
 }

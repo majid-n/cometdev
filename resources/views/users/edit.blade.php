@@ -68,6 +68,7 @@
 		<p>{{ $edu->endyear }}</p>
 		<p>{{ $edu->uni }}</p>
 		<p>{{ $edu->degree }}</p>
+		<p>{{ $edu->branch }}</p>
 		<p>{{ $edu->score }}</p>
 
 		{!! Form::open(array('method' => 'post', 'route' => array('edu.destroy', $edu->id))) !!}

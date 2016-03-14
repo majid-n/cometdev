@@ -215,10 +215,10 @@ class DatabaseSeeder extends Seeder
     # Edu Seeder
         DB::table('edus')->delete();
         DB::table('edus')->insert([
-                [ 'user_id' => 1, 'startyear' => '1998-01-01', 'endyear' => '2001-01-01', 'degree' => 'دیپلم', 'uni' => 'مدرسه فاتح', 'score' => 17.8 ],
-                [ 'user_id' => 1, 'startyear' => '2010-01-01', 'endyear' => '2014-01-01', 'degree' => 'دکترای صنایع', 'uni' => 'صنعتی شریف', 'score' => 14.72 ],
-                [ 'user_id' => 2, 'startyear' => '1990-01-01', 'endyear' => '2001-01-01', 'degree' => 'فوق لیسانس', 'uni' => 'دانشگاه شمال آمل', 'score' => 19.8 ],
-                [ 'user_id' => 2, 'startyear' => '2014-01-01', 'endyear' => '2015-01-01', 'degree' => 'دکترای نرم افزار', 'uni' => 'دانشگاه آزاد اسلامی واحد تهران جنوب', 'score' => 12.5 ],
+                [ 'user_id' => 1, 'startyear' => '1998-01-01', 'endyear' => '2001-01-01', 'degree' => 'دیپلم', 'branch' => 'ریاضی' ,'uni' => 'مدرسه فاتح', 'score' => 17.8 ],
+                [ 'user_id' => 1, 'startyear' => '2010-01-01', 'endyear' => '2014-01-01', 'degree' => 'دکترای', 'branch' => 'صنایع' , 'uni' => 'صنعتی شریف', 'score' => 14.72 ],
+                [ 'user_id' => 2, 'startyear' => '1990-01-01', 'endyear' => '2001-01-01', 'degree' => 'فوق لیسانس', 'branch' => 'کامپیوتر نرم افزار' , 'uni' => 'دانشگاه شمال آمل', 'score' => 19.8 ],
+                [ 'user_id' => 2, 'startyear' => '2014-01-01', 'endyear' => '2015-01-01', 'degree' => 'دکترای', 'branch' => 'نرم افزار' , 'uni' => 'دانشگاه آزاد اسلامی واحد تهران جنوب', 'score' => 12.5 ],
             ]);
         $this->command->info('Edus seeded!');
 
