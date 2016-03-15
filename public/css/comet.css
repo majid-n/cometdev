@@ -248,6 +248,17 @@
         -webkit-box-shadow: 0 0 5px 1px rgba(254,197,3,0.5);
         box-shadow: 0 0 5px 1px rgba(254,197,3,0.5);
     }
+    .form-group.switch{
+        margin-bottom: 0;
+        direction: rtl;
+    }
+    .form-group.switch .input-group>span{
+        position: absolute;
+        top: -6px;
+        right: 50px;
+        width: 140px;
+        color: #fff;
+    }
     .text-danger {
         color: #e74c3c;
     }
@@ -1554,6 +1565,7 @@
         margin-bottom: 35px;
     }
 /*Switch Section*/
+
     .onoffswitch {
         position: relative;
         width: 35px;
@@ -1579,6 +1591,7 @@
         width: 200%;
         margin-left: -100%;
         transition: margin 0.3s ease-in 0s;
+        cursor: pointer;
     }
     .onoffswitch-inner:before,
     .onoffswitch-inner:after {
@@ -1618,6 +1631,7 @@
         transition: all 0.3s ease-in 0s;
         height: 18px;
         border: 1px solid rgb(204, 204, 204);
+        cursor: pointer;
     }
     .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
         margin-left: 0;

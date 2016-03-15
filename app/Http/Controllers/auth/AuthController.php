@@ -55,7 +55,7 @@ class AuthController extends Controller
             }
 
             if ( $user = Sentinel::authenticate($credentials, $remember) ) {
-                if     ( Sentinel::inRole( 'admins' ) ) return redirect()->intended('admin/post');
+                if     ( Sentinel::inRole( 'admins' ) ) return redirect()->intended('/');
                 elseif ( Sentinel::inRole( 'users'  ) ) return redirect()->intended('/');
             }
 

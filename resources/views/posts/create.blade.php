@@ -95,8 +95,8 @@
                     </div>
 
                     <div class="form-group col-md-12 btn-group btn-group-lg" role="group">
-                        {!! Form::button('ایجاد پست جدید<i class="fa fa-plus"></i>',['class' => 'btn btn-xl', 'type' => 'submit']) !!}
-                        {!! Form::button('<i class="fa fa-retweet"></i>', ['class' => 'btn btn-default', 'type' => 'reset']) !!}
+                        {!! Form::button('ایجاد پست جدید<i class="fa fa-plus"></i>',['class' => 'btn btn-primary transitionfast', 'type' => 'submit']) !!}
+                        {!! Form::button('<i class="fa fa-retweet"></i>', ['class' => 'btn btn-default transitionfast', 'type' => 'reset']) !!}
                     </div>
 
                 {!! Form::close() !!}

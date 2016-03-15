@@ -133,7 +133,7 @@ class PostController extends Controller
 
                 # Redirect on Success
                 if ( $post->save() ) {
-                    return redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت ثبت شد.');
+                    return redirect()->route('post.index')->with('success', 'محصول با موفقیت ثبت شد.');
                 }
             } 
         }
@@ -188,7 +188,7 @@ class PostController extends Controller
 
                 # Redirect on Success
                 if ( $post->save() ) {
-                    return redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت ثبت شد.');
+                    return redirect()->route('post.index')->with('success', 'محصول با موفقیت ثبت شد.');
                 }
         }
 
@@ -205,7 +205,7 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect()->route('admin.post.index')->with('success', 'محصول با موفقیت حذف شد.');
+        return redirect()->route('post.index')->with('success', 'محصول با موفقیت حذف شد.');
     }
 
     # Like each Post from Portfiolio Section

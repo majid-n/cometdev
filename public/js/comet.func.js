@@ -227,15 +227,19 @@ function ReadonlyRate(element){
 }
 // Select input Init
 function SelectInit(){
-    $('select').on('change', function() {
-        
-        number = $(this).find('option:selected').data('title');
-        if( number > 0)
-            $('.selectBadge').html(number);
-        else
-            $('.selectBadge').html('');
-    });
 
+    var select    = $('.form-group select'),
+        badge     = $('.selectBadge'),
+        checkItem = function(element) {
+
+                        number = element.find('option:selected').data('title');
+                        
+                        if( number > 0) badge.html(number);
+                        else badge.html('');
+                    };
+
+    checkItem(select);
+    select.on('change', function() { checkItem($(this)) });
     $('button[type="reset"]').click(function() { $('.selectBadge').html('') });
 }
 // Animation Numbers
